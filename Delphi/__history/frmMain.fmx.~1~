@@ -1,0 +1,32 @@
+object Form5: TForm5
+  Left = 0
+  Top = 0
+  Caption = 'Form5'
+  ClientHeight = 844
+  ClientWidth = 392
+  FormFactor.Width = 320
+  FormFactor.Height = 480
+  FormFactor.Devices = [Desktop]
+  OnCreate = FormCreate
+  DesignerMasterStyle = 0
+  object layHost: TLayout
+    Align = Contents
+    Size.Width = 392.000000000000000000
+    Size.Height = 844.000000000000000000
+    Size.PlatformDefault = False
+    TabOrder = 0
+  end
+  object FDQuery1: TFDQuery
+    Connection = FDConnection1
+    Left = 160
+    Top = 616
+  end
+  object FDConnection1: TFDConnection
+    Params.Strings = (
+      'DriverID=SQLite'
+      'Database=users.db')
+    LoginPrompt = False
+    Left = 248
+    Top = 560
+  end
+end

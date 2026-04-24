@@ -1,0 +1,391 @@
+object Frame5: TFrame5
+  Size.Width = 390.000000000000000000
+  Size.Height = 844.000000000000000000
+  Size.PlatformDefault = False
+  OnEnter = FrameEnter
+  object Layout1: TLayout
+    Align = Center
+    Size.Width = 390.000000000000000000
+    Size.Height = 844.000000000000000000
+    Size.PlatformDefault = False
+    TabOrder = 0
+    object Layout2: TLayout
+      Align = Top
+      Padding.Left = 20.000000000000000000
+      Padding.Top = 20.000000000000000000
+      Padding.Right = 20.000000000000000000
+      Padding.Bottom = 20.000000000000000000
+      Size.Width = 390.000000000000000000
+      Size.Height = 90.000000000000000000
+      Size.PlatformDefault = False
+      TabOrder = 0
+      object Label1: TLabel
+        Align = Left
+        StyledSettings = [Family, FontColor]
+        Position.X = 20.000000000000000000
+        Position.Y = 20.000000000000000000
+        Size.Width = 350.000000000000000000
+        Size.Height = 50.000000000000000000
+        Size.PlatformDefault = False
+        TextSettings.Font.Size = 24.000000000000000000
+        TextSettings.Font.StyleExt = {00070000000000000004000000}
+        Text = 'Pocetna strana'
+        TabOrder = 0
+      end
+      object btnChangePet: TButton
+        Position.X = 226.000000000000000000
+        Position.Y = 20.000000000000000000
+        Size.Width = 140.000000000000000000
+        Size.Height = 40.000000000000000000
+        Size.PlatformDefault = False
+        TabOrder = 1
+        Text = 'Promeni ljubimca'
+        TextSettings.Trimming = None
+        OnClick = btnChangePetClick
+      end
+      object btnAddPet: TButton
+        Position.X = 240.000000000000000000
+        Position.Y = 68.000000000000000000
+        TabOrder = 2
+        Text = 'Dodaj ljubimca'
+        TextSettings.Trimming = None
+        OnClick = btnAddPetClick
+      end
+      object btnRefresh: TButton
+        Position.X = 240.000000000000000000
+        Position.Y = 98.000000000000000000
+        TabOrder = 3
+        Text = 'Osvezi listu'
+        TextSettings.Trimming = None
+        OnClick = btnRefreshClick
+      end
+    end
+    object Layout3: TLayout
+      Align = Client
+      Padding.Left = 20.000000000000000000
+      Padding.Top = 10.000000000000000000
+      Padding.Right = 20.000000000000000000
+      Size.Width = 390.000000000000000000
+      Size.Height = 704.000000000000000000
+      Size.PlatformDefault = False
+      TabOrder = 1
+      object Rectangle1: TRectangle
+        Align = Top
+        Fill.Color = claWhite
+        Margins.Bottom = 20.000000000000000000
+        Position.X = 20.000000000000000000
+        Position.Y = 45.000000000000000000
+        Size.Width = 350.000000000000000000
+        Size.Height = 80.000000000000000000
+        Size.PlatformDefault = False
+        Stroke.Kind = None
+        XRadius = 18.000000000000000000
+        YRadius = 18.000000000000000000
+        object Layout5: TLayout
+          Align = Left
+          Padding.Left = 15.000000000000000000
+          Padding.Top = 15.000000000000000000
+          Padding.Right = 15.000000000000000000
+          Padding.Bottom = 15.000000000000000000
+          Size.Width = 70.000000000000000000
+          Size.Height = 80.000000000000000000
+          Size.PlatformDefault = False
+          TabOrder = 0
+          object imgPet: TImage
+            MultiResBitmap = <
+              item
+              end>
+            Align = Center
+            Margins.Left = 15.000000000000000000
+            Margins.Top = 15.000000000000000000
+            Margins.Right = 15.000000000000000000
+            Margins.Bottom = 15.000000000000000000
+            Size.Width = 67.000000000000000000
+            Size.Height = 76.000000000000000000
+            Size.PlatformDefault = False
+          end
+        end
+        object Layout6: TLayout
+          Align = Client
+          Size.Width = 280.000000000000000000
+          Size.Height = 80.000000000000000000
+          Size.PlatformDefault = False
+          TabOrder = 1
+          object lblName: TLabel
+            Align = Left
+            StyledSettings = [Family, FontColor]
+            Position.Y = 29.000000000000000000
+            Size.Width = 45.000000000000000000
+            Size.Height = 22.000000000000000000
+            Size.PlatformDefault = False
+            TextSettings.Font.Size = 14.000000000000000000
+            TextSettings.Font.StyleExt = {00070000000000000004000000}
+            Text = 'Ime'
+            TabOrder = 2
+          end
+          object lblBreed: TLabel
+            Align = Top
+            StyledSettings = [Family, FontColor]
+            Size.Width = 280.000000000000000000
+            Size.Height = 29.000000000000000000
+            Size.PlatformDefault = False
+            TextSettings.Font.Size = 14.000000000000000000
+            Text = 'Rasa'
+            TabOrder = 1
+          end
+          object lblAge: TLabel
+            Align = Bottom
+            StyledSettings = [Family, FontColor]
+            Position.Y = 51.000000000000000000
+            Size.Width = 280.000000000000000000
+            Size.Height = 29.000000000000000000
+            Size.PlatformDefault = False
+            TextSettings.Font.Size = 14.000000000000000000
+            Text = 'Godine'
+            TabOrder = 0
+          end
+          object Label3: TLabel
+            Cursor = crHandPoint
+            StyledSettings = [Family, Style, FontColor]
+            HitTest = True
+            Position.X = 220.000000000000000000
+            Position.Y = 21.000000000000000000
+            Size.Width = 17.000000000000000000
+            Size.Height = 22.000000000000000000
+            Size.PlatformDefault = False
+            TextSettings.Font.Size = 20.000000000000000000
+            Text = #9660
+            TabOrder = 3
+            OnClick = Label3Click
+          end
+        end
+        object ListBox1: TListBox
+          Align = Bottom
+          Position.Y = 4.000000000000000000
+          Size.Width = 150.000000000000000000
+          Size.Height = 76.000000000000000000
+          Size.PlatformDefault = False
+          TabOrder = 2
+          Visible = False
+          OnClick = ListBox1Click
+          DisableFocusEffect = True
+          ItemHeight = 60.000000000000000000
+          DefaultItemStyles.ItemStyle = ''
+          DefaultItemStyles.GroupHeaderStyle = ''
+          DefaultItemStyles.GroupFooterStyle = ''
+          Viewport.Width = 146.000000000000000000
+          Viewport.Height = 72.000000000000000000
+        end
+      end
+      object Label2: TLabel
+        Align = Top
+        StyledSettings = [Family, FontColor]
+        Margins.Bottom = 10.000000000000000000
+        Position.X = 20.000000000000000000
+        Position.Y = 10.000000000000000000
+        Size.Width = 350.000000000000000000
+        Size.Height = 25.000000000000000000
+        Size.PlatformDefault = False
+        TextSettings.Font.Size = 16.000000000000000000
+        TextSettings.Font.StyleExt = {00070000000000000004000000}
+        Text = 'Pregled'
+        TabOrder = 1
+      end
+    end
+    object Layout4: TLayout
+      Align = Bottom
+      Position.Y = 794.000000000000000000
+      Size.Width = 390.000000000000000000
+      Size.Height = 50.000000000000000000
+      Size.PlatformDefault = False
+      TabOrder = 2
+      object Rectangle2: TRectangle
+        Align = Bottom
+        Corners = [TopLeft, TopRight]
+        Fill.Color = claYellow
+        Position.Y = -20.000000000000000000
+        Size.Width = 390.000000000000000000
+        Size.Height = 70.000000000000000000
+        Size.PlatformDefault = False
+        Stroke.Kind = None
+        XRadius = 24.000000000000000000
+        YRadius = 24.000000000000000000
+        object Layout7: TLayout
+          Align = Client
+          Padding.Left = 20.000000000000000000
+          Padding.Top = 10.000000000000000000
+          Padding.Right = 20.000000000000000000
+          Padding.Bottom = 10.000000000000000000
+          Size.Width = 390.000000000000000000
+          Size.Height = 70.000000000000000000
+          Size.PlatformDefault = False
+          TabOrder = 0
+          object GridLayout1: TGridLayout
+            Align = Client
+            ItemHeight = 40.000000000000000000
+            ItemWidth = 80.000000000000000000
+            Padding.Left = 20.000000000000000000
+            Padding.Top = 10.000000000000000000
+            Padding.Bottom = 10.000000000000000000
+            Orientation = Horizontal
+            Size.Width = 350.000000000000000000
+            Size.Height = 50.000000000000000000
+            Size.PlatformDefault = False
+            TabOrder = 0
+            object Image1: TImage
+              MultiResBitmap = <
+                item
+                  Width = 24
+                  Height = 24
+                  PNG = {
+                    89504E470D0A1A0A0000000D4948445200000018000000180806000000E0773D
+                    F80000000473424954080808087C08648800000170494441544889ED94414E02
+                    311885DFFF1734EE3491482131CC09F408C30DB8817A02C71BE80DB801DE003D
+                    817802BDC114AC2DB26263C2109CDF852604CD60155CE95BB6FF7B5F5FD29610
+                    286B4787CC7957004C3369469136213E0E19726E9810E77702340034363629B5
+                    D625215E5AB6E9BD6F08A82382B8C0DCCB323959D6A6B08173C32417BE2B0A07
+                    0001E28D4DBAB17E745434F3A9C157A72E94D0E5749A5F7C6CB300180C5C4B95
+                    540790ED6F85CF655E66F9D9FE7EED6A0190A6E976B9BC754E8CD31F062F88C0
+                    ED2C7BBE88A2684C0FDEC74AA8F37E43D62933CDA4498F6E286B0E9E4B306670
+                    A905A1F3B567131F33AB16D7ABBBD7C2797FDD0005325A576E835EF22AFA2EC0
+                    0034FE0D80615271BD568DEAB5BD1D26151360428CA590F0B7DFB36206EEA905
+                    BC40EBCA95F7BE2942E957E69006F751A48DB5C3B6827415B86BAD4BB4D68680
+                    DEEA00A27B00608583F99A3A00002132AB0356D43FE0AF006416F62AC345E3C9
+                    64D6078057F3AB92DC290E549B0000000049454E44AE426082}
+                end>
+              Align = Left
+              Margins.Right = 40.000000000000000000
+              Position.X = 20.000000000000000000
+              Position.Y = 10.000000000000000000
+              Size.Width = 40.000000000000000000
+              Size.Height = 40.000000000000000000
+              Size.PlatformDefault = False
+            end
+            object Image2: TImage
+              MultiResBitmap = <
+                item
+                  Width = 27
+                  Height = 25
+                  PNG = {
+                    89504E470D0A1A0A0000000D494844520000001B000000190806000000C01C55
+                    5E0000000473424954080808087C086488000002E8494441544889A5565D5ADA
+                    40143D7702020FFD1A1FFC09A4365981B082D215A82B5056D0CF15202B28DD01
+                    AE407780AEA0EC60D21232E28BF1EB8392CADC3E10FC802412E9794A32E7DE73
+                    E67E73EF04C881A152CD5130FE390AEE3808EEBFE7894903E511124CFDE528BA
+                    A8597B9D8DC5864A3501E09365DD2C1282E04E32E02C4531C2287A725DD70DDF
+                    23266609554F30F505537F14DC4929950300BF83F171426866D1DCAA7CF8B2F8
+                    69A85473A4C66D5FDD9F6689157C5F9D316891E06C95A82FA56C188443707A20
+                    B33601C0F7EFEB42E82B66380083C0F0FD60DBB6ABDDC4CE8441694E9C52A972
+                    4A44996532409E52CA21C1FDD5DD1389B694D24C8831533D23DFF1E4A97899B1
+                    E659D6CEAD6671057022290866A9647E4C88A5920130E0B8EE7608A68BD5B5E9
+                    8B3E97F2C10438CB282693F0312146C04D86980700B5DA5E8735B700BA66A69E
+                    20A3797050BD2E979F534DCE4083B4935A7801FD30C0CD245FF4E68FB66DF500
+                    F416972DCBF246C1384CAB0C13250E0710F7D968346E83F86281DDABD5F65A43
+                    A59AC47444401320274E3C00D3208A74A758E463126269A2B046D7B6F7CF33C5
+                    004029E50085CFD3293FB231350D509B19C91DBF6645389DEA961064921047CC
+                    080D217A96B5733B37290875D6E44591EEB8AEE525C695EFDF7549E05BA6C8AA
+                    A61667B6BD7B0900524AB354AE5C254CC61347FC8F100010E9EEBCA78AC5CA45
+                    6A35E289F32AE6FBEAECBD42F344C552A50D0042E0288BC62FCFBF5ECB983A70
+                    F3222ED356A9F290BACC18D8B5FD860000291FCC8D85008060160AE57A46CF7A
+                    7F233E01E2A9FF7683E68361D02111B740D48B1D840CDC4413FEEABA9637F314
+                    63148C1FB246571E30D0B5ABE9FD35C7EB0121CC1D6D86B76E8884D86452EC00
+                    EB03B2D58CC15ACAE28BEFDFD749707F83727AB5EABEBB8EB4D4D4B6BD3B10A4
+                    1B144FFC7CA090B538C9C314AB1F2CCBF2AAD57D37BE56DE2CCDECB4E9866DEF
+                    AE2D2190E3574E29E5682A1E12B40300C4083589307AFA73FBDEBFAB7F76D84C
+                    DEA3D0A03C0000000049454E44AE426082}
+                end>
+              Align = Left
+              Margins.Right = 40.000000000000000000
+              Position.X = 100.000000000000000000
+              Position.Y = 10.000000000000000000
+              Size.Width = 40.000000000000000000
+              Size.Height = 40.000000000000000000
+              Size.PlatformDefault = False
+            end
+            object Image3: TImage
+              MultiResBitmap = <
+                item
+                  Width = 24
+                  Height = 24
+                  PNG = {
+                    89504E470D0A1A0A0000000D4948445200000018000000180806000000E0773D
+                    F80000000473424954080808087C08648800000363494441544889A556CB55E3
+                    5810BDB724D9EC5ABDA1F97821458033683B031C0110017404400440046D3230
+                    11D844D0CAC0E28C41336C469B9E31B2F5EE2C64BB6D8F0D8BBEE76851A5A75B
+                    BF575522DEC11F59D632875651A05BAFF358E025A05C6EDA31B3C8D1FF341997
+                    8F71BC9F6EE3E026E568F4DA34CFDD486841EC02EE09E4E5E280904BD6A6A95F
+                    C9EEAE28C6B7711CE71F1A7879F9F342C0CD9CC83975CC637FC3870398F5E4DC
+                    ED4C95166F6AAF4763CBC2F37376B520AF687AE6DBC9A62805B4A6C5F409E0DC
+                    EBA856E38FD168D4DC68E0F939BB5A49030033EB526A6D3200005EE01D81E82D
+                    8515927E7F38CCA21503599645EBE410F229A61410611BA453C13DAEE888B05E
+                    E7F7B9E80380683790964FE5007A2C2DA78F0B0A39C0748D3D7250E441030726
+                    8016A911D01A65AF278DFDDD7B6659163971083017D4F5E8F5A69892A5979BB9
+                    96801312A1C41050F8CB01A52472574EBFC9F3424C0112118C27045A04060707
+                    7B6DBEBCBCDE38E73099E8AE56C32968E780420217208E256CADC12CFA534A17
+                    B30812D16E3D948F12FB40BDE53B877B33B46A75FB517958A54AE6A7D4747BFE
+                    172957042805D004D0A45CD781A9DCB43399884696C7D5D59C875FC1A45C7AA7
+                    C0F308A410E47A8345A4DF0F8232B42A25BF0131DCA82742987F6200D2DF32F0
+                    1E6889C9F16CA91B177064B849FF7F8E2D0E0AC964FCF3C180B2E94AD701D95D
+                    792F1792FAD000302FF442CA215E39D337602734F3BD4FE6F1BBC08151B1805B
+                    8089C98512928FD9BD0402040C687621C7B6A4CF26F68171CEE1F0EFB0562F86
+                    D52D620EA157B27C28DF980441197A5EEDC84191A47051502A37B394423E1EFF
+                    7C08822032BFF61572BFFA46EC1E1E7E3923003C677F5D42BA5A732D29816B0F
+                    BA24916B6D54CCD21295D059E5ED2A8A37C571BC9FFA00508C6B77F5FADBE9EA
+                    605333A0122736AB31A5150255CFC033EF4872ABECE2551CEFA5C06C9AC6F1E7
+                    DC39EBACDF9A12DE570283EDF9B72EE48ED70C0F0E0FBF5CCFE5C53E68347613
+                    39B6B9D4172677EA9CEEB7D0A79A964FCBB34AC060F2F66F67F9D0CA466B3476
+                    13520B23025A12526E6A46B1BBBCEDE470DB38D86BAFEFE58D4B1F0046A3EC94
+                    66E79020D959B5E067F34A48163AA15714EE7ADB9FC55603736459168DC7E37C
+                    6767272CC5738A7951FC7317044134994CD24D7F12CBF80FDE98C6B721948207
+                    0000000049454E44AE426082}
+                end>
+              Align = Left
+              Margins.Right = 40.000000000000000000
+              Position.X = 180.000000000000000000
+              Position.Y = 10.000000000000000000
+              Size.Width = 40.000000000000000000
+              Size.Height = 40.000000000000000000
+              Size.PlatformDefault = False
+            end
+          end
+        end
+        object Image4: TImage
+          MultiResBitmap = <
+            item
+              Width = 24
+              Height = 24
+              PNG = {
+                89504E470D0A1A0A0000000D4948445200000018000000180806000000E0773D
+                F80000000473424954080808087C08648800000260494441544889B555C151DB
+                5014DC7DF61826B9984B8C2C1FA40A0215C4A9003A085410A702CB150015E00E
+                822BC01D980EA48364412ED129C64AFC5F0E0662CB5F42994C764697F735BBFB
+                A4F7FE121508C3B0DD6AED0F28FC00C05385B73E6146EA1D2837CBC56AE2FB4E
+                54C6415B314D534FC16B55F4AB0CBC4039CE7333B20949B1309FDF0F8CCAAC36
+                390050CF5A2DCEE2783EA81448923450E002D0B6CD25A4792A6CF4418E7745D0
+                A6C84592A4C17679C3F99ADC0265E0BA9DD1B6998721A881F57563BEF47ADDCB
+                1781344D3DA332B33A0722B77BE8DB8892F9C3777BB7C8F25C8F7DDF8904000C
+                6458420E05226B570048BDB31FA0BDB7C76B00E0DA3DC33292B59B85EFFB7E56
+                BB8327E4CBC581281B27A5E42F6EDE0E77C89334A8220780D6FE9BCF4DA839AD
+                1400A03083247968AFB89A08D916F0539D31A66A9FAFB5F98F88E43F920380B7
+                B3C9D560B67EEA43C8F23104984119081BFD7CB93870BB9DA7E790C2465F814B
+                568C311419E7F3FB5B45F1873183E232CF7F5CD9C6B388B2AD56602A4A4E0BF5
+                480D3FBA6E6754871C005CB73312AA5FEC46801BC91F5B57DBE639EEF5DED937
+                B4028EE34480DC6CD6964B9D10008A9F49CDAFE35EAFF757223B378272ECBA9D
+                73599BD6F3CDE9A034BFC6717C54973C8EBF1DA9F2F64F85599E9B11F094078E
+                E3446A569BD7B14769CE8A777B116118B693240D287AAB788E5380D0E039DDB6
+                22B3641A2228A72BAE26E4BA4B021E94EF099EED2C6A213B7632398EE7034AA3
+                F4FA2E073342836EF7706B684A43DF4086503DAB43ADC0F4E752CF6DA16F15D8
+                1452364E8C31A7048F36BA8A1488A89CBEB68CBF01B368309BD34A7E33000000
+                0049454E44AE426082}
+            end>
+          Margins.Right = 40.000000000000000000
+          Position.X = 280.000000000000000000
+          Position.Y = 20.000000000000000000
+          Size.Width = 40.000000000000000000
+          Size.Height = 40.000000000000000000
+          Size.PlatformDefault = False
+        end
+      end
+    end
+  end
+end

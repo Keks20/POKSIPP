@@ -1,0 +1,190 @@
+object Frame5: TFrame5
+  Size.Width = 388.000000000000000000
+  Size.Height = 844.000000000000000000
+  Size.PlatformDefault = False
+  OnEnter = FrameEnter
+  object Layout1: TLayout
+    Align = Client
+    Size.Width = 388.000000000000000000
+    Size.Height = 844.000000000000000000
+    Size.PlatformDefault = False
+    TabOrder = 0
+    object Layout2: TLayout
+      Align = Top
+      Padding.Left = 20.000000000000000000
+      Padding.Top = 20.000000000000000000
+      Padding.Right = 20.000000000000000000
+      Padding.Bottom = 20.000000000000000000
+      Size.Width = 388.000000000000000000
+      Size.Height = 90.000000000000000000
+      Size.PlatformDefault = False
+      TabOrder = 0
+      object Label1: TLabel
+        Align = Left
+        StyledSettings = [Family, FontColor]
+        Position.X = 20.000000000000000000
+        Position.Y = 20.000000000000000000
+        Size.Width = 350.000000000000000000
+        Size.Height = 50.000000000000000000
+        Size.PlatformDefault = False
+        TextSettings.Font.Size = 24.000000000000000000
+        TextSettings.Font.StyleExt = {00070000000000000004000000}
+        Text = 'Pocetna strana'
+        TabOrder = 0
+      end
+      object btnChangePet: TButton
+        Position.X = 220.000000000000000000
+        Position.Y = 20.000000000000000000
+        Size.Width = 140.000000000000000000
+        Size.Height = 40.000000000000000000
+        Size.PlatformDefault = False
+        TabOrder = 1
+        Text = 'Promeni ljubimca'
+        TextSettings.Trimming = None
+        OnClick = btnChangePetClick
+      end
+      object btnAddPet: TButton
+        Position.X = 240.000000000000000000
+        Position.Y = 68.000000000000000000
+        TabOrder = 2
+        Text = 'Dodaj ljubimca'
+        TextSettings.Trimming = None
+        OnClick = btnAddPetClick
+      end
+      object btnRefresh: TButton
+        Position.X = 240.000000000000000000
+        Position.Y = 98.000000000000000000
+        TabOrder = 3
+        Text = 'Osvezi listu'
+        TextSettings.Trimming = None
+        OnClick = btnRefreshClick
+      end
+    end
+    object Layout3: TLayout
+      Align = Client
+      Padding.Left = 20.000000000000000000
+      Padding.Top = 10.000000000000000000
+      Padding.Right = 20.000000000000000000
+      Size.Width = 388.000000000000000000
+      Size.Height = 704.000000000000000000
+      Size.PlatformDefault = False
+      TabOrder = 1
+      object Rectangle1: TRectangle
+        Align = Top
+        Fill.Color = claWhite
+        Margins.Bottom = 20.000000000000000000
+        Position.X = 20.000000000000000000
+        Position.Y = 45.000000000000000000
+        Size.Width = 348.000000000000000000
+        Size.Height = 80.000000000000000000
+        Size.PlatformDefault = False
+        Stroke.Kind = None
+        XRadius = 18.000000000000000000
+        YRadius = 18.000000000000000000
+        object Layout5: TLayout
+          Align = Left
+          Padding.Left = 15.000000000000000000
+          Padding.Top = 15.000000000000000000
+          Padding.Right = 15.000000000000000000
+          Padding.Bottom = 15.000000000000000000
+          Size.Width = 70.000000000000000000
+          Size.Height = 80.000000000000000000
+          Size.PlatformDefault = False
+          TabOrder = 0
+          object imgPet: TImage
+            MultiResBitmap = <
+              item
+              end>
+            Align = Center
+            Margins.Left = 15.000000000000000000
+            Margins.Top = 15.000000000000000000
+            Margins.Right = 15.000000000000000000
+            Margins.Bottom = 15.000000000000000000
+            Size.Width = 67.000000000000000000
+            Size.Height = 76.000000000000000000
+            Size.PlatformDefault = False
+          end
+        end
+        object Layout6: TLayout
+          Align = Client
+          Size.Width = 278.000000000000000000
+          Size.Height = 80.000000000000000000
+          Size.PlatformDefault = False
+          TabOrder = 1
+          object lblName: TLabel
+            Align = Left
+            StyledSettings = [Family, FontColor]
+            Position.Y = 29.000000000000000000
+            Size.Width = 45.000000000000000000
+            Size.Height = 22.000000000000000000
+            Size.PlatformDefault = False
+            TextSettings.Font.Size = 14.000000000000000000
+            TextSettings.Font.StyleExt = {00070000000000000004000000}
+            Text = 'Ime'
+            TabOrder = 2
+          end
+          object lblBreed: TLabel
+            Align = Top
+            StyledSettings = [Family, FontColor]
+            Size.Width = 278.000000000000000000
+            Size.Height = 29.000000000000000000
+            Size.PlatformDefault = False
+            TextSettings.Font.Size = 14.000000000000000000
+            Text = 'Rasa'
+            TabOrder = 1
+          end
+          object lblAge: TLabel
+            Align = Bottom
+            StyledSettings = [Family, FontColor]
+            Position.Y = 51.000000000000000000
+            Size.Width = 278.000000000000000000
+            Size.Height = 29.000000000000000000
+            Size.PlatformDefault = False
+            TextSettings.Font.Size = 14.000000000000000000
+            Text = 'Godine'
+            TabOrder = 0
+          end
+        end
+        object ListBox1: TListBox
+          Align = Bottom
+          Position.Y = 4.000000000000000000
+          Size.Width = 150.000000000000000000
+          Size.Height = 76.000000000000000000
+          Size.PlatformDefault = False
+          TabOrder = 2
+          Visible = False
+          OnClick = ListBox1Click
+          DisableFocusEffect = True
+          ItemHeight = 60.000000000000000000
+          DefaultItemStyles.ItemStyle = ''
+          DefaultItemStyles.GroupHeaderStyle = ''
+          DefaultItemStyles.GroupFooterStyle = ''
+          Viewport.Width = 146.000000000000000000
+          Viewport.Height = 72.000000000000000000
+        end
+      end
+      object Label2: TLabel
+        Align = Top
+        StyledSettings = [Family, FontColor]
+        Margins.Bottom = 10.000000000000000000
+        Position.X = 20.000000000000000000
+        Position.Y = 10.000000000000000000
+        Size.Width = 348.000000000000000000
+        Size.Height = 25.000000000000000000
+        Size.PlatformDefault = False
+        TextSettings.Font.Size = 16.000000000000000000
+        TextSettings.Font.StyleExt = {00070000000000000004000000}
+        Text = 'Pregled'
+        TabOrder = 1
+      end
+    end
+    object Layout4: TLayout
+      Align = Bottom
+      Position.Y = 794.000000000000000000
+      Size.Width = 388.000000000000000000
+      Size.Height = 50.000000000000000000
+      Size.PlatformDefault = False
+      TabOrder = 2
+    end
+  end
+end

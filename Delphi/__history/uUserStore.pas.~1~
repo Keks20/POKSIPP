@@ -1,0 +1,15 @@
+unit uUserStore;
+
+interface
+
+uses
+System.SysUtils, System.Generics.Collections,FireDAC.Comp.Client,uPetModel;
+
+var
+  Pets: array[0..2] of TPet;
+  ActivePetIndex: Integer = 0;
+  DB: TFDConnection;
+
+implementation
+
+end.

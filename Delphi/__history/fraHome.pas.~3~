@@ -1,0 +1,173 @@
+﻿unit fraHome;
+
+interface
+
+uses
+  System.SysUtils, System.Types, System.UITypes, System.Classes, System.Variants,
+  FMX.Types, FMX.Graphics, FMX.Controls, FMX.Forms, FMX.Dialogs, FMX.StdCtrls,
+  FMX.Objects, FMX.Controls.Presentation, FMX.Layouts, FMX.ListBox,
+  FireDAC.Comp.Client, uUserStore, uPetModel;
+
+type
+  TFrame5 = class(TFrame)
+    Layout1: TLayout;
+    Layout2: TLayout;
+    imgPet: TImage;
+    lblName: TLabel;
+    lblBreed: TLabel;
+    lblAge: TLabel;
+    ListBox1: TListBox;
+    btnChangePet: TButton;
+    btnAddPet: TButton;
+    btnRefresh: TButton;
+    Layout3: TLayout;
+    procedure FrameEnter(Sender: TObject);
+    procedure btnChangePetClick(Sender: TObject);
+    procedure ListBox1Click(Sender: TObject);
+    procedure btnAddPetClick(Sender: TObject);
+    procedure btnRefreshClick(Sender: TObject);
+  private
+    procedure LoadPetsFromDB;
+    procedure LoadPetsIntoListBox;
+    procedure LoadPetImage(const ResName: string; TargetBitmap: TBitmap);
+    procedure RefreshMainCard;
+  public
+  end;
+
+implementation
+
+{$R *.fmx}
+
+procedure TFrame5.FrameEnter(Sender: TObject);
+begin
+  if Pets[0].Id = 0 then
+    LoadPetsFromDB;
+  LoadPetsIntoListBox;
+  if ActivePetIndex = -1 then
+    ActivePetIndex := 0;
+  RefreshMainCard;
+end;
+
+procedure TFrame5.LoadPetsFromDB;
+var
+  Q: TFDQuery;
+  i: Integer;
+begin
+  Q := TFDQuery.Create(nil);
+  try
+    Q.Connection := DB;
+    Q.SQL.Text := 'SELECT id, name, species, breed, age, image_res FROM pets ORDER BY id';
+    Q.Open;
+
+    FillChar(Pets, SizeOf(Pets), 0);
+    i := 0;
+    while not Q.Eof and (i <= High(Pets)) do
+    begin
+      Pets[i].Id := Q.FieldByName('id').AsInteger;
+      Pets[i].Name := Q.FieldByName('name').AsString;
+      Pets[i].Species := Q.FieldByName('species').AsString;
+      Pets[i].Breed := Q.FieldByName('breed').AsString;
+      Pets[i].Age := Q.FieldByName('age').AsString;
+      Pets[i].ImageRes := Q.FieldByName('image_res').AsString;
+      Inc(i);
+      Q.Next;
+    end;
+
+    
+    if i = 0 then
+      ShowMessage('Nema ljubimaca u bazi. Dodajte prvog!');
+  finally
+    Q.Free;
+  end;
+end;
+
+procedure TFrame5.LoadPetsIntoListBox;
+var
+  i: Integer;
+  Item: TListBoxItem;
+begin
+  ListBox1.BeginUpdate;
+  try
+    ListBox1.Clear;
+    for i := 0 to High(Pets) do
+    begin
+      if Pets[i].Id = 0 then Continue;
+      Item := TListBoxItem.Create(ListBox1);
+      Item.Text := Pets[i].Name;
+      Item.ItemData.Detail := Pets[i].Breed + ' • ' + Pets[i].Age;
+      Item.ItemData.Bitmap.Clear(TAlphaColors.Null); 
+      if not Pets[i].ImageRes.IsEmpty then
+        LoadPetImage(Pets[i].ImageRes, Item.ItemData.Bitmap);
+      ListBox1.AddObject(Item);
+    end;
+  finally
+    ListBox1.EndUpdate;
+  end;
+  if (ActivePetIndex >= 0) and (ActivePetIndex < ListBox1.Count) then
+    ListBox1.ItemIndex := ActivePetIndex;
+end;
+
+procedure TFrame5.LoadPetImage(const ResName: string; TargetBitmap: TBitmap);
+var
+  Res: TResourceStream;
+begin
+  if ResName.IsEmpty then Exit;
+  try
+    Res := TResourceStream.Create(HInstance, ResName, RT_RCDATA);
+    try
+      TargetBitmap.LoadFromStream(Res);
+    finally
+      Res.Free;
+    end;
+  except
+    TargetBitmap.Clear(TAlphaColors.Lightgray); 
+  end;
+end;
+
+procedure TFrame5.RefreshMainCard;
+begin
+  if (ActivePetIndex < 0) or (ActivePetIndex > High(Pets)) or (Pets[ActivePetIndex].Id = 0) then
+  begin
+    imgPet.Bitmap.Clear(TAlphaColors.Null);
+    lblName.Text := 'Izaberi ljubimca';
+    lblBreed.Text := '';
+    lblAge.Text := '';
+    Exit;
+  end;
+  lblName.Text := Pets[ActivePetIndex].Name;
+  lblBreed.Text := Pets[ActivePetIndex].Breed;
+  lblAge.Text := Pets[ActivePetIndex].Age;
+  LoadPetImage(Pets[ActivePetIndex].ImageRes, imgPet.Bitmap);
+end;
+
+procedure TFrame5.btnChangePetClick(Sender: TObject);
+begin
+  ListBox1.Visible := not ListBox1.Visible;
+  if ListBox1.Visible then
+    ListBox1.BringToFront
+  else
+    ListBox1.SendToBack;
+end;
+
+procedure TFrame5.ListBox1Click(Sender: TObject);
+begin
+  if ListBox1.ItemIndex = 0 then Exit;
+  ActivePetIndex := ListBox1.ItemIndex;
+  RefreshMainCard;
+  ListBox1.Visible := False;
+end;
+
+procedure TFrame5.btnAddPetClick(Sender: TObject);
+begin
+  ShowMessage('Dodavanje novog ljubimca - još nije implementirano.');
+end;
+
+procedure TFrame5.btnRefreshClick(Sender: TObject);
+begin
+  LoadPetsFromDB;
+  LoadPetsIntoListBox;
+  RefreshMainCard;
+  ShowMessage('Lista ljubimaca osvežena!');
+end;
+
+end.

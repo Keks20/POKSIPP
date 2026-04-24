@@ -1,0 +1,66 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<BorlandProject>
+	<Transactions>
+    <Transaction>2026/01/26 19:18:54.000.320,=C:\Users\misin\Documents\Embarcadero\Studio\Projects\Unit1.pas</Transaction>
+    <Transaction>2026/01/26 19:30:32.000.421,C:\Users\misin\Documents\Embarcadero\Studio\Projects\Unit1.fmx=C:\Users\misin\Documents\Embarcadero\Studio\Projects\frmWelcome.fmx</Transaction>
+    <Transaction>2026/01/26 19:30:32.000.421,C:\Users\misin\Documents\Embarcadero\Studio\Projects\Unit1.pas=C:\Users\misin\Documents\Embarcadero\Studio\Projects\frmWelcome.pas</Transaction>
+    <Transaction>2026/01/26 19:30:40.000.713,C:\Users\misin\Documents\Embarcadero\Studio\Projects\Project1.dproj=C:\Users\misin\Documents\Embarcadero\Studio\Projects\poksi.dproj</Transaction>
+    <Transaction>2026/01/26 19:51:31.000.024,=C:\Users\misin\Documents\Embarcadero\Studio\Projects\Unit2.pas</Transaction>
+    <Transaction>2026/01/26 19:52:20.000.047,C:\Users\misin\Documents\Embarcadero\Studio\Projects\Unit2.fmx=C:\Users\misin\Documents\Embarcadero\Studio\Projects\frmLogin.fmx</Transaction>
+    <Transaction>2026/01/26 19:52:20.000.047,C:\Users\misin\Documents\Embarcadero\Studio\Projects\Unit2.pas=C:\Users\misin\Documents\Embarcadero\Studio\Projects\frmLogin.pas</Transaction>
+    <Transaction>2026/01/26 20:18:36.000.254,=C:\Users\misin\Documents\Embarcadero\Studio\Projects\Unit3.pas</Transaction>
+    <Transaction>2026/01/26 20:19:04.000.717,C:\Users\misin\Documents\Embarcadero\Studio\Projects\Unit3.fmx=C:\Users\misin\Documents\Embarcadero\Studio\Projects\frmForgot.fmx</Transaction>
+    <Transaction>2026/01/26 20:19:04.000.717,C:\Users\misin\Documents\Embarcadero\Studio\Projects\Unit3.pas=C:\Users\misin\Documents\Embarcadero\Studio\Projects\frmForgot.pas</Transaction>
+    <Transaction>2026/01/26 20:31:55.000.761,=C:\Users\misin\Documents\Embarcadero\Studio\Projects\Unit4.pas</Transaction>
+    <Transaction>2026/01/26 20:32:21.000.118,C:\Users\misin\Documents\Embarcadero\Studio\Projects\Unit4.pas=C:\Users\misin\Documents\Embarcadero\Studio\Projects\frmRegister.pas</Transaction>
+    <Transaction>2026/01/26 20:32:21.000.118,C:\Users\misin\Documents\Embarcadero\Studio\Projects\Unit4.fmx=C:\Users\misin\Documents\Embarcadero\Studio\Projects\frmRegister.fmx</Transaction>
+    <Transaction>2026/01/26 20:47:03.000.091,=C:\Users\misin\Documents\Embarcadero\Studio\Projects\Unit1.pas</Transaction>
+    <Transaction>2026/01/26 20:47:20.000.764,C:\Users\misin\Documents\Embarcadero\Studio\Projects\Unit1.pas=C:\Users\misin\Documents\Embarcadero\Studio\Projects\uUserStore.pas</Transaction>
+    <Transaction>2026/01/31 19:34:29.000.867,=C:\Users\misin\Documents\Embarcadero\Studio\Projects\Unit1.pas</Transaction>
+    <Transaction>2026/01/31 19:34:46.000.767,C:\Users\misin\Documents\Embarcadero\Studio\Projects\uNav.pas=C:\Users\misin\Documents\Embarcadero\Studio\Projects\Unit1.pas</Transaction>
+    <Transaction>2026/01/31 19:48:03.000.198,=C:\Users\misin\Documents\Embarcadero\Studio\Projects\Unit5.pas</Transaction>
+    <Transaction>2026/01/31 19:48:28.000.535,C:\Users\misin\Documents\Embarcadero\Studio\Projects\frmMain.fmx=C:\Users\misin\Documents\Embarcadero\Studio\Projects\Unit5.fmx</Transaction>
+    <Transaction>2026/01/31 19:48:28.000.535,C:\Users\misin\Documents\Embarcadero\Studio\Projects\frmMain.pas=C:\Users\misin\Documents\Embarcadero\Studio\Projects\Unit5.pas</Transaction>
+    <Transaction>2026/01/31 19:49:56.000.802,=C:\Users\misin\Documents\Embarcadero\Studio\Projects\Unit1.pas</Transaction>
+    <Transaction>2026/01/31 19:50:34.000.200,C:\Users\misin\Documents\Embarcadero\Studio\Projects\frmWelcome1.pas=C:\Users\misin\Documents\Embarcadero\Studio\Projects\Unit1.pas</Transaction>
+    <Transaction>2026/01/31 19:50:34.000.200,C:\Users\misin\Documents\Embarcadero\Studio\Projects\frmWelcome1.fmx=C:\Users\misin\Documents\Embarcadero\Studio\Projects\Unit1.fmx</Transaction>
+    <Transaction>2026/01/31 19:50:44.000.502,=C:\Users\misin\Documents\Embarcadero\Studio\Projects\Unit2.pas</Transaction>
+    <Transaction>2026/01/31 19:51:10.000.967,C:\Users\misin\Documents\Embarcadero\Studio\Projects\frmLogin1.pas=C:\Users\misin\Documents\Embarcadero\Studio\Projects\Unit2.pas</Transaction>
+    <Transaction>2026/01/31 19:51:10.000.967,C:\Users\misin\Documents\Embarcadero\Studio\Projects\frmLogin1.fmx=C:\Users\misin\Documents\Embarcadero\Studio\Projects\Unit2.fmx</Transaction>
+    <Transaction>2026/01/31 19:51:18.000.968,=C:\Users\misin\Documents\Embarcadero\Studio\Projects\Unit3.pas</Transaction>
+    <Transaction>2026/01/31 19:52:04.000.655,C:\Users\misin\Documents\Embarcadero\Studio\Projects\frmForgot1.pas=C:\Users\misin\Documents\Embarcadero\Studio\Projects\Unit3.pas</Transaction>
+    <Transaction>2026/01/31 19:52:04.000.655,C:\Users\misin\Documents\Embarcadero\Studio\Projects\frmForgot1.fmx=C:\Users\misin\Documents\Embarcadero\Studio\Projects\Unit3.fmx</Transaction>
+    <Transaction>2026/01/31 19:52:11.000.867,=C:\Users\misin\Documents\Embarcadero\Studio\Projects\Unit4.pas</Transaction>
+    <Transaction>2026/01/31 19:52:27.000.966,C:\Users\misin\Documents\Embarcadero\Studio\Projects\frmRegister1.pas=C:\Users\misin\Documents\Embarcadero\Studio\Projects\Unit4.pas</Transaction>
+    <Transaction>2026/01/31 19:52:27.000.966,C:\Users\misin\Documents\Embarcadero\Studio\Projects\frmRegister1.fmx=C:\Users\misin\Documents\Embarcadero\Studio\Projects\Unit4.fmx</Transaction>
+    <Transaction>2026/01/31 19:52:59.000.369,C:\Users\misin\Documents\Embarcadero\Studio\Projects\fraRegister.pas=C:\Users\misin\Documents\Embarcadero\Studio\Projects\frmRegister1.pas</Transaction>
+    <Transaction>2026/01/31 19:52:59.000.369,C:\Users\misin\Documents\Embarcadero\Studio\Projects\fraRegister.fmx=C:\Users\misin\Documents\Embarcadero\Studio\Projects\frmRegister1.fmx</Transaction>
+    <Transaction>2026/01/31 19:53:09.000.528,C:\Users\misin\Documents\Embarcadero\Studio\Projects\fraForgot.pas=C:\Users\misin\Documents\Embarcadero\Studio\Projects\frmForgot1.pas</Transaction>
+    <Transaction>2026/01/31 19:53:09.000.528,C:\Users\misin\Documents\Embarcadero\Studio\Projects\fraForgot.fmx=C:\Users\misin\Documents\Embarcadero\Studio\Projects\frmForgot1.fmx</Transaction>
+    <Transaction>2026/01/31 19:53:17.000.576,C:\Users\misin\Documents\Embarcadero\Studio\Projects\fraLogin.fmx=C:\Users\misin\Documents\Embarcadero\Studio\Projects\frmLogin1.fmx</Transaction>
+    <Transaction>2026/01/31 19:53:17.000.576,C:\Users\misin\Documents\Embarcadero\Studio\Projects\fraLogin.pas=C:\Users\misin\Documents\Embarcadero\Studio\Projects\frmLogin1.pas</Transaction>
+    <Transaction>2026/01/31 19:53:26.000.289,C:\Users\misin\Documents\Embarcadero\Studio\Projects\fraWelcome.pas=C:\Users\misin\Documents\Embarcadero\Studio\Projects\frmWelcome1.pas</Transaction>
+    <Transaction>2026/01/31 19:53:26.000.289,C:\Users\misin\Documents\Embarcadero\Studio\Projects\fraWelcome.fmx=C:\Users\misin\Documents\Embarcadero\Studio\Projects\frmWelcome1.fmx</Transaction>
+    <Transaction>2026/01/31 19:57:51.000.912,=C:\Users\misin\Documents\Embarcadero\Studio\Projects\Unit1.pas</Transaction>
+    <Transaction>2026/01/31 19:58:06.000.108,C:\Users\misin\Documents\Embarcadero\Studio\Projects\uNavFrames.pas=C:\Users\misin\Documents\Embarcadero\Studio\Projects\Unit1.pas</Transaction>
+    <Transaction>2026/02/02 04:14:03.000.441,=C:\Users\misin\Documents\Embarcadero\Studio\Projects\Unit5.pas</Transaction>
+    <Transaction>2026/02/02 04:16:11.000.409,C:\Users\misin\Documents\Embarcadero\Studio\Projects\Unit5.pas=C:\Users\misin\Documents\Embarcadero\Studio\Projects\fraHome.pas</Transaction>
+    <Transaction>2026/02/02 04:16:11.000.409,C:\Users\misin\Documents\Embarcadero\Studio\Projects\Unit5.fmx=C:\Users\misin\Documents\Embarcadero\Studio\Projects\fraHome.fmx</Transaction>
+    <Transaction>2026/02/02 07:36:32.000.309,=C:\Users\misin\Documents\Embarcadero\Studio\Projects\Unit1.pas</Transaction>
+    <Transaction>2026/02/02 07:36:54.000.348,C:\Users\misin\Documents\Embarcadero\Studio\Projects\Unit1.pas=C:\Users\misin\Documents\Embarcadero\Studio\Projects\uPetModel.pas</Transaction>
+    <Transaction>2026/02/02 14:53:26.000.544,=D:\Pictures\guster.jfif</Transaction>
+    <Transaction>2026/02/02 14:53:26.000.560,=D:\Pictures\macka.jpg</Transaction>
+    <Transaction>2026/02/02 14:53:26.000.592,=D:\Pictures\pas.jfif</Transaction>
+    <Transaction>2026/02/02 15:25:09.000.665,=D:\Pictures\macka.png</Transaction>
+    <Transaction>2026/02/02 15:25:09.000.713,=D:\Pictures\pas.png</Transaction>
+    <Transaction>2026/02/02 15:25:09.000.537,D:\Pictures\pas.jfif=</Transaction>
+    <Transaction>2026/02/02 15:25:09.000.537,D:\Pictures\guster.jfif=</Transaction>
+    <Transaction>2026/02/02 15:25:09.000.629,=D:\Pictures\guster.png</Transaction>
+    <Transaction>2026/02/02 15:25:09.000.521,D:\Pictures\macka.jpg=</Transaction>
+    <Transaction>2026/02/02 15:33:25.000.136,D:\Embarcadero\Poksi2\POKSI apl\POKSI apl\frmWelcome.pas=</Transaction>
+    <Transaction>2026/02/02 15:33:33.000.269,D:\Embarcadero\Poksi2\POKSI apl\POKSI apl\frmRegister.pas=</Transaction>
+    <Transaction>2026/02/04 00:05:26.000.352,C:\Users\misin\Desktop\POKSI apl\frmForgot.pas=</Transaction>
+    <Transaction>2026/02/04 00:05:37.000.306,C:\Users\misin\Desktop\POKSI apl\frmLogin.pas=</Transaction>
+    <Transaction>2026/02/04 00:09:20.000.238,C:\Users\misin\Desktop\POKSI apl\uNav.pas=</Transaction>
+  </Transactions>
+</BorlandProject>

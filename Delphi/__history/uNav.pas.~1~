@@ -1,0 +1,71 @@
+﻿unit uNav;
+
+interface
+
+uses
+  System.Generics.Collections,
+  FMX.Forms;
+
+type
+  TNav = class
+  private
+    class var FStack: TStack<TForm>;
+  public
+    class constructor Create;
+    class destructor Destroy;
+
+    // Idi na sledeću formu i zapamti trenutnu (za Back)
+    class procedure Go(ACurrent, ANext: TForm);
+
+    // Vrati se na prethodnu formu (ako postoji)
+    class procedure Back(ACurrent: TForm);
+
+    // Korisno: da znaš da li uopšte ima “nazad”
+    class function CanBack: Boolean;
+  end;
+
+implementation
+
+class constructor TNav.Create;
+begin
+  FStack := TStack<TForm>.Create;
+end;
+
+class destructor TNav.Destroy;
+begin
+  FStack.Free;
+end;
+
+class procedure TNav.Go(ACurrent, ANext: TForm);
+begin
+  if (ACurrent = nil) or (ANext = nil) then Exit;
+
+  // zapamti trenutnu
+  FStack.Push(ACurrent);
+
+  // pokaži sledeću
+  ANext.Show;
+
+  // sakrij trenutnu (nemoj Close, da ostane stanje)
+  ACurrent.Hide;
+end;
+
+class procedure TNav.Back(ACurrent: TForm);
+var
+  Prev: TForm;
+begin
+  if (ACurrent = nil) then Exit;
+  if FStack.Count = 0 then Exit;
+
+  Prev := FStack.Pop;
+  Prev.Show;
+  ACurrent.Hide;
+end;
+
+class function TNav.CanBack: Boolean;
+begin
+  Result := (FStack.Count > 0);
+end;
+
+end.
+

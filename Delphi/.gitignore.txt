@@ -1,0 +1,42 @@
+# Compiled and temporary files
+*.dcu
+*.dcp
+*.bpl
+*.bpi
+*.drc
+*.map
+*.dres
+*.rsm
+*.tds
+*.local
+*.identcache
+*.stat
+*.obj
+*.o
+*.tvsconfig
+*.exe
+*.dll
+*.so
+*.dylib
+
+# Build output folders
+Win32/
+Win64/
+OSX32/
+OSX64/
+OSXArm64/
+iOSDevice32/
+iOSDevice64/
+iOSSimulator/
+Android/
+Android64/
+
+# History and backup
+__history/
+*.~*
+*.bak
+
+# Project specific
+*.deployproj
+*.groupproj
+*.dsk
