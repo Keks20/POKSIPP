@@ -26,6 +26,7 @@ object Form5: TForm5
       'DriverID=SQLite'
       'Database=users.db')
     LoginPrompt = False
+    AfterConnect = FDConnection1AfterConnect
     Left = 248
     Top = 560
   end

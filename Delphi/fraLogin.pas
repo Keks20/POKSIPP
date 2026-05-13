@@ -3,7 +3,7 @@
 interface
 
 uses
-  System.SysUtils, System.Types, System.UITypes, System.Classes, System.Variants, 
+  System.SysUtils, System.Types, System.UITypes, System.Classes, System.Variants,
   FMX.Types, FMX.Graphics, FMX.Controls, FMX.Forms, FMX.Dialogs, FMX.StdCtrls,
   FMX.Edit, FMX.Objects, FMX.Controls.Presentation, FMX.Layouts,uNavFrames,fraForgot,
   fraRegister,FireDAC.Comp.Client,uUserStore,fraHome;
@@ -44,53 +44,50 @@ begin
 end;
 
 procedure TFrame2.rectLoginButtonClick(Sender: TObject);
+var
+  Username, Pass: string;
 begin
-  if Trim(edtUsername.Text) = '' then
+  Username := Trim(edtUsername.Text);
+  Pass := Trim(edtPassword.Text);
+
+  with TFDQuery.Create(nil) do
   begin
-    ShowMessage('Unesite korisničko ime ili email');
-    Exit;
-  end;
+    try
+      Connection := DB;
+      // Proveravamo prvo tabelu ZAPOSLENI
+      SQL.Text := 'SELECT * FROM ZAPOSLENI WHERE KorisnickoIme = :u AND Lozinka = :p';
+      ParamByName('u').AsString := Username;
+      ParamByName('p').AsString := Pass;
+      Open;
 
-  if Trim(edtPassword.Text) = '' then
-  begin
-    ShowMessage('Unesite lozinku');
-    Exit;
-  end;
-
-  try
-    with TFDQuery.Create(nil) do
-    begin
-      try
-        Connection := DB;
-
-        SQL.Text :=
-          'SELECT * FROM users ' +
-          'WHERE (lower(username) = lower(:u) OR lower(email) = lower(:u)) ' +
-          'AND password = :p';
-
-        ParamByName('u').AsString := Trim(edtUsername.Text);
-        ParamByName('p').AsString := edtPassword.Text;
-
-        Open;
-
-        if IsEmpty then
-        begin
-          ShowMessage('Pogrešan username/email ili lozinka');
-          Exit;
-        end;
-
-      finally
-        Free;
+      if not IsEmpty then
+      begin
+        LoggedInUserID := FieldByName('Sifra_zaposlenog').AsInteger;
+        LoggedInRole := 'ZAPOSLENI';
+        LoggedInUsername := FieldByName('KorisnickoIme').AsString;
+        TNavFrames.Go(TFrame5.Create(nil)); // Ide na Home
+        Exit;
       end;
+
+      // Ako nije zaposleni, proveravamo obične korisnike (tabela users)
+      Close;
+      SQL.Text := 'SELECT * FROM users WHERE (username = :u OR email = :u) AND password = :p';
+      ParamByName('u').AsString := Username;
+      ParamByName('p').AsString := Pass;
+      Open;
+
+      if not IsEmpty then
+      begin
+        LoggedInUserID := FieldByName('id').AsInteger;
+        LoggedInRole := 'USER';
+        LoggedInUsername := FieldByName('username').AsString;
+        TNavFrames.Go(TFrame5.Create(nil));
+      end
+      else
+        ShowMessage('Pogresni podaci za prijavu!');
+    finally
+      Free;
     end;
-
-    TNavFrames.Go(TFrame5.Create(nil));
-
-  except
-    on E: Exception do
-      ShowMessage('Greška: ' + E.Message);
   end;
 end;
-
-
 end.

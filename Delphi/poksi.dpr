@@ -2,6 +2,8 @@ program poksi;
 
 
 
+
+
 {$R *.dres}
 
 uses
@@ -15,7 +17,9 @@ uses
   fraRegister in 'fraRegister.pas' {Frame4: TFrame},
   uNavFrames in 'uNavFrames.pas',
   fraHome in 'fraHome.pas' {Frame5: TFrame},
-  uPetModel in 'uPetModel.pas';
+  uPetModel in 'uPetModel.pas',
+  fraOsoblje in 'fraOsoblje.pas' {TFrameOsoblje: TFrame},
+  fraDnevnikMusterije in 'fraDnevnikMusterije.pas' {TFrameDnevnikMusterije: TFrame};
 
 {$R *.res}
 
