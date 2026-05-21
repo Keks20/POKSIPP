@@ -1,5 +1,5 @@
 object Frame5: TFrame5
-  Size.Width = 390.000000000000000000
+  Size.Width = 388.000000000000000000
   Size.Height = 844.000000000000000000
   Size.PlatformDefault = False
   OnEnter = FrameEnter
@@ -31,33 +31,32 @@ object Frame5: TFrame5
         TextSettings.Font.StyleExt = {00070000000000000004000000}
         Text = 'Pocetna strana'
         TabOrder = 0
-      end
-      object btnChangePet: TButton
-        Position.X = 220.000000000000000000
-        Position.Y = 20.000000000000000000
-        Size.Width = 140.000000000000000000
-        Size.Height = 40.000000000000000000
-        Size.PlatformDefault = False
-        TabOrder = 1
-        Text = 'Promeni ljubimca'
-        TextSettings.Trimming = None
-        OnClick = btnChangePetClick
-      end
-      object btnAddPet: TButton
-        Position.X = 240.000000000000000000
-        Position.Y = 68.000000000000000000
-        TabOrder = 2
-        Text = 'Dodaj ljubimca'
-        TextSettings.Trimming = None
-        OnClick = btnAddPetClick
-      end
-      object btnRefresh: TButton
-        Position.X = 240.000000000000000000
-        Position.Y = 98.000000000000000000
-        TabOrder = 3
-        Text = 'Osvezi listu'
-        TextSettings.Trimming = None
-        OnClick = btnRefreshClick
+        object Image5: TImage
+          MultiResBitmap = <
+            item
+              Width = 32
+              Height = 32
+              PNG = {
+                89504E470D0A1A0A0000000D4948445200000020000000200806000000737A7A
+                F40000000473424954080808087C086488000000FC494441545885ED96D10D82
+                3014454F0C033042476004D9C00DAC9BE8084EA04E221BE006B2816CA01F2569
+                4185BE408B89DC84A410D27BDAF77A5358B4A8AD3550024FC1339914F0109A8F
+                06489C7106A4CDB800AAB1934BA5B1ABDAC6325DC5329A0340634B1A1D600F9C
+                80EB1044088014DB43D9104408801AC8B1A7A8172254092A5F88A4FBA1470A93
+                94129D31FDE042E4985D1203AC318D35466F10B3E78064070ACCD99648614B00
+                70A35302579A69A358017767CE920F4D18AA040A536BD5BC7F5D79A820F2320F
+                0550638EDFA039C89A50A243637AE9330F090070F4F9E9677340E31FBBBB4948
+                30DD1BFD52DAD5867678440758F47F7A016E545FD800DB65E80000000049454E
+                44AE426082}
+            end>
+          Margins.Right = 40.000000000000000000
+          Position.X = 306.000000000000000000
+          Position.Y = 6.000000000000000000
+          Size.Width = 40.000000000000000000
+          Size.Height = 40.000000000000000000
+          Size.PlatformDefault = False
+          OnClick = Image5Click
+        end
       end
     end
     object Layout3: TLayout
@@ -145,9 +144,11 @@ object Frame5: TFrame5
             TabOrder = 0
           end
           object Label3: TLabel
+            Cursor = crHandPoint
             StyledSettings = [Family, Style, FontColor]
-            Position.X = 224.000000000000000000
-            Position.Y = 32.000000000000000000
+            HitTest = True
+            Position.X = 220.000000000000000000
+            Position.Y = 21.000000000000000000
             Size.Width = 17.000000000000000000
             Size.Height = 22.000000000000000000
             Size.PlatformDefault = False
@@ -158,9 +159,8 @@ object Frame5: TFrame5
           end
         end
         object ListBox1: TListBox
-          Align = Bottom
           Position.Y = 4.000000000000000000
-          Size.Width = 150.000000000000000000
+          Size.Width = 350.000000000000000000
           Size.Height = 76.000000000000000000
           Size.PlatformDefault = False
           TabOrder = 2
@@ -171,7 +171,7 @@ object Frame5: TFrame5
           DefaultItemStyles.ItemStyle = ''
           DefaultItemStyles.GroupHeaderStyle = ''
           DefaultItemStyles.GroupFooterStyle = ''
-          Viewport.Width = 146.000000000000000000
+          Viewport.Width = 346.000000000000000000
           Viewport.Height = 72.000000000000000000
         end
       end
@@ -184,10 +184,126 @@ object Frame5: TFrame5
         Size.Width = 350.000000000000000000
         Size.Height = 25.000000000000000000
         Size.PlatformDefault = False
-        TextSettings.Font.Size = 16.000000000000000000
+        TextSettings.Font.Size = 20.000000000000000000
         TextSettings.Font.StyleExt = {00070000000000000004000000}
         Text = 'Pregled'
+        TabOrder = 2
+      end
+      object Label4: TLabel
+        Align = Top
+        StyledSettings = [Family, FontColor]
+        Margins.Bottom = 10.000000000000000000
+        Position.X = 20.000000000000000000
+        Position.Y = 145.000000000000000000
+        Size.Width = 350.000000000000000000
+        Size.Height = 25.000000000000000000
+        Size.PlatformDefault = False
+        TextSettings.Font.Size = 20.000000000000000000
+        TextSettings.Font.StyleExt = {00070000000000000004000000}
+        Text = 'Plan'
         TabOrder = 1
+      end
+      object Rectangle3: TRectangle
+        Align = Top
+        Fill.Color = claWhite
+        Margins.Bottom = 20.000000000000000000
+        Position.X = 20.000000000000000000
+        Position.Y = 180.000000000000000000
+        Size.Width = 350.000000000000000000
+        Size.Height = 80.000000000000000000
+        Size.PlatformDefault = False
+        Stroke.Kind = None
+        XRadius = 18.000000000000000000
+        YRadius = 18.000000000000000000
+        object Layout8: TLayout
+          Align = Contents
+          Padding.Left = 28.000000000000000000
+          Size.Width = 350.000000000000000000
+          Size.Height = 80.000000000000000000
+          Size.PlatformDefault = False
+          TabOrder = 0
+          object Label5: TLabel
+            Align = Left
+            StyledSettings = [Family, FontColor]
+            Margins.Bottom = 10.000000000000000000
+            Position.X = 28.000000000000000000
+            Size.Width = 350.000000000000000000
+            Size.Height = 70.000000000000000000
+            Size.PlatformDefault = False
+            TextSettings.Font.Size = 20.000000000000000000
+            TextSettings.Font.StyleExt = {00070000000000000004000000}
+            Text = 'Aktivnost'
+            TabOrder = 2
+          end
+        end
+      end
+      object Rectangle4: TRectangle
+        Align = Top
+        Fill.Color = claWhite
+        Margins.Bottom = 20.000000000000000000
+        Position.X = 20.000000000000000000
+        Position.Y = 380.000000000000000000
+        Size.Width = 350.000000000000000000
+        Size.Height = 80.000000000000000000
+        Size.PlatformDefault = False
+        Stroke.Kind = None
+        XRadius = 18.000000000000000000
+        YRadius = 18.000000000000000000
+        object Layout10: TLayout
+          Align = Contents
+          Padding.Left = 28.000000000000000000
+          Size.Width = 350.000000000000000000
+          Size.Height = 80.000000000000000000
+          Size.PlatformDefault = False
+          TabOrder = 0
+          object Label7: TLabel
+            Align = Left
+            StyledSettings = [Family, FontColor]
+            Margins.Bottom = 10.000000000000000000
+            Position.X = 28.000000000000000000
+            Size.Width = 350.000000000000000000
+            Size.Height = 70.000000000000000000
+            Size.PlatformDefault = False
+            TextSettings.Font.Size = 20.000000000000000000
+            TextSettings.Font.StyleExt = {00070000000000000004000000}
+            Text = 'Ostalo'
+            TabOrder = 2
+          end
+        end
+      end
+      object Rectangle5: TRectangle
+        Align = Top
+        Fill.Color = claWhite
+        Margins.Bottom = 20.000000000000000000
+        Position.X = 20.000000000000000000
+        Position.Y = 280.000000000000000000
+        Size.Width = 350.000000000000000000
+        Size.Height = 80.000000000000000000
+        Size.PlatformDefault = False
+        Stroke.Kind = None
+        XRadius = 18.000000000000000000
+        YRadius = 18.000000000000000000
+        object Layout9: TLayout
+          Align = Contents
+          Padding.Left = 28.000000000000000000
+          Size.Width = 350.000000000000000000
+          Size.Height = 80.000000000000000000
+          Size.PlatformDefault = False
+          TabOrder = 0
+          object Label6: TLabel
+            Align = Left
+            StyledSettings = [Family, FontColor]
+            Margins.Bottom = 10.000000000000000000
+            Position.X = 28.000000000000000000
+            Size.Width = 350.000000000000000000
+            Size.Height = 70.000000000000000000
+            Size.PlatformDefault = False
+            TextSettings.Font.Size = 20.000000000000000000
+            TextSettings.Font.StyleExt = {00070000000000000004000000}
+            Text = 'Hrana'
+            TabOrder = 2
+          end
+        end
       end
     end
     object Layout4: TLayout
@@ -222,7 +338,7 @@ object Frame5: TFrame5
             Align = Client
             ItemHeight = 40.000000000000000000
             ItemWidth = 80.000000000000000000
-            Padding.Left = 20.000000000000000000
+            Padding.Left = 30.000000000000000000
             Padding.Top = 10.000000000000000000
             Padding.Bottom = 10.000000000000000000
             Orientation = Horizontal
@@ -237,23 +353,24 @@ object Frame5: TFrame5
                   Height = 24
                   PNG = {
                     89504E470D0A1A0A0000000D4948445200000018000000180806000000E0773D
-                    F80000000473424954080808087C08648800000170494441544889ED94414E02
-                    311885DFFF1734EE3491482131CC09F408C30DB8817A02C71BE80DB801DE003D
-                    817802BDC114AC2DB26263C2109CDF852604CD60155CE95BB6FF7B5F5FD29610
-                    286B4787CC7957004C3369469136213E0E19726E9810E77702340034363629B5
-                    D625215E5AB6E9BD6F08A82382B8C0DCCB323959D6A6B08173C32417BE2B0A07
-                    0001E28D4DBAB17E745434F3A9C157A72E94D0E5749A5F7C6CB300180C5C4B95
-                    540790ED6F85CF655E66F9D9FE7EED6A0190A6E976B9BC754E8CD31F062F88C0
-                    ED2C7BBE88A2684C0FDEC74AA8F37E43D62933CDA4498F6E286B0E9E4B306670
-                    A905A1F3B567131F33AB16D7ABBBD7C2797FDD0005325A576E835EF22AFA2EC0
-                    0034FE0D80615271BD568DEAB5BD1D26151360428CA590F0B7DFB36206EEA905
-                    BC40EBCA95F7BE2942E957E69006F751A48DB5C3B6827415B86BAD4BB4D68680
-                    DEEA00A27B00608583F99A3A00002132AB0356D43FE0AF006416F62AC345E3C9
-                    64D6078057F3AB92DC290E549B0000000049454E44AE426082}
+                    F80000000473424954080808087C0864880000017E494441544889ED93B14E02
+                    411086FF598E42239D0DC1838B0989350FA08F412F366689A1B3900E1B3A1224
+                    262450EB03F0023476D01A2DE4386129EC88247ADC8E85C608C971875EA1897F
+                    B599CCFCDF3FC92C21A4764F9CACAB510503C2F5A4DDB45498390AD364164779
+                    409716AB5C732ED2D73F02644A83A49E1B6580733EE33DF13A3F5FB58D2FC02C
+                    8EF2042E3038B132224309EDB5EC4BAB130A109CDA0FC41DE1EAD6F2360B809D
+                    E38703118B9F05A6F68540015C731AE9EE0260FBF036B1B9B15560E2FCB78C97
+                    44C0D56CF6DC7E6AEF4D292307394DB132806414E69F6228E17A92CCA27313A9
+                    F182686A80F99489B2041C4569CD8C8A16A484D348772110EA57AE232D841AD7
+                    537D11B5F1B2D60528024DD71930427531942744655C4FF5012029073923E4E5
+                    056FF0716EE37AAA6FCAE1BE2987FBAA61F584E1C930D902012C7067372D9596
+                    8F2510554154358BC3BC5DB31440BD2836B807002664BFD4DEDFA403AFEFD75D
+                    D13FE0AF02629E3789D29440D3F88B3B018037B972959608283F450000000049
+                    454E44AE426082}
                 end>
               Align = Left
               Margins.Right = 40.000000000000000000
-              Position.X = 20.000000000000000000
+              Position.X = 30.000000000000000000
               Position.Y = 10.000000000000000000
               Size.Width = 40.000000000000000000
               Size.Height = 40.000000000000000000
@@ -294,7 +411,7 @@ object Frame5: TFrame5
                 end>
               Align = Left
               Margins.Right = 40.000000000000000000
-              Position.X = 100.000000000000000000
+              Position.X = 110.000000000000000000
               Position.Y = 10.000000000000000000
               Size.Width = 40.000000000000000000
               Size.Height = 40.000000000000000000
@@ -339,7 +456,7 @@ object Frame5: TFrame5
                 end>
               Align = Left
               Margins.Right = 40.000000000000000000
-              Position.X = 180.000000000000000000
+              Position.X = 190.000000000000000000
               Position.Y = 10.000000000000000000
               Size.Width = 40.000000000000000000
               Size.Height = 40.000000000000000000
@@ -377,8 +494,8 @@ object Frame5: TFrame5
                 0049454E44AE426082}
             end>
           Margins.Right = 40.000000000000000000
-          Position.X = 280.000000000000000000
-          Position.Y = 20.000000000000000000
+          Position.X = 290.000000000000000000
+          Position.Y = 16.000000000000000000
           Size.Width = 40.000000000000000000
           Size.Height = 40.000000000000000000
           Size.PlatformDefault = False

@@ -1,0 +1,224 @@
+object FrameOstaloUnos: TFrameOstaloUnos
+  Size.Width = 352.000000000000000000
+  Size.Height = 496.000000000000000000
+  Size.PlatformDefault = False
+  object layHeader: TLayout
+    Align = Top
+    Size.Width = 352.000000000000000000
+    Size.Height = 50.000000000000000000
+    Size.PlatformDefault = False
+    TabOrder = 0
+    object rectNazad: TRectangle
+      Align = Right
+      Fill.Kind = None
+      Position.X = 302.000000000000000000
+      Size.Width = 50.000000000000000000
+      Size.Height = 50.000000000000000000
+      Size.PlatformDefault = False
+      Stroke.Kind = None
+      OnClick = rectNazadClick
+      object Image1: TImage
+        MultiResBitmap = <
+          item
+            Width = 64
+            Height = 64
+            PNG = {
+              89504E470D0A1A0A0000000D4948445200000040000000400806000000AA6971
+              DE0000000473424954080808087C086488000001B049444154789CED9AFD4DC3
+              3010479F100374848E5026A06CC00694091821611232021B5026800DCA067403
+              FA87B1548A1D92E62ECE917B52552991ACFBBDDAF147038EE3388EE338691640
+              05EC802FA5CF6459A21B7CF202C6083F59011BC6095F5CC045E6FA6AD42A0A72
+              99B9BE485C7B051ABD52CA90139062C73F14901B02B3C105942EA0345605A41E
+              D2676151405C9A8B4CD5D60454404DE8012F0848B02420868F8848B02260C5CF
+              F091C112AC087807EE33F70649B02200C22A545C822501A020C19A0010966051
+              00084AB02A008284C7CCBDCE12FA6C87FBB001AE95DA3E654F7A691C25DC1066
+              91245A02D6C09D52DB7DF85382E521D095D6E1300701ADCC41C09E9621A0F50C
+              D832DE91F72DF9F381D6F06D34FC3EBF7F3AAF3E552AF2FF377CD2611AB43C04
+              4EB7C7C774FEE5AD0A10090F36058885077B0244C3832D01E2E1C18E80350AE1
+              C18E802DE99DDFA0F0604700841E702C617078D05B096A517F7F3F20101E6CF5
+              80480D5C21101E6C0A00F8906AC8AA00315C40E9024AD3671658120E3BA56914
+              DA1C4CC3CCDF137C1EB58A89F2C60C7A401B4B66FEB23404090DBABDC1711CC7
+              711CA7080760001833BF4F0B9A0000000049454E44AE426082}
+          end>
+        Align = Client
+        HitTest = False
+        Size.Width = 50.000000000000000000
+        Size.Height = 50.000000000000000000
+        Size.PlatformDefault = False
+      end
+    end
+    object lblNaslov: TLabel
+      Align = Client
+      StyledSettings = [Family, FontColor]
+      Size.Width = 302.000000000000000000
+      Size.Height = 50.000000000000000000
+      Size.PlatformDefault = False
+      TextSettings.Font.Size = 16.000000000000000000
+      TextSettings.Font.StyleExt = {00070000000000000004000000}
+      TextSettings.HorzAlign = Center
+      Text = 'Ostalo'
+      TabOrder = 1
+    end
+  end
+  object scrollForm: TScrollBox
+    Align = Client
+    Padding.Left = 10.000000000000000000
+    Padding.Top = 10.000000000000000000
+    Padding.Right = 10.000000000000000000
+    Padding.Bottom = 10.000000000000000000
+    Size.Width = 352.000000000000000000
+    Size.Height = 446.000000000000000000
+    Size.PlatformDefault = False
+    TabOrder = 1
+    Viewport.Width = 352.000000000000000000
+    Viewport.Height = 446.000000000000000000
+    object rectForma: TRectangle
+      Align = Top
+      Padding.Left = 12.000000000000000000
+      Padding.Top = 12.000000000000000000
+      Padding.Right = 12.000000000000000000
+      Padding.Bottom = 12.000000000000000000
+      Position.X = 10.000000000000000000
+      Position.Y = 10.000000000000000000
+      Size.Width = 332.000000000000000000
+      Size.Height = 423.000000000000000000
+      Size.PlatformDefault = False
+      Stroke.Thickness = 0.500000000000000000
+      XRadius = 12.000000000000000000
+      YRadius = 12.000000000000000000
+      object lblVrsta: TLabel
+        Align = Top
+        StyledSettings = [Family, Style, FontColor]
+        Position.X = 12.000000000000000000
+        Position.Y = 12.000000000000000000
+        Size.Width = 308.000000000000000000
+        Size.Height = 18.000000000000000000
+        Size.PlatformDefault = False
+        TextSettings.Font.Size = 11.000000000000000000
+        Text = 'Vrsta:'
+        TabOrder = 0
+      end
+      object edtVrsta: TEdit
+        Touch.InteractiveGestures = [LongTap, DoubleTap]
+        Align = Top
+        TabOrder = 1
+        TextSettings.Font.Size = 14.000000000000000000
+        Position.X = 12.000000000000000000
+        Position.Y = 38.000000000000000000
+        Margins.Top = 8.000000000000000000
+        Size.Width = 308.000000000000000000
+        Size.Height = 36.000000000000000000
+        Size.PlatformDefault = False
+        TextPrompt = 'npr. Higijena'
+        StyledSettings = [Family, Style, FontColor]
+      end
+      object lblVreme: TLabel
+        Align = Top
+        StyledSettings = [Family, Style, FontColor]
+        Margins.Top = 8.000000000000000000
+        Position.X = 12.000000000000000000
+        Position.Y = 82.000000000000000000
+        Size.Width = 308.000000000000000000
+        Size.Height = 18.000000000000000000
+        Size.PlatformDefault = False
+        TextSettings.Font.Size = 11.000000000000000000
+        Text = 'Vreme:'
+        TabOrder = 2
+      end
+      object edtVreme: TEdit
+        Touch.InteractiveGestures = [LongTap, DoubleTap]
+        Align = Top
+        TabOrder = 3
+        TextSettings.Font.Size = 14.000000000000000000
+        Position.X = 12.000000000000000000
+        Position.Y = 108.000000000000000000
+        Margins.Top = 8.000000000000000000
+        Size.Width = 308.000000000000000000
+        Size.Height = 36.000000000000000000
+        Size.PlatformDefault = False
+        TextPrompt = 'npr. 14:00'
+        StyledSettings = [Family, Style, FontColor]
+      end
+      object lblStatus: TLabel
+        Align = Top
+        StyledSettings = [Family, Style, FontColor]
+        Margins.Top = 8.000000000000000000
+        Position.X = 12.000000000000000000
+        Position.Y = 152.000000000000000000
+        Size.Width = 308.000000000000000000
+        Size.Height = 18.000000000000000000
+        Size.PlatformDefault = False
+        TextSettings.Font.Size = 11.000000000000000000
+        Text = 'Status (opis obavljenog):'
+        TabOrder = 4
+      end
+      object edtStatus: TEdit
+        Touch.InteractiveGestures = [LongTap, DoubleTap]
+        Align = Top
+        TabOrder = 5
+        TextSettings.Font.Size = 14.000000000000000000
+        Position.X = 12.000000000000000000
+        Position.Y = 178.000000000000000000
+        Margins.Top = 8.000000000000000000
+        Size.Width = 308.000000000000000000
+        Size.Height = 36.000000000000000000
+        Size.PlatformDefault = False
+        TextPrompt = 'npr. Dlaka ociscena, nokti iseceni'
+        StyledSettings = [Family, Style, FontColor]
+      end
+      object lblKomentar: TLabel
+        Align = Top
+        StyledSettings = [Family, Style, FontColor]
+        Margins.Top = 8.000000000000000000
+        Position.X = 12.000000000000000000
+        Position.Y = 222.000000000000000000
+        Size.Width = 308.000000000000000000
+        Size.Height = 18.000000000000000000
+        Size.PlatformDefault = False
+        TextSettings.Font.Size = 11.000000000000000000
+        Text = 'Komentar:'
+        TabOrder = 6
+      end
+      object memoKomentar: TMemo
+        Touch.InteractiveGestures = [Pan, LongTap, DoubleTap]
+        DataDetectorTypes = []
+        StyledSettings = [Family, Style, FontColor]
+        TextSettings.Font.Size = 14.000000000000000000
+        Align = Top
+        Margins.Top = 8.000000000000000000
+        Position.X = 12.000000000000000000
+        Position.Y = 248.000000000000000000
+        Size.Width = 308.000000000000000000
+        Size.Height = 65.000000000000000000
+        Size.PlatformDefault = False
+        TabOrder = 7
+        Viewport.Width = 308.000000000000000000
+        Viewport.Height = 65.000000000000000000
+      end
+      object rectPotvrdi: TRectangle
+        Align = Bottom
+        Fill.Color = claYellow
+        Margins.Top = 10.000000000000000000
+        Position.X = 12.000000000000000000
+        Position.Y = 365.000000000000000000
+        Size.Width = 308.000000000000000000
+        Size.Height = 46.000000000000000000
+        Size.PlatformDefault = False
+        Stroke.Kind = None
+        XRadius = 20.000000000000000000
+        YRadius = 20.000000000000000000
+        OnClick = rectPotvrdiClick
+        object lblPotvrdi: TLabel
+          StyledSettings = [Family, FontColor]
+          Position.X = 96.000000000000000000
+          Position.Y = 16.000000000000000000
+          TextSettings.Font.Size = 14.000000000000000000
+          TextSettings.Font.StyleExt = {00070000000000000004000000}
+          TextSettings.HorzAlign = Center
+          Text = 'Potvrdi'
+          TabOrder = 0
+        end
+      end
+    end
+  end
+end
