@@ -364,7 +364,7 @@ begin
     'WHERE Ime = ''Admin'' AND Prezime = ''Adminovic'' AND KorisnickoIme <> ''admin''');
 
   // Osiguraj da admin nalog UVEK ima ispravnu ulogu i ime
-  // (stare migracije/baze su umele da ga preimenuju u Osoblje/Osobljic)
+
   FDConnection1.ExecSQL(
     'UPDATE ZAPOSLENI SET Uloga = ''Admin'', Ime = ''Admin'', Prezime = ''Administrator'' ' +
     'WHERE KorisnickoIme = ''admin''');
@@ -390,9 +390,7 @@ procedure TForm5.UcitajTestPodatke;
 var
   Stream: TResourceStream;
 begin
-  // Nalozi za zaposlene i musterije se kreiraju u FDConnection1AfterConnect
-  // (osoblje, osoblje3, osoblje4, admin, vlasnik1). Stari test nalozi
-  // (osoblje1, osoblje2, vlasnik2) se vise ne kreiraju.
+
 
   // --- Test ljubimci ---
   FDQuery1.SQL.Text := 'SELECT COUNT(*) FROM pets';

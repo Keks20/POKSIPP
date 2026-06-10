@@ -121,9 +121,9 @@ begin
         FPetIDs[FPetCount] := Q.FieldByName('id').AsInteger;
 
         Item := TListBoxItem.Create(lbLjubimci);
-        Item.Text := ''; // sprjecava crtanje teksta iza custom kontrola
+        Item.Text := ''; // sprecava crtanje teksta iza custom kontrola
 
-        // --- Slika (lijevo, 68px) ---
+        // --- Slika (levo, 68px) ---
         imgPet := TImage.Create(Item);
         imgPet.Parent := Item;
         imgPet.Align := TAlignLayout.Left;
@@ -264,7 +264,7 @@ begin
     lblHranaSub.Text      := 'Uneseno danas: ' + IntToStr(nHrana);
     lblOstaloSub.Text     := 'Uneseno danas: ' + IntToStr(nOst);
 
-    // Provjeri da li radnik ima aktivnost u toku
+    // Proveri da li radnik ima aktivnost u toku
     Q.SQL.Text :=
       'SELECT COUNT(*), Vrsta_aktivnosti, VremeOd ' +
       'FROM DNEVNA_AKTIVNOST ' +

@@ -83,7 +83,7 @@ begin
       try
         Connection := DB;
 
-        // Provjeri da li je korisničko ime zauzeto
+        // Proveri da li je korisničko ime zauzeto
         SQL.Text :=
           'SELECT COUNT(*) FROM MUSTERIJA ' +
           'WHERE lower(KorisnickoIme) = lower(:u)';

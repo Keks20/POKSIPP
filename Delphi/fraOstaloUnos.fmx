@@ -219,8 +219,8 @@ object FrameOstaloUnos: TFrameOstaloUnos
         Size.Height = 65.000000000000000000
         Size.PlatformDefault = False
         TabOrder = 7
-        Viewport.Width = 288.000000000000000000
-        Viewport.Height = 61.000000000000000000
+        Viewport.Width = 292.000000000000000000
+        Viewport.Height = 65.000000000000000000
       end
       object rectPotvrdi: TRectangle
         Align = Bottom

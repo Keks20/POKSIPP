@@ -27,7 +27,7 @@ type
     edtVreme: TEdit;          // npr. "14:00"
 
     lblStatus: TLabel;
-    edtStatus: TEdit;         // npr. "Dlaka ociscena, nokti skropani"
+    edtStatus: TEdit;         // npr. "Dlaka ociscena, nokti sredjeni"
 
     lblKolicina: TLabel;
     edtKolicina: TEdit;       // npr. "50" (sampon ml) ili "5" (maramice kom)

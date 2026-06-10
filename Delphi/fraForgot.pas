@@ -79,7 +79,7 @@ begin
       try
         Connection := DB;
 
-        // Provjeri u MUSTERIJA tabeli (po korisničkom imenu, emailu ili telefonu)
+        // Proveri u MUSTERIJA tabeli (po korisničkom imenu, emailu ili telefonu)
         SQL.Text :=
           'SELECT Sifra_musterije FROM MUSTERIJA ' +
           'WHERE lower(KorisnickoIme) = lower(:x) ' +

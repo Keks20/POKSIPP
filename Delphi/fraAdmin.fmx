@@ -101,7 +101,7 @@ object FrameAdmin: TFrameAdmin
       Align = Top
       Margins.Bottom = 12.000000000000000000
       Position.X = 10.000000000000000000
-      Position.Y = 51.000000000000000000
+      Position.Y = 45.000000000000000000
       Size.Width = 336.000000000000000000
       Size.Height = 170.000000000000000000
       Size.PlatformDefault = False
@@ -121,7 +121,7 @@ object FrameAdmin: TFrameAdmin
       Fill.Color = claWhite
       Margins.Bottom = 12.000000000000000000
       Position.X = 10.000000000000000000
-      Position.Y = 233.000000000000000000
+      Position.Y = 227.000000000000000000
       Size.Width = 336.000000000000000000
       Size.Height = 120.000000000000000000
       Size.PlatformDefault = False
@@ -192,8 +192,8 @@ object FrameAdmin: TFrameAdmin
       Align = Top
       StyledSettings = [Family, FontColor]
       Position.X = 10.000000000000000000
-      Position.Y = 365.000000000000000000
-      Size.Width = 220.000000000000000000
+      Position.Y = 359.000000000000000000
+      Size.Width = 336.000000000000000000
       Size.Height = 29.000000000000000000
       Size.PlatformDefault = False
       TextSettings.Font.Size = 13.000000000000000000
@@ -206,7 +206,7 @@ object FrameAdmin: TFrameAdmin
       StyledSettings = [Family, Style, FontColor]
       Margins.Bottom = 4.000000000000000000
       Position.X = 10.000000000000000000
-      Position.Y = 394.000000000000000000
+      Position.Y = 388.000000000000000000
       Size.Width = 336.000000000000000000
       Size.Height = 20.000000000000000000
       Size.PlatformDefault = False
@@ -218,7 +218,7 @@ object FrameAdmin: TFrameAdmin
       Align = Top
       Margins.Bottom = 10.000000000000000000
       Position.X = 10.000000000000000000
-      Position.Y = 418.000000000000000000
+      Position.Y = 412.000000000000000000
       Size.Width = 336.000000000000000000
       Size.Height = 220.000000000000000000
       Size.PlatformDefault = False
@@ -238,7 +238,7 @@ object FrameAdmin: TFrameAdmin
       StyledSettings = [Family, FontColor]
       Margins.Bottom = 4.000000000000000000
       Position.X = 10.000000000000000000
-      Position.Y = 648.000000000000000000
+      Position.Y = 642.000000000000000000
       Size.Width = 336.000000000000000000
       Size.Height = 29.000000000000000000
       Size.PlatformDefault = False
@@ -251,7 +251,7 @@ object FrameAdmin: TFrameAdmin
       Align = Top
       Margins.Bottom = 10.000000000000000000
       Position.X = 10.000000000000000000
-      Position.Y = 681.000000000000000000
+      Position.Y = 675.000000000000000000
       Size.Width = 336.000000000000000000
       Size.Height = 160.000000000000000000
       Size.PlatformDefault = False
@@ -295,7 +295,7 @@ object FrameAdmin: TFrameAdmin
       StyledSettings = [Family, FontColor]
       Margins.Bottom = 4.000000000000000000
       Position.X = 10.000000000000000000
-      Position.Y = 851.000000000000000000
+      Position.Y = 903.000000000000000000
       Size.Width = 336.000000000000000000
       Size.Height = 29.000000000000000000
       Size.PlatformDefault = False
@@ -308,7 +308,7 @@ object FrameAdmin: TFrameAdmin
       Align = Top
       Margins.Bottom = 10.000000000000000000
       Position.X = 10.000000000000000000
-      Position.Y = 884.000000000000000000
+      Position.Y = 936.000000000000000000
       Size.Width = 336.000000000000000000
       Size.Height = 180.000000000000000000
       Size.PlatformDefault = False
