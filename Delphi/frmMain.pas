@@ -401,14 +401,15 @@ begin
   begin
     FDQuery1.Close;
     FDQuery1.SQL.Text :=
-      'INSERT INTO pets (name, species, breed, age, image_blob, Status, Sifra_musterije, Lokacija) ' +
-      'VALUES (:name, :species, :breed, :age, :img, :status, :sid, :lok)';
+      'INSERT INTO pets (name, species, breed, age, image_blob, Status, Sifra_musterije, Lokacija, Alergije) ' +
+      'VALUES (:name, :species, :breed, :age, :img, :status, :sid, :lok, :alerg)';
 
     FDQuery1.ParamByName('name').AsString    := 'Maca';
     FDQuery1.ParamByName('species').AsString := 'Macka';
     FDQuery1.ParamByName('breed').AsString   := 'Persijska';
     FDQuery1.ParamByName('age').AsString     := '2 godine';
     FDQuery1.ParamByName('status').AsString  := 'Aktivan';
+    FDQuery1.ParamByName('alerg').AsString   := 'Piletina';
     FDQuery1.ParamByName('sid').AsInteger    := 1;
     FDQuery1.ParamByName('lok').AsString     := 'Boks A1';
     // Slika je samo rezerva (prikaz ide iz foldera Slike); ako resurs fali, preskoci
@@ -429,6 +430,7 @@ begin
     FDQuery1.ParamByName('breed').AsString   := 'Ovcar';
     FDQuery1.ParamByName('age').AsString     := '4 godine';
     FDQuery1.ParamByName('status').AsString  := 'Aktivan';
+    FDQuery1.ParamByName('alerg').AsString   := 'Nema poznatih';
     FDQuery1.ParamByName('sid').AsInteger    := 1;
     FDQuery1.ParamByName('lok').AsString     := 'Boks A2';
     try

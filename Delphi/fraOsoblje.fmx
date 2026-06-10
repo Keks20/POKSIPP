@@ -363,7 +363,7 @@ object FrameOsoblje: TFrameOsoblje
           Size.PlatformDefault = False
           TextSettings.Font.Size = 10.000000000000000000
           Text = 'Uneseno danas: 0'
-          TabOrder = 3
+          TabOrder = 4
         end
       end
       object rectPregledAktBtn: TRectangle
@@ -452,7 +452,7 @@ object FrameOsoblje: TFrameOsoblje
           Size.PlatformDefault = False
           TextSettings.Font.Size = 10.000000000000000000
           Text = 'Uneseno danas: 0'
-          TabOrder = 3
+          TabOrder = 4
         end
       end
       object rectPregledHranaBtn: TRectangle
@@ -541,7 +541,7 @@ object FrameOsoblje: TFrameOsoblje
           Size.PlatformDefault = False
           TextSettings.Font.Size = 10.000000000000000000
           Text = 'Uneseno danas: 0'
-          TabOrder = 3
+          TabOrder = 4
         end
       end
       object rectPregledOstaloBtn: TRectangle
