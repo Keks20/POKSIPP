@@ -5,7 +5,7 @@ object FrameOsoblje: TFrameOsoblje
   object layHeader: TLayout
     Align = Top
     Size.Width = 372.000000000000000000
-    Size.Height = 50.000000000000000000
+    Size.Height = 65.000000000000000000
     Size.PlatformDefault = False
     TabOrder = 0
     object lblNaslov: TLabel
@@ -14,19 +14,29 @@ object FrameOsoblje: TFrameOsoblje
       Margins.Left = 14.000000000000000000
       Position.X = 14.000000000000000000
       Size.Width = 120.000000000000000000
-      Size.Height = 50.000000000000000000
+      Size.Height = 65.000000000000000000
       Size.PlatformDefault = False
       TextSettings.Font.Size = 16.000000000000000000
       TextSettings.Font.StyleExt = {00070000000000000004000000}
-      Text = 'Pocetna strana'
+      Text = 'Osoblje'
       TabOrder = 0
+    end
+    object lblImeZaposlenog: TLabel
+      StyledSettings = [Family, Style, FontColor]
+      Position.X = 14.000000000000000000
+      Position.Y = 34.000000000000000000
+      Size.Width = 200.000000000000000000
+      Size.Height = 22.000000000000000000
+      Size.PlatformDefault = False
+      TextSettings.Font.Size = 11.000000000000000000
+      TabOrder = 3
     end
     object rectOdjava: TRectangle
       Align = Right
       Fill.Kind = None
       Position.X = 328.000000000000000000
       Size.Width = 44.000000000000000000
-      Size.Height = 50.000000000000000000
+      Size.Height = 65.000000000000000000
       Size.PlatformDefault = False
       Stroke.Kind = None
       OnClick = rectOdjavaClick
@@ -56,9 +66,22 @@ object FrameOsoblje: TFrameOsoblje
         Align = Client
         HitTest = False
         Size.Width = 44.000000000000000000
-        Size.Height = 50.000000000000000000
+        Size.Height = 65.000000000000000000
         Size.PlatformDefault = False
       end
+    end
+    object lblDostupnost: TLabel
+      Align = Right
+      StyledSettings = [Family]
+      Position.X = 230.000000000000000000
+      Size.Width = 98.000000000000000000
+      Size.Height = 65.000000000000000000
+      Size.PlatformDefault = False
+      TextSettings.Font.Size = 11.000000000000000000
+      TextSettings.FontColor = claGreen
+      TextSettings.HorzAlign = Center
+      Text = #226#8212#143' Dostupan'
+      TabOrder = 2
     end
   end
   object layNavBar: TLayout
@@ -232,24 +255,70 @@ object FrameOsoblje: TFrameOsoblje
     Padding.Right = 10.000000000000000000
     Padding.Bottom = 10.000000000000000000
     Size.Width = 372.000000000000000000
-    Size.Height = 472.000000000000000000
+    Size.Height = 457.000000000000000000
     Size.PlatformDefault = False
     TabOrder = 2
-    Viewport.Width = 372.000000000000000000
-    Viewport.Height = 472.000000000000000000
+    Viewport.Width = 356.000000000000000000
+    Viewport.Height = 457.000000000000000000
     object lblLjubimci: TLabel
       Align = MostTop
       StyledSettings = [Family, FontColor]
       Margins.Top = 12.000000000000000000
       Position.X = 10.000000000000000000
       Position.Y = 22.000000000000000000
-      Size.Width = 352.000000000000000000
+      Size.Width = 336.000000000000000000
       Size.Height = 29.000000000000000000
       Size.PlatformDefault = False
       TextSettings.Font.Size = 13.000000000000000000
       TextSettings.Font.StyleExt = {00070000000000000004000000}
-      Text = 'Ljubimci'
+      Text = 'Ljubimci - Pansion'
       TabOrder = 0
+    end
+    object lbLjubimci: TListBox
+      Align = Top
+      Position.X = 10.000000000000000000
+      Position.Y = 51.000000000000000000
+      Size.Width = 336.000000000000000000
+      Size.Height = 176.000000000000000000
+      Size.PlatformDefault = False
+      StyleLookup = 'listboxstyle'
+      TabOrder = 1
+      OnClick = lbLjubimciClick
+      ShowScrollBars = False
+      DisableFocusEffect = True
+      ItemHeight = 80.000000000000000000
+      DefaultItemStyles.ItemStyle = ''
+      DefaultItemStyles.GroupHeaderStyle = ''
+      DefaultItemStyles.GroupFooterStyle = ''
+      Viewport.Width = 332.000000000000000000
+      Viewport.Height = 172.000000000000000000
+    end
+    object rectUToku: TRectangle
+      Align = Top
+      Fill.Color = claYellow
+      Margins.Bottom = 6.000000000000000000
+      Position.X = 10.000000000000000000
+      Position.Y = 228.000000000000000000
+      Size.Width = 352.000000000000000000
+      Size.Height = 46.000000000000000000
+      Size.PlatformDefault = False
+      Stroke.Kind = None
+      Visible = False
+      XRadius = 10.000000000000000000
+      YRadius = 10.000000000000000000
+      OnClick = rectUTokuClick
+      object lblUToku: TLabel
+        Align = Client
+        StyledSettings = [Family, FontColor]
+        Margins.Left = 10.000000000000000000
+        Size.Width = 342.000000000000000000
+        Size.Height = 46.000000000000000000
+        Size.PlatformDefault = False
+        TextSettings.Font.Size = 11.000000000000000000
+        TextSettings.Font.StyleExt = {00070000000000000004000000}
+        Text = 'Aktivnost u toku: ...'
+        TabOrder = 0
+      end
     end
     object lblPlanTitle: TLabel
       Align = Top
@@ -257,7 +326,7 @@ object FrameOsoblje: TFrameOsoblje
       Margins.Top = 6.000000000000000000
       Position.X = 10.000000000000000000
       Position.Y = 233.000000000000000000
-      Size.Width = 352.000000000000000000
+      Size.Width = 336.000000000000000000
       Size.Height = 28.000000000000000000
       Size.PlatformDefault = False
       TextSettings.Font.Size = 13.000000000000000000
@@ -270,7 +339,7 @@ object FrameOsoblje: TFrameOsoblje
       Margins.Bottom = 7.000000000000000000
       Position.X = 10.000000000000000000
       Position.Y = 261.000000000000000000
-      Size.Width = 352.000000000000000000
+      Size.Width = 336.000000000000000000
       Size.Height = 59.000000000000000000
       Size.PlatformDefault = False
       object lblAktivnosti: TLabel
@@ -294,7 +363,31 @@ object FrameOsoblje: TFrameOsoblje
           Size.PlatformDefault = False
           TextSettings.Font.Size = 10.000000000000000000
           Text = 'Uneseno danas: 0'
-          TabOrder = 4
+          TabOrder = 3
+        end
+      end
+      object rectPregledAktBtn: TRectangle
+        Fill.Color = claYellow
+        Position.X = 246.000000000000000000
+        Position.Y = 15.000000000000000000
+        Size.Width = 58.000000000000000000
+        Size.Height = 27.000000000000000000
+        Size.PlatformDefault = False
+        Stroke.Color = claNull
+        XRadius = 8.000000000000000000
+        YRadius = 8.000000000000000000
+        OnClick = rectPregledAktBtnClick
+        object lblPregledAkt: TLabel
+          Align = Client
+          StyledSettings = [Family, FontColor]
+          Size.Width = 58.000000000000000000
+          Size.Height = 27.000000000000000000
+          Size.PlatformDefault = False
+          TextSettings.Font.Size = 10.000000000000000000
+          TextSettings.Font.StyleExt = {00070000000000000004000000}
+          TextSettings.HorzAlign = Center
+          Text = 'Pregled'
+          TabOrder = 5
         end
       end
       object rectAktivnostiBtn: TRectangle
@@ -335,7 +428,7 @@ object FrameOsoblje: TFrameOsoblje
       Margins.Bottom = 7.000000000000000000
       Position.X = 10.000000000000000000
       Position.Y = 327.000000000000000000
-      Size.Width = 352.000000000000000000
+      Size.Width = 336.000000000000000000
       Size.Height = 59.000000000000000000
       Size.PlatformDefault = False
       object lblHrana: TLabel
@@ -359,7 +452,31 @@ object FrameOsoblje: TFrameOsoblje
           Size.PlatformDefault = False
           TextSettings.Font.Size = 10.000000000000000000
           Text = 'Uneseno danas: 0'
-          TabOrder = 4
+          TabOrder = 3
+        end
+      end
+      object rectPregledHranaBtn: TRectangle
+        Fill.Color = claYellow
+        Position.X = 246.000000000000000000
+        Position.Y = 15.000000000000000000
+        Size.Width = 58.000000000000000000
+        Size.Height = 27.000000000000000000
+        Size.PlatformDefault = False
+        Stroke.Color = claNull
+        XRadius = 8.000000000000000000
+        YRadius = 8.000000000000000000
+        OnClick = rectPregledHranaBtnClick
+        object lblPregledHrana: TLabel
+          Align = Client
+          StyledSettings = [Family, FontColor]
+          Size.Width = 58.000000000000000000
+          Size.Height = 27.000000000000000000
+          Size.PlatformDefault = False
+          TextSettings.Font.Size = 10.000000000000000000
+          TextSettings.Font.StyleExt = {00070000000000000004000000}
+          TextSettings.HorzAlign = Center
+          Text = 'Pregled'
+          TabOrder = 5
         end
       end
       object rectHranaBtn: TRectangle
@@ -400,7 +517,7 @@ object FrameOsoblje: TFrameOsoblje
       Margins.Bottom = 7.000000000000000000
       Position.X = 10.000000000000000000
       Position.Y = 393.000000000000000000
-      Size.Width = 352.000000000000000000
+      Size.Width = 336.000000000000000000
       Size.Height = 59.000000000000000000
       Size.PlatformDefault = False
       object lblOstalo: TLabel
@@ -424,7 +541,31 @@ object FrameOsoblje: TFrameOsoblje
           Size.PlatformDefault = False
           TextSettings.Font.Size = 10.000000000000000000
           Text = 'Uneseno danas: 0'
-          TabOrder = 4
+          TabOrder = 3
+        end
+      end
+      object rectPregledOstaloBtn: TRectangle
+        Fill.Color = claYellow
+        Position.X = 246.000000000000000000
+        Position.Y = 15.000000000000000000
+        Size.Width = 58.000000000000000000
+        Size.Height = 27.000000000000000000
+        Size.PlatformDefault = False
+        Stroke.Color = claNull
+        XRadius = 8.000000000000000000
+        YRadius = 8.000000000000000000
+        OnClick = rectPregledOstaloBtnClick
+        object lblPregledOstalo: TLabel
+          Align = Client
+          StyledSettings = [Family, FontColor]
+          Size.Width = 58.000000000000000000
+          Size.Height = 27.000000000000000000
+          Size.PlatformDefault = False
+          TextSettings.Font.Size = 10.000000000000000000
+          TextSettings.Font.StyleExt = {00070000000000000004000000}
+          TextSettings.HorzAlign = Center
+          Text = 'Pregled'
+          TabOrder = 5
         end
       end
       object rectOstaloBtn: TRectangle
@@ -460,24 +601,141 @@ object FrameOsoblje: TFrameOsoblje
         end
       end
     end
-    object lbLjubimci: TListBox
-      Align = Top
-      Position.X = 10.000000000000000000
-      Position.Y = 51.000000000000000000
-      Size.Width = 352.000000000000000000
-      Size.Height = 176.000000000000000000
+  end
+  object rectPopupUToku: TRectangle
+    Align = Client
+    Fill.Color = claBlack
+    Opacity = 0.600000023841857900
+    Size.Width = 372.000000000000000000
+    Size.Height = 407.000000000000000000
+    Size.PlatformDefault = False
+    Stroke.Kind = None
+    Visible = False
+    OnClick = rectPopupUTokuZatvoriClick
+    object rectPopupCard: TRectangle
+      Align = Center
+      Fill.Color = claWhite
+      Padding.Left = 16.000000000000000000
+      Padding.Top = 16.000000000000000000
+      Padding.Right = 16.000000000000000000
+      Padding.Bottom = 16.000000000000000000
+      Size.Width = 320.000000000000000000
+      Size.Height = 310.000000000000000000
       Size.PlatformDefault = False
-      StyleLookup = 'listboxstyle'
-      TabOrder = 1
-      OnClick = lbLjubimciClick
-      ShowScrollBars = False
-      DisableFocusEffect = True
-      ItemHeight = 68.000000000000000000
-      DefaultItemStyles.ItemStyle = ''
-      DefaultItemStyles.GroupHeaderStyle = ''
-      DefaultItemStyles.GroupFooterStyle = ''
-      Viewport.Width = 348.000000000000000000
-      Viewport.Height = 172.000000000000000000
+      Stroke.Kind = None
+      XRadius = 16.000000000000000000
+      YRadius = 16.000000000000000000
+      object lblPopupAktNaslov: TLabel
+        Align = Top
+        StyledSettings = [Family, FontColor]
+        Position.X = 16.000000000000000000
+        Position.Y = 16.000000000000000000
+        Size.Width = 288.000000000000000000
+        Size.Height = 28.000000000000000000
+        Size.PlatformDefault = False
+        TextSettings.Font.Size = 15.000000000000000000
+        TextSettings.Font.StyleExt = {00070000000000000004000000}
+        Text = 'Aktivnost'
+        TabOrder = 0
+      end
+      object lblPopupAktVreme: TLabel
+        Align = Top
+        StyledSettings = [Family, FontColor]
+        Margins.Top = 6.000000000000000000
+        Position.X = 16.000000000000000000
+        Position.Y = 50.000000000000000000
+        Size.Width = 288.000000000000000000
+        Size.Height = 44.000000000000000000
+        Size.PlatformDefault = False
+        Text = 'Pocelo: 00:00'
+        TabOrder = 1
+      end
+      object lblPopupAktStatus: TLabel
+        Align = Top
+        StyledSettings = [Family]
+        Margins.Top = 4.000000000000000000
+        Position.X = 16.000000000000000000
+        Position.Y = 98.000000000000000000
+        Size.Width = 288.000000000000000000
+        Size.Height = 22.000000000000000000
+        Size.PlatformDefault = False
+        TextSettings.FontColor = claOrange
+        Text = 'Status: U toku'
+        TabOrder = 2
+      end
+      object lblVremeZavrsetka: TLabel
+        Align = Top
+        StyledSettings = [Family, Style, FontColor]
+        Margins.Top = 12.000000000000000000
+        Position.X = 16.000000000000000000
+        Position.Y = 132.000000000000000000
+        Size.Width = 288.000000000000000000
+        Size.Height = 18.000000000000000000
+        Size.PlatformDefault = False
+        TextSettings.Font.Size = 11.000000000000000000
+        Text = 'Stvarno vreme zavrsetka (hh:nn):'
+        TabOrder = 3
+      end
+      object edtVremeZavrsetka: TEdit
+        Touch.InteractiveGestures = [LongTap, DoubleTap]
+        Align = Top
+        TabOrder = 4
+        Position.X = 16.000000000000000000
+        Position.Y = 154.000000000000000000
+        Margins.Top = 4.000000000000000000
+        Size.Width = 288.000000000000000000
+        Size.Height = 36.000000000000000000
+        Size.PlatformDefault = False
+        TextPrompt = 'hh:nn'
+      end
+      object rectZavrsiBtn: TRectangle
+        Align = Top
+        Fill.Color = claYellow
+        Margins.Top = 10.000000000000000000
+        Position.X = 16.000000000000000000
+        Position.Y = 200.000000000000000000
+        Size.Width = 288.000000000000000000
+        Size.Height = 40.000000000000000000
+        Size.PlatformDefault = False
+        Stroke.Kind = None
+        XRadius = 10.000000000000000000
+        YRadius = 10.000000000000000000
+        OnClick = rectZavrsiBtnClick
+        object lblZavrsiBtn: TLabel
+          Align = Client
+          StyledSettings = [Family, FontColor]
+          Size.Width = 288.000000000000000000
+          Size.Height = 40.000000000000000000
+          Size.PlatformDefault = False
+          TextSettings.Font.StyleExt = {00070000000000000004000000}
+          TextSettings.HorzAlign = Center
+          Text = 'Zavrsi aktivnost'
+          TabOrder = 0
+        end
+      end
+      object rectZatvoriBtn: TRectangle
+        Align = Top
+        Margins.Top = 6.000000000000000000
+        Position.X = 16.000000000000000000
+        Position.Y = 246.000000000000000000
+        Size.Width = 288.000000000000000000
+        Size.Height = 36.000000000000000000
+        Size.PlatformDefault = False
+        Stroke.Color = claLightgray
+        XRadius = 10.000000000000000000
+        YRadius = 10.000000000000000000
+        OnClick = rectPopupUTokuZatvoriClick
+        object lblZatvoriBtn: TLabel
+          Align = Client
+          StyledSettings = [Family, FontColor]
+          Size.Width = 288.000000000000000000
+          Size.Height = 36.000000000000000000
+          Size.PlatformDefault = False
+          TextSettings.HorzAlign = Center
+          Text = 'Zatvori'
+          TabOrder = 0
+        end
+      end
     end
   end
 end

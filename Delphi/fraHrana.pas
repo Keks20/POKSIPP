@@ -79,10 +79,27 @@ begin
   Result := True;
 end;
 
+// Izvlaci pocetni ceo broj iz teksta kolicine (npr. "280g" -> 280)
+function ParsujKolicinu(const AKol: string): Integer;
+var
+  i: Integer;
+  sNum: string;
+begin
+  sNum := '';
+  for i := 1 to Length(AKol) do
+    if CharInSet(AKol[i], ['0'..'9']) then
+      sNum := sNum + AKol[i]
+    else if sNum <> '' then
+      Break;
+  Result := StrToIntDef(sNum, 0);
+end;
+
 procedure TFrameHrana.SacuvajHranu;
 var
   Q: TFDQuery;
   dtVreme: TDateTime;
+  idUsluga, idResurs, nUtrosak: Integer;
+  sResTip, sVrstaLower: string;
 begin
   // --- Validacija ---
   if Trim(edtVrsta.Text) = '' then
@@ -114,20 +131,44 @@ begin
     Exit;
   end;
 
+  // --- Odredi uslugu (Hranjenje) i resurs (suva/vlazna hrana) ---
+  nUtrosak := ParsujKolicinu(edtKolicina.Text);
+  sVrstaLower := LowerCase(Trim(edtVrsta.Text));
+  if (Pos('vlaz', sVrstaLower) > 0) or (Pos('konzerv', sVrstaLower) > 0) then
+    sResTip := 'Vlazna hrana (g)'
+  else
+    sResTip := 'Suva hrana (g)';
+
   // --- SQL INSERT ---
   Q := TFDQuery.Create(nil);
   try
     Q.Connection := DB;
+
+    idUsluga := 0;
+    Q.SQL.Text := 'SELECT Sifra_usluge FROM USLUGA WHERE Naziv = ''Hranjenje'' LIMIT 1';
+    Q.Open;
+    if not Q.IsEmpty then idUsluga := Q.Fields[0].AsInteger;
+    Q.Close;
+
+    idResurs := 0;
+    Q.SQL.Text := 'SELECT Sifra_resursa FROM RESURS WHERE Tip_Resursa = :t LIMIT 1';
+    Q.ParamByName('t').AsString := sResTip;
+    Q.Open;
+    if not Q.IsEmpty then idResurs := Q.Fields[0].AsInteger;
+    Q.Close;
+
     Q.SQL.Text :=
       'INSERT INTO DNEVNA_AKTIVNOST ' +
       '  (Kategorija, Vrsta_aktivnosti, VremeOd, VremeDo, ' +
       '   DuzinaTrajanja, StatusAktivnosti, ' +
       '   VremeObroka, Kolicina, Komentar, ' +
+      '   Sifra_usluge, Sifra_resursa, Kolicina_Utroska, ' +
       '   Sifra_zaposlenog, Sifra_ljubimca) ' +
       'VALUES ' +
       '  (:kat, :vrsta, :od, :od, ' +
       '   :traj, :status, ' +
       '   :vobroka, :kol, :kom, ' +
+      '   :usl, :res, :utr, ' +
       '   :zap, :pet)';
 
     Q.ParamByName('kat').AsString     := 'Hrana';
@@ -138,9 +179,24 @@ begin
     Q.ParamByName('vobroka').AsString := Trim(edtVremeObroka.Text);
     Q.ParamByName('kol').AsString     := Trim(edtKolicina.Text);
     Q.ParamByName('kom').AsString     := Trim(memoKomentar.Text);
+    Q.ParamByName('usl').AsInteger    := idUsluga;
+    Q.ParamByName('res').AsInteger    := idResurs;
+    Q.ParamByName('utr').AsInteger    := nUtrosak;
     Q.ParamByName('zap').AsInteger    := LoggedInUserID;
     Q.ParamByName('pet').AsInteger    := SelectedPetID;
     Q.ExecSQL;
+
+    // --- Automatsko umanjenje zaliha u magacinu (A2.4) ---
+    if (idResurs > 0) and (nUtrosak > 0) then
+    begin
+      Q.SQL.Text :=
+        'UPDATE RESURS SET Trenutno_u_Magacinu = ' +
+        '  MAX(0, Trenutno_u_Magacinu - :u) ' +
+        'WHERE Sifra_resursa = :r';
+      Q.ParamByName('u').AsInteger := nUtrosak;
+      Q.ParamByName('r').AsInteger := idResurs;
+      Q.ExecSQL;
+    end;
 
     ShowMessage('Obrok je uspesno zabelezen!');
     TNavFrames.Back;

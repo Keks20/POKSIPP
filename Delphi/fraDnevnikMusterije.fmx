@@ -134,8 +134,10 @@ object FrameDnevnikMusterije: TFrameDnevnikMusterije
       Size.Width = 284.000000000000000000
       Size.Height = 200.000000000000000000
       Size.PlatformDefault = False
+      StyleLookup = 'listboxstyle'
       TabOrder = 1
       OnClick = lbAktivnostiClick
+      ShowScrollBars = False
       DisableFocusEffect = True
       ItemHeight = 90.000000000000000000
       DefaultItemStyles.ItemStyle = ''
@@ -191,8 +193,10 @@ object FrameDnevnikMusterije: TFrameDnevnikMusterije
       Size.Width = 284.000000000000000000
       Size.Height = 160.000000000000000000
       Size.PlatformDefault = False
+      StyleLookup = 'listboxstyle'
       TabOrder = 3
       OnClick = lbHranaClick
+      ShowScrollBars = False
       DisableFocusEffect = True
       ItemHeight = 70.000000000000000000
       DefaultItemStyles.ItemStyle = ''
@@ -248,8 +252,10 @@ object FrameDnevnikMusterije: TFrameDnevnikMusterije
       Size.Width = 284.000000000000000000
       Size.Height = 160.000000000000000000
       Size.PlatformDefault = False
+      StyleLookup = 'listboxstyle'
       TabOrder = 5
       OnClick = lbOstaloClick
+      ShowScrollBars = False
       DisableFocusEffect = True
       ItemHeight = 75.000000000000000000
       DefaultItemStyles.ItemStyle = ''

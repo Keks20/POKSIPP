@@ -91,8 +91,10 @@ var
 begin
   if FHost = nil then Exit;
 
+  // Gasi samo frejmove; pozadina (bgRect) i ostali fiksni elementi ostaju vidljivi
   for i := 0 to FHost.ControlsCount - 1 do
-    FHost.Controls[i].Visible := False;
+    if FHost.Controls[i] is TFrame then
+      FHost.Controls[i].Visible := False;
 end;
 
 class procedure TNavFrames.GoCached(AFrameClass: TClass; AOwner: TComponent);

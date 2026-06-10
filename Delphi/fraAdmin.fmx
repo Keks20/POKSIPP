@@ -1,0 +1,399 @@
+object FrameAdmin: TFrameAdmin
+  Size.Width = 372.000000000000000000
+  Size.Height = 572.000000000000000000
+  Size.PlatformDefault = False
+  object layHeader: TLayout
+    Align = Top
+    Size.Width = 372.000000000000000000
+    Size.Height = 65.000000000000000000
+    Size.PlatformDefault = False
+    TabOrder = 0
+    object lblNaslov: TLabel
+      Align = Left
+      StyledSettings = [Family, FontColor]
+      Margins.Left = 14.000000000000000000
+      Position.X = 14.000000000000000000
+      Size.Width = 160.000000000000000000
+      Size.Height = 65.000000000000000000
+      Size.PlatformDefault = False
+      TextSettings.Font.Size = 16.000000000000000000
+      TextSettings.Font.StyleExt = {00070000000000000004000000}
+      Text = 'Administrator'
+      TabOrder = 0
+    end
+    object lblImeAdmin: TLabel
+      StyledSettings = [Family, Style, FontColor]
+      Position.X = 14.000000000000000000
+      Position.Y = 36.000000000000000000
+      Size.Width = 200.000000000000000000
+      Size.Height = 22.000000000000000000
+      Size.PlatformDefault = False
+      TextSettings.Font.Size = 11.000000000000000000
+      TabOrder = 1
+    end
+    object rectOdjava: TRectangle
+      Align = Right
+      Fill.Kind = None
+      Position.X = 328.000000000000000000
+      Size.Width = 44.000000000000000000
+      Size.Height = 65.000000000000000000
+      Size.PlatformDefault = False
+      Stroke.Kind = None
+      OnClick = rectOdjavaClick
+      object Image1: TImage
+        MultiResBitmap = <
+          item
+            Width = 64
+            Height = 64
+            PNG = {
+              89504E470D0A1A0A0000000D4948445200000040000000400806000000AA6971
+              DE0000000473424954080808087C086488000001B049444154789CED9AFD4DC3
+              3010479F100374848E5026A06CC00694091821611232021B5026800DCA067403
+              FA87B1548A1D92E62ECE917B52552991ACFBBDDAF147038EE3388EE338691640
+              05EC802FA5CF6459A21B7CF202C6083F59011BC6095F5CC045E6FA6AD42A0A72
+              99B9BE485C7B051ABD52CA90139062C73F14901B02B3C105942EA0345605A41E
+              D2676151405C9A8B4CD5D60454404DE8012F0848B02420868F8848B02260C5CF
+              F091C112AC087807EE33F70649B02200C22A545C822501A020C19A0010966051
+              00084AB02A008284C7CCBDCE12FA6C87FBB001AE95DA3E654F7A691C25DC1066
+              91245A02D6C09D52DB7DF85382E521D095D6E1300701ADCC41C09E9621A0F50C
+              D832DE91F72DF9F381D6F06D34FC3EBF7F3AAF3E552AF2FF377CD2611AB43C04
+              4EB7C7C774FEE5AD0A10090F36058885077B0244C3832D01E2E1C18E80350AE1
+              C18E802DE99DDFA0F0604700841E702C617078D05B096A517F7F3F20101E6CF5
+              80480D5C21101E6C0A00F8906AC8AA00315C40E9024AD3671658120E3BA56914
+              DA1C4CC3CCDF137C1EB58A89F2C60C7A401B4B66FEB23404090DBABDC1711CC7
+              711CA7080760001833BF4F0B9A0000000049454E44AE426082}
+          end>
+        Align = Client
+        HitTest = False
+        Size.Width = 44.000000000000000000
+        Size.Height = 65.000000000000000000
+        Size.PlatformDefault = False
+      end
+    end
+  end
+  object scrollContent: TScrollBox
+    Align = Client
+    Padding.Left = 10.000000000000000000
+    Padding.Top = 10.000000000000000000
+    Padding.Right = 10.000000000000000000
+    Padding.Bottom = 10.000000000000000000
+    Size.Width = 372.000000000000000000
+    Size.Height = 507.000000000000000000
+    Size.PlatformDefault = False
+    TabOrder = 1
+    Viewport.Width = 356.000000000000000000
+    Viewport.Height = 507.000000000000000000
+    object lblZaposleniTitle: TLabel
+      Align = MostTop
+      StyledSettings = [Family, FontColor]
+      Margins.Top = 6.000000000000000000
+      Position.X = 10.000000000000000000
+      Position.Y = 16.000000000000000000
+      Size.Width = 336.000000000000000000
+      Size.Height = 29.000000000000000000
+      Size.PlatformDefault = False
+      TextSettings.Font.Size = 13.000000000000000000
+      TextSettings.Font.StyleExt = {00070000000000000004000000}
+      Text = 'Zaposleni'
+      TabOrder = 0
+    end
+    object lbZaposleni: TListBox
+      Align = Top
+      Margins.Bottom = 12.000000000000000000
+      Position.X = 10.000000000000000000
+      Position.Y = 51.000000000000000000
+      Size.Width = 336.000000000000000000
+      Size.Height = 170.000000000000000000
+      Size.PlatformDefault = False
+      StyleLookup = 'listboxstyle'
+      TabOrder = 1
+      OnClick = lbZaposleniClick
+      DisableFocusEffect = True
+      ItemHeight = 56.000000000000000000
+      DefaultItemStyles.ItemStyle = ''
+      DefaultItemStyles.GroupHeaderStyle = ''
+      DefaultItemStyles.GroupFooterStyle = ''
+      Viewport.Width = 332.000000000000000000
+      Viewport.Height = 166.000000000000000000
+    end
+    object rectProfil: TRectangle
+      Align = Top
+      Fill.Color = claWhite
+      Margins.Bottom = 12.000000000000000000
+      Position.X = 10.000000000000000000
+      Position.Y = 233.000000000000000000
+      Size.Width = 336.000000000000000000
+      Size.Height = 120.000000000000000000
+      Size.PlatformDefault = False
+      Stroke.Color = claGainsboro
+      XRadius = 12.000000000000000000
+      YRadius = 12.000000000000000000
+      object lblProfilIme: TLabel
+        Align = Top
+        StyledSettings = [Family, FontColor]
+        Margins.Left = 14.000000000000000000
+        Margins.Top = 12.000000000000000000
+        Margins.Right = 14.000000000000000000
+        Position.X = 14.000000000000000000
+        Position.Y = 12.000000000000000000
+        Size.Width = 308.000000000000000000
+        Size.Height = 26.000000000000000000
+        Size.PlatformDefault = False
+        TextSettings.Font.Size = 15.000000000000000000
+        TextSettings.Font.StyleExt = {00070000000000000004000000}
+        Text = 'Ime Prezime'
+        TabOrder = 0
+      end
+      object lblProfilUloga: TLabel
+        Align = Top
+        StyledSettings = [Family, Style, FontColor]
+        Margins.Left = 14.000000000000000000
+        Margins.Top = 2.000000000000000000
+        Margins.Right = 14.000000000000000000
+        Position.X = 14.000000000000000000
+        Position.Y = 40.000000000000000000
+        Size.Width = 308.000000000000000000
+        Size.Height = 20.000000000000000000
+        Size.PlatformDefault = False
+        Text = 'Uloga: -'
+        TabOrder = 1
+      end
+      object lblProfilKorIme: TLabel
+        Align = Top
+        StyledSettings = [Family, Style, FontColor]
+        Margins.Left = 14.000000000000000000
+        Margins.Top = 2.000000000000000000
+        Margins.Right = 14.000000000000000000
+        Position.X = 14.000000000000000000
+        Position.Y = 62.000000000000000000
+        Size.Width = 308.000000000000000000
+        Size.Height = 20.000000000000000000
+        Size.PlatformDefault = False
+        Text = 'Korisnicko ime: -'
+        TabOrder = 2
+      end
+      object lblProfilDostupnost: TLabel
+        Align = Top
+        StyledSettings = [Family]
+        Margins.Left = 14.000000000000000000
+        Margins.Top = 4.000000000000000000
+        Margins.Right = 14.000000000000000000
+        Position.X = 14.000000000000000000
+        Position.Y = 86.000000000000000000
+        Size.Width = 308.000000000000000000
+        Size.Height = 22.000000000000000000
+        Size.PlatformDefault = False
+        TextSettings.FontColor = claGreen
+        Text = #226#8212#143' Dostupan'
+        TabOrder = 3
+      end
+    end
+    object lblUnosiTitle: TLabel
+      Align = Top
+      StyledSettings = [Family, FontColor]
+      Position.X = 10.000000000000000000
+      Position.Y = 365.000000000000000000
+      Size.Width = 220.000000000000000000
+      Size.Height = 29.000000000000000000
+      Size.PlatformDefault = False
+      TextSettings.Font.Size = 13.000000000000000000
+      TextSettings.Font.StyleExt = {00070000000000000004000000}
+      Text = 'Unosi radnika'
+      TabOrder = 2
+    end
+    object lblBrojUnosi: TLabel
+      Align = Top
+      StyledSettings = [Family, Style, FontColor]
+      Margins.Bottom = 4.000000000000000000
+      Position.X = 10.000000000000000000
+      Position.Y = 394.000000000000000000
+      Size.Width = 336.000000000000000000
+      Size.Height = 20.000000000000000000
+      Size.PlatformDefault = False
+      TextSettings.Font.Size = 11.000000000000000000
+      Text = '(0 unosa)'
+      TabOrder = 3
+    end
+    object lbUnosi: TListBox
+      Align = Top
+      Margins.Bottom = 10.000000000000000000
+      Position.X = 10.000000000000000000
+      Position.Y = 418.000000000000000000
+      Size.Width = 336.000000000000000000
+      Size.Height = 220.000000000000000000
+      Size.PlatformDefault = False
+      StyleLookup = 'listboxstyle'
+      TabOrder = 4
+      OnClick = lbUnosiClick
+      DisableFocusEffect = True
+      ItemHeight = 64.000000000000000000
+      DefaultItemStyles.ItemStyle = ''
+      DefaultItemStyles.GroupHeaderStyle = ''
+      DefaultItemStyles.GroupFooterStyle = ''
+      Viewport.Width = 332.000000000000000000
+      Viewport.Height = 216.000000000000000000
+    end
+    object lblCenovnikTitle: TLabel
+      Align = Top
+      StyledSettings = [Family, FontColor]
+      Margins.Bottom = 4.000000000000000000
+      Position.X = 10.000000000000000000
+      Position.Y = 648.000000000000000000
+      Size.Width = 336.000000000000000000
+      Size.Height = 29.000000000000000000
+      Size.PlatformDefault = False
+      TextSettings.Font.Size = 13.000000000000000000
+      TextSettings.Font.StyleExt = {00070000000000000004000000}
+      Text = 'Cenovnik usluga'
+      TabOrder = 5
+    end
+    object lbCenovnik: TListBox
+      Align = Top
+      Margins.Bottom = 10.000000000000000000
+      Position.X = 10.000000000000000000
+      Position.Y = 681.000000000000000000
+      Size.Width = 336.000000000000000000
+      Size.Height = 160.000000000000000000
+      Size.PlatformDefault = False
+      StyleLookup = 'listboxstyle'
+      TabOrder = 6
+      DisableFocusEffect = True
+      ItemHeight = 48.000000000000000000
+      DefaultItemStyles.ItemStyle = ''
+      DefaultItemStyles.GroupHeaderStyle = ''
+      DefaultItemStyles.GroupFooterStyle = ''
+      Viewport.Width = 332.000000000000000000
+      Viewport.Height = 156.000000000000000000
+    end
+    object rectIzmeniCenu: TRectangle
+      Align = Top
+      Fill.Color = claYellow
+      Margins.Bottom = 14.000000000000000000
+      Position.X = 10.000000000000000000
+      Position.Y = 845.000000000000000000
+      Size.Width = 336.000000000000000000
+      Size.Height = 44.000000000000000000
+      Size.PlatformDefault = False
+      Stroke.Kind = None
+      XRadius = 22.000000000000000000
+      YRadius = 22.000000000000000000
+      OnClick = rectIzmeniCenuClick
+      object lblIzmeniCenu: TLabel
+        Align = Client
+        StyledSettings = [Family, FontColor]
+        Size.Width = 336.000000000000000000
+        Size.Height = 44.000000000000000000
+        Size.PlatformDefault = False
+        TextSettings.Font.StyleExt = {00070000000000000004000000}
+        TextSettings.HorzAlign = Center
+        Text = 'Izmeni cenu izabrane usluge'
+        TabOrder = 0
+      end
+    end
+    object lblMagacinTitle: TLabel
+      Align = Top
+      StyledSettings = [Family, FontColor]
+      Margins.Bottom = 4.000000000000000000
+      Position.X = 10.000000000000000000
+      Position.Y = 851.000000000000000000
+      Size.Width = 336.000000000000000000
+      Size.Height = 29.000000000000000000
+      Size.PlatformDefault = False
+      TextSettings.Font.Size = 13.000000000000000000
+      TextSettings.Font.StyleExt = {00070000000000000004000000}
+      Text = 'Magacin (zalihe)'
+      TabOrder = 7
+    end
+    object lbMagacin: TListBox
+      Align = Top
+      Margins.Bottom = 10.000000000000000000
+      Position.X = 10.000000000000000000
+      Position.Y = 884.000000000000000000
+      Size.Width = 336.000000000000000000
+      Size.Height = 180.000000000000000000
+      Size.PlatformDefault = False
+      StyleLookup = 'listboxstyle'
+      TabOrder = 8
+      DisableFocusEffect = True
+      ItemHeight = 48.000000000000000000
+      DefaultItemStyles.ItemStyle = ''
+      DefaultItemStyles.GroupHeaderStyle = ''
+      DefaultItemStyles.GroupFooterStyle = ''
+      Viewport.Width = 332.000000000000000000
+      Viewport.Height = 176.000000000000000000
+    end
+  end
+  object rectPopup: TRectangle
+    Align = Client
+    Fill.Color = claBlack
+    Opacity = 0.600000023841857900
+    Size.Width = 372.000000000000000000
+    Size.Height = 572.000000000000000000
+    Size.PlatformDefault = False
+    Stroke.Kind = None
+    Visible = False
+    OnClick = rectPopupClick
+    object rectPopupCard: TRectangle
+      Align = Center
+      Fill.Color = claWhite
+      Padding.Left = 16.000000000000000000
+      Padding.Top = 16.000000000000000000
+      Padding.Right = 16.000000000000000000
+      Padding.Bottom = 16.000000000000000000
+      Size.Width = 320.000000000000000000
+      Size.Height = 320.000000000000000000
+      Size.PlatformDefault = False
+      Stroke.Kind = None
+      XRadius = 16.000000000000000000
+      YRadius = 16.000000000000000000
+      object lblPopupNaslov: TLabel
+        Align = Top
+        StyledSettings = [Family, FontColor]
+        Position.X = 16.000000000000000000
+        Position.Y = 16.000000000000000000
+        Size.Width = 288.000000000000000000
+        Size.Height = 30.000000000000000000
+        Size.PlatformDefault = False
+        TextSettings.Font.Size = 15.000000000000000000
+        TextSettings.Font.StyleExt = {00070000000000000004000000}
+        Text = 'Detalji unosa'
+        TabOrder = 0
+      end
+      object rectPopupZatvori: TRectangle
+        Align = Bottom
+        Fill.Color = claYellow
+        Margins.Top = 10.000000000000000000
+        Position.X = 16.000000000000000000
+        Position.Y = 264.000000000000000000
+        Size.Width = 288.000000000000000000
+        Size.Height = 40.000000000000000000
+        Size.PlatformDefault = False
+        Stroke.Kind = None
+        XRadius = 12.000000000000000000
+        YRadius = 12.000000000000000000
+        OnClick = rectPopupZatvoriClick
+        object lblPopupX: TLabel
+          Align = Client
+          StyledSettings = [Family, FontColor]
+          Size.Width = 288.000000000000000000
+          Size.Height = 40.000000000000000000
+          Size.PlatformDefault = False
+          TextSettings.Font.StyleExt = {00070000000000000004000000}
+          TextSettings.HorzAlign = Center
+          Text = 'Zatvori'
+          TabOrder = 0
+        end
+      end
+      object lblPopupDetalji: TLabel
+        Align = Client
+        StyledSettings = [Family, FontColor]
+        Size.Width = 288.000000000000000000
+        Size.Height = 208.000000000000000000
+        Size.PlatformDefault = False
+        TextSettings.VertAlign = Leading
+        Text = 'lblPopupDetalji'
+        TabOrder = 1
+      end
+    end
+  end
+end

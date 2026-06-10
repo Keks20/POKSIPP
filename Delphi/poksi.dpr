@@ -22,7 +22,8 @@ uses
   fraDnevnikMusterije in 'fraDnevnikMusterije.pas' {FrameDnevnikMusterije: TFrame},
   fraAktivnosti in 'fraAktivnosti.pas' {FrameAktivnosti: TFrame},
   fraHrana in 'fraHrana.pas' {FrameHrana: TFrame},
-  fraOstaloUnos in 'fraOstaloUnos.pas' {FrameOstaloUnos: TFrame};
+  fraOstaloUnos in 'fraOstaloUnos.pas' {FrameOstaloUnos: TFrame},
+  fraAdmin in 'fraAdmin.pas' {FrameAdmin: TFrame};
 
 {$R *.res}
 

@@ -82,6 +82,8 @@ implementation
 {$R *.fmx}
 
 procedure TFrameDnevnikMusterije.Loaded;
+var
+  i, nIdx: Integer;
 begin
   inherited;
   lblPozdrav.Text := 'Zdravo, ' + LoggedInImePrezime + '!';
@@ -93,8 +95,16 @@ begin
 
   if cbLjubimci.Count > 0 then
   begin
-    cbLjubimci.ItemIndex := 0;
-    SelectedPetID := FPetIDs[0];
+    // Zadrzi vec selektovanog ljubimca (kad osoblje dodje preko "Pregled")
+    nIdx := 0;
+    for i := 0 to FPetCount - 1 do
+      if FPetIDs[i] = SelectedPetID then
+      begin
+        nIdx := i;
+        Break;
+      end;
+    cbLjubimci.ItemIndex := nIdx;
+    SelectedPetID := FPetIDs[nIdx];
     UcitajSve;
   end;
 end;
@@ -243,7 +253,7 @@ begin
       Q.SQL.Text :=
         'SELECT da.Vrsta_aktivnosti, da.VremeOd, da.VremeDo, ' +
         '       da.DuzinaTrajanja, da.ProcenaPonasanja, da.Komentar, ' +
-        '       z.Ime, z.Prezime ' +
+        '       da.StatusAktivnosti, z.Ime, z.Prezime ' +
         'FROM DNEVNA_AKTIVNOST da ' +
         'LEFT JOIN ZAPOSLENI z ON z.Sifra_zaposlenog = da.Sifra_zaposlenog ' +
         'WHERE da.Sifra_ljubimca = :pid AND da.Kategorija = ''Aktivnosti'' ' +
@@ -274,21 +284,33 @@ begin
           lbAktivnosti.AddObject(Item);
 
           // Sacuvaj pune detalje za popup
-          sDetalj :=
-            'Vrsta: ' + Q.FieldByName('Vrsta_aktivnosti').AsString + #13#10 +
-            'Vreme: ' +
-            FormatDateTime('hh:nn', Q.FieldByName('VremeOd').AsDateTime) +
-            ' - ' +
-            FormatDateTime('hh:nn', Q.FieldByName('VremeDo').AsDateTime) + #13#10 +
-            'Trajanje: ' + Q.FieldByName('DuzinaTrajanja').AsString;
+          if Q.FieldByName('StatusAktivnosti').AsString = 'U toku' then
+          begin
+            sDetalj :=
+              'Vrsta: ' + Q.FieldByName('Vrsta_aktivnosti').AsString + #13#10 +
+              'Pocelo: ' +
+              FormatDateTime('hh:nn', Q.FieldByName('VremeOd').AsDateTime) + #13#10 +
+              'Predvidjeno zavrsetka: ' +
+              FormatDateTime('hh:nn', Q.FieldByName('VremeDo').AsDateTime) + #13#10 +
+              'Status: U toku';
+          end
+          else
+          begin
+            sDetalj :=
+              'Vrsta: ' + Q.FieldByName('Vrsta_aktivnosti').AsString + #13#10 +
+              'Od: ' + FormatDateTime('hh:nn', Q.FieldByName('VremeOd').AsDateTime) +
+              '  Do: ' + FormatDateTime('hh:nn', Q.FieldByName('VremeDo').AsDateTime) + #13#10 +
+              'Trajanje: ' + Q.FieldByName('DuzinaTrajanja').AsString + #13#10 +
+              'Status: Zavrseno';
 
-          if Q.FieldByName('ProcenaPonasanja').AsString <> '' then
-            sDetalj := sDetalj + #13#10 +
-              'Procena ponasanja: ' + Q.FieldByName('ProcenaPonasanja').AsString;
+            if Q.FieldByName('ProcenaPonasanja').AsString <> '' then
+              sDetalj := sDetalj + #13#10 +
+                'Procena: ' + Q.FieldByName('ProcenaPonasanja').AsString;
 
-          if Q.FieldByName('Komentar').AsString <> '' then
-            sDetalj := sDetalj + #13#10 +
-              'Komentar: ' + Q.FieldByName('Komentar').AsString;
+            if Q.FieldByName('Komentar').AsString <> '' then
+              sDetalj := sDetalj + #13#10 +
+                'Komentar: ' + Q.FieldByName('Komentar').AsString;
+          end;
 
           sDetalj := sDetalj + #13#10 +
             'Zaposleni: ' + Q.FieldByName('Ime').AsString +
@@ -469,12 +491,17 @@ end;
 
 procedure TFrameDnevnikMusterije.rectNazadClick(Sender: TObject);
 begin
-  LoggedInUserID     := 0;
-  LoggedInRole       := '';
-  LoggedInUsername   := '';
-  LoggedInImePrezime := '';
-  SelectedPetID      := 0;
-  TNavFrames.GoLogin;
+  if LoggedInRole = 'MUSTERIJA' then
+  begin
+    LoggedInUserID     := 0;
+    LoggedInRole       := '';
+    LoggedInUsername   := '';
+    LoggedInImePrezime := '';
+    SelectedPetID      := 0;
+    TNavFrames.GoLogin;
+  end
+  else
+    TNavFrames.Back;
 end;
 
 end.

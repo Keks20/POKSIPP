@@ -18,6 +18,8 @@ type
     edtPassword: TEdit;
     edtNumber: TEdit;
     edtEmail: TEdit;
+    edtIme: TEdit;
+    edtPrezime: TEdit;
     btnRegister: TRectangle;
     Label1: TLabel;
     lblLogin: TLabel;
@@ -39,7 +41,6 @@ implementation
 
 procedure TFrame4.btnRegisterClick(Sender: TObject);
 begin
-
   if Trim(edtUsername.Text) = '' then
   begin
     ShowMessage('Unesite korisničko ime');
@@ -64,6 +65,17 @@ begin
     Exit;
   end;
 
+  if Trim(edtIme.Text) = '' then
+  begin
+    ShowMessage('Unesite ime');
+    Exit;
+  end;
+
+  if Trim(edtPrezime.Text) = '' then
+  begin
+    ShowMessage('Unesite prezime');
+    Exit;
+  end;
 
   try
     with TFDQuery.Create(nil) do
@@ -71,14 +83,32 @@ begin
       try
         Connection := DB;
 
+        // Provjeri da li je korisničko ime zauzeto
         SQL.Text :=
-          'INSERT INTO users (username, email, phone, password) ' +
-          'VALUES (:u, :e, :p, :pw)';
+          'SELECT COUNT(*) FROM MUSTERIJA ' +
+          'WHERE lower(KorisnickoIme) = lower(:u)';
+        ParamByName('u').AsString := Trim(edtUsername.Text);
+        Open;
+        if Fields[0].AsInteger > 0 then
+        begin
+          Close;
+          ShowMessage('Korisničko ime je već zauzeto!');
+          Exit;
+        end;
+        Close;
 
-        ParamByName('u').AsString := edtUsername.Text;
-        ParamByName('e').AsString := edtEmail.Text;
-        ParamByName('p').AsString := edtNumber.Text;
-        ParamByName('pw').AsString := edtPassword.Text;
+        SQL.Text :=
+          'INSERT INTO MUSTERIJA ' +
+          '  (KorisnickoIme, Lozinka, Telefon_Hitno, Email, Ime, Prezime, Nalog) ' +
+          'VALUES (:kor, :loz, :tel, :email, :ime, :prez, :nalog)';
+
+        ParamByName('kor').AsString   := Trim(edtUsername.Text);
+        ParamByName('loz').AsString   := Trim(edtPassword.Text);
+        ParamByName('tel').AsString   := Trim(edtNumber.Text);
+        ParamByName('email').AsString := Trim(edtEmail.Text);
+        ParamByName('ime').AsString   := Trim(edtIme.Text);
+        ParamByName('prez').AsString  := Trim(edtPrezime.Text);
+        ParamByName('nalog').AsString := 'Standard';
 
         ExecSQL;
       finally
@@ -86,7 +116,7 @@ begin
       end;
     end;
 
-    ShowMessage('Uspešna registracija!');
+    ShowMessage('Uspešna registracija! Možete se prijaviti.');
     TNavFrames.Back;
 
   except

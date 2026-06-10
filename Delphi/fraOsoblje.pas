@@ -1,11 +1,12 @@
-unit fraOsoblje;
+﻿unit fraOsoblje;
 
 interface
 
 uses
   System.SysUtils, System.Types, System.UITypes, System.Classes, System.Variants,
+  System.DateUtils,
   FMX.Types, FMX.Graphics, FMX.Controls, FMX.Forms, FMX.Dialogs, FMX.StdCtrls,
-  FMX.Controls.Presentation, FMX.Layouts, FMX.Objects, FMX.ListBox,
+  FMX.Controls.Presentation, FMX.Layouts, FMX.Objects, FMX.ListBox, FMX.Edit,
   FireDAC.Comp.Client, uUserStore, uNavFrames;
 
 type
@@ -13,41 +14,66 @@ type
     // --- ZAGLAVLJE ---
     layHeader: TLayout;
     lblNaslov: TLabel;
+    lblImeZaposlenog: TLabel;
     rectOdjava: TRectangle;
+    lblDostupnost: TLabel;
 
     // --- LJUBIMCI ---
-
     lbLjubimci: TListBox;
 
-   // --- PLAN ---
+    // --- AKTIVNOST U TOKU ---
+    rectUToku: TRectangle;
+    lblUToku: TLabel;
+
+    // --- POPUP U TOKU ---
+    rectPopupUToku: TRectangle;
+    lblPopupAktNaslov: TLabel;
+    lblPopupAktVreme: TLabel;
+    lblPopupAktStatus: TLabel;
+    edtVremeZavrsetka: TEdit;
+
+    // --- PLAN ---
     lblPlanTitle: TLabel;
 
     rectAktivnosti: TRectangle;
     lblAktivnosti: TLabel;
     lblAktivnostiSub: TLabel;
     rectAktivnostiBtn: TRectangle;
+    rectPregledAktBtn: TRectangle;
+    lblPregledAkt: TLabel;
 
     rectHrana: TRectangle;
     lblHrana: TLabel;
     lblHranaSub: TLabel;
     rectHranaBtn: TRectangle;
+    rectPregledHranaBtn: TRectangle;
+    lblPregledHrana: TLabel;
 
     rectOstalo: TRectangle;
     lblOstalo: TLabel;
     lblOstaloSub: TLabel;
     rectOstaloBtn: TRectangle;
+    rectPregledOstaloBtn: TRectangle;
+    lblPregledOstalo: TLabel;
 
     procedure Loaded; override;
     procedure Show; override;
+    procedure rectUTokuClick(Sender: TObject);
+    procedure rectZavrsiBtnClick(Sender: TObject);
+    procedure rectPopupUTokuZatvoriClick(Sender: TObject);
     procedure rectOdjavaClick(Sender: TObject);
     procedure rectAktivnostiBtnClick(Sender: TObject);
+    procedure rectPregledAktBtnClick(Sender: TObject);
     procedure rectHranaBtnClick(Sender: TObject);
+    procedure rectPregledHranaBtnClick(Sender: TObject);
     procedure rectOstaloBtnClick(Sender: TObject);
+    procedure rectPregledOstaloBtnClick(Sender: TObject);
     procedure lbLjubimciClick(Sender: TObject);
 
   private
     FPetIDs: array[0..19] of Integer;
     FPetCount: Integer;
+    FCurrentActivityID: Integer;
     procedure UcitajLjubimce;
     procedure AzurirajBrojeve;
   public
@@ -56,16 +82,24 @@ type
 implementation
 
 {$R *.fmx}
-uses fraAktivnosti, fraHrana, fraOstaloUnos;
-// -------------------------------------------------------
-//  Ucitaj ljubimce - samo tekst, bez slika u ListBoxu
-//  (isto kao fraHome - Item.Text + Item.ItemData.Detail)
-// -------------------------------------------------------
+uses fraAktivnosti, fraHrana, fraOstaloUnos, fraDnevnikMusterije;
+
 procedure TFrameOsoblje.UcitajLjubimce;
 var
   Q: TFDQuery;
   Item: TListBoxItem;
+  blobBytes: TBytes;
+  Stream: TMemoryStream;
+  imgPet: TImage;
+  layText: TLayout;
+  lblName, lblSpecies, lblOwner: TLabel;
+  sSlikes, sImgFile: string;
 begin
+  // Pronadji folder sa slikama (exe_dir/slike ili ../../slike za Debug build)
+  sSlikes := ExtractFilePath(ParamStr(0)) + 'slike';
+  if not DirectoryExists(sSlikes) then
+    sSlikes := ExpandFileName(ExtractFilePath(ParamStr(0)) + '..\..\slike');
+
   lbLjubimci.BeginUpdate;
   try
     lbLjubimci.Clear;
@@ -75,8 +109,8 @@ begin
     try
       Q.Connection := DB;
       Q.SQL.Text :=
-        'SELECT p.id, p.name, p.breed, p.species, p.age, ' +
-        '       m.Ime, m.Prezime ' +
+        'SELECT p.id, p.name, p.breed, p.species, p.age, p.image_blob, ' +
+        '       p.Lokacija, p.Alergije, m.Ime, m.Prezime ' +
         'FROM pets p ' +
         'LEFT JOIN MUSTERIJA m ON m.Sifra_musterije = p.Sifra_musterije ' +
         'ORDER BY p.name';
@@ -87,16 +121,91 @@ begin
         FPetIDs[FPetCount] := Q.FieldByName('id').AsInteger;
 
         Item := TListBoxItem.Create(lbLjubimci);
-        Item.Text := Q.FieldByName('name').AsString;
-        Item.ItemData.Detail :=
-          Q.FieldByName('species').AsString + ' � ' +
-          Q.FieldByName('breed').AsString + ' � ' +
-          Q.FieldByName('age').AsString + '  |  ' +
-          'Vlasnik: ' +
-          Q.FieldByName('Ime').AsString + ' ' +
-          Q.FieldByName('Prezime').AsString;
-        lbLjubimci.AddObject(Item);
+        Item.Text := ''; // sprjecava crtanje teksta iza custom kontrola
 
+        // --- Slika (lijevo, 68px) ---
+        imgPet := TImage.Create(Item);
+        imgPet.Parent := Item;
+        imgPet.Align := TAlignLayout.Left;
+        imgPet.Margins.Left   := 6;
+        imgPet.Margins.Top    := 6;
+        imgPet.Margins.Bottom := 6;
+        imgPet.Margins.Right  := 6;
+        imgPet.Size.Width := 68;
+        imgPet.WrapMode   := TImageWrapMode.Fit;
+        imgPet.HitTest    := False;
+
+        // Prioritet: slike folder (ispravne slike), pa tek BLOB kao fallback
+        sImgFile := IncludeTrailingPathDelimiter(sSlikes) +
+          LowerCase(Q.FieldByName('species').AsString) + '.png';
+        if FileExists(sImgFile) then
+          imgPet.Bitmap.LoadFromFile(sImgFile)
+        else
+        begin
+          blobBytes := Q.FieldByName('image_blob').AsBytes;
+          if Length(blobBytes) > 0 then
+          begin
+            Stream := TMemoryStream.Create;
+            try
+              Stream.WriteBuffer(blobBytes[0], Length(blobBytes));
+              Stream.Position := 0;
+              imgPet.Bitmap.LoadFromStream(Stream);
+            finally
+              Stream.Free;
+            end;
+          end;
+        end;
+
+        // --- Layout za tekst (desno) ---
+        layText := TLayout.Create(Item);
+        layText.Parent := Item;
+        layText.Align := TAlignLayout.Client;
+        layText.Padding.Left   := 4;
+        layText.Padding.Top    := 8;
+        layText.Padding.Bottom := 6;
+        layText.HitTest := False;
+
+        // Ime ljubimca (vece, bold)
+        lblName := TLabel.Create(Item);
+        lblName.Parent := layText;
+        lblName.Align  := TAlignLayout.Top;
+        lblName.Height := 22;
+        lblName.Text   := Q.FieldByName('name').AsString;
+        lblName.StyledSettings := [];
+        lblName.TextSettings.Font.Size  := 14;
+        lblName.TextSettings.Font.Style := [TFontStyle.fsBold];
+        lblName.HitTest := False;
+
+        // Vrsta · Rasa · Starost
+        lblSpecies := TLabel.Create(Item);
+        lblSpecies.Parent := layText;
+        lblSpecies.Align  := TAlignLayout.Top;
+        lblSpecies.Height := 19;
+        lblSpecies.Text   :=
+          Q.FieldByName('species').AsString + '  ·  ' +
+          Q.FieldByName('breed').AsString   + '  ·  ' +
+          Q.FieldByName('age').AsString;
+        lblSpecies.StyledSettings := [];
+        lblSpecies.TextSettings.Font.Size := 11;
+        lblSpecies.HitTest := False;
+
+        // Vlasnik · Boks
+        lblOwner := TLabel.Create(Item);
+        lblOwner.Parent := layText;
+        lblOwner.Align  := TAlignLayout.Top;
+        lblOwner.Height := 17;
+        lblOwner.Text   :=
+          Q.FieldByName('Ime').AsString + ' ' +
+          Q.FieldByName('Prezime').AsString + '  ·  Boks: ' +
+          Q.FieldByName('Lokacija').AsString;
+        if Trim(Q.FieldByName('Alergije').AsString) <> '' then
+          lblOwner.Text := lblOwner.Text + '  ·  Alergije: ' +
+            Q.FieldByName('Alergije').AsString;
+        lblOwner.StyledSettings := [];
+        lblOwner.TextSettings.Font.Size := 10;
+        lblOwner.HitTest := False;
+
+        lbLjubimci.AddObject(Item);
         Inc(FPetCount);
         Q.Next;
       end;
@@ -115,10 +224,10 @@ begin
   end;
 end;
 
-
 procedure TFrameOsoblje.Loaded;
 begin
   inherited;
+  lblImeZaposlenog.Text := LoggedInImePrezime;
   UcitajLjubimce;
   AzurirajBrojeve;
 end;
@@ -126,19 +235,20 @@ end;
 procedure TFrameOsoblje.AzurirajBrojeve;
 var
   Q: TFDQuery;
-  nAkt, nHrana, nOst: Integer;
+  nAkt, nHrana, nOst, nUToku: Integer;
+  sAktivnost: string;
 begin
-
   if SelectedPetID <= 0 then Exit;
 
   Q := TFDQuery.Create(nil);
   try
     Q.Connection := DB;
+
+    // Brojevi unesenih po kategoriji danas
     Q.SQL.Text :=
       'SELECT COUNT(*) FROM DNEVNA_AKTIVNOST ' +
       'WHERE Sifra_ljubimca = :pid AND Kategorija = :kat ' +
       'AND date(VremeOd) = date(''now'')';
-
     Q.ParamByName('pid').AsInteger := SelectedPetID;
 
     Q.ParamByName('kat').AsString := 'Aktivnosti';
@@ -153,6 +263,36 @@ begin
     lblAktivnostiSub.Text := 'Uneseno danas: ' + IntToStr(nAkt);
     lblHranaSub.Text      := 'Uneseno danas: ' + IntToStr(nHrana);
     lblOstaloSub.Text     := 'Uneseno danas: ' + IntToStr(nOst);
+
+    // Provjeri da li radnik ima aktivnost u toku
+    Q.SQL.Text :=
+      'SELECT COUNT(*), Vrsta_aktivnosti, VremeOd ' +
+      'FROM DNEVNA_AKTIVNOST ' +
+      'WHERE Sifra_zaposlenog = :zap ' +
+      'AND StatusAktivnosti = ''U toku'' ' +
+      'AND date(VremeOd) = date(''now'') ' +
+      'ORDER BY VremeOd DESC LIMIT 1';
+    Q.ParamByName('zap').AsInteger := LoggedInUserID;
+    Q.Open;
+    nUToku := Q.Fields[0].AsInteger;
+
+    if nUToku > 0 then
+    begin
+      sAktivnost := Q.FieldByName('Vrsta_aktivnosti').AsString;
+      lblUToku.Text := 'U toku: ' + sAktivnost + '  (od ' +
+        FormatDateTime('hh:nn', Q.FieldByName('VremeOd').AsDateTime) + ')';
+      rectUToku.Visible := True;
+
+      lblDostupnost.Text := '● Zauzet';
+      lblDostupnost.TextSettings.FontColor := TAlphaColors.Red;
+    end
+    else
+    begin
+      rectUToku.Visible := False;
+      lblDostupnost.Text := '● Dostupan';
+      lblDostupnost.TextSettings.FontColor := TAlphaColors.Green;
+    end;
+    Q.Close;
 
   finally
     Q.Free;
@@ -178,6 +318,16 @@ begin
   TNavFrames.Go(TFrameAktivnosti.Create(nil));
 end;
 
+procedure TFrameOsoblje.rectPregledAktBtnClick(Sender: TObject);
+begin
+  if SelectedPetID <= 0 then
+  begin
+    ShowMessage('Izaberite ljubimca sa liste!');
+    Exit;
+  end;
+  TNavFrames.Go(TFrameDnevnikMusterije.Create(nil));
+end;
+
 procedure TFrameOsoblje.rectHranaBtnClick(Sender: TObject);
 begin
   if SelectedPetID <= 0 then
@@ -185,8 +335,17 @@ begin
     ShowMessage('Izaberite ljubimca sa liste!');
     Exit;
   end;
+  TNavFrames.Go(TFrameHrana.Create(nil));
+end;
 
-   TNavFrames.Go(TFrameHrana.Create(nil));
+procedure TFrameOsoblje.rectPregledHranaBtnClick(Sender: TObject);
+begin
+  if SelectedPetID <= 0 then
+  begin
+    ShowMessage('Izaberite ljubimca sa liste!');
+    Exit;
+  end;
+  TNavFrames.Go(TFrameDnevnikMusterije.Create(nil));
 end;
 
 procedure TFrameOsoblje.rectOstaloBtnClick(Sender: TObject);
@@ -199,6 +358,142 @@ begin
   TNavFrames.Go(TFrameOstaloUnos.Create(nil));
 end;
 
+procedure TFrameOsoblje.rectPregledOstaloBtnClick(Sender: TObject);
+begin
+  if SelectedPetID <= 0 then
+  begin
+    ShowMessage('Izaberite ljubimca sa liste!');
+    Exit;
+  end;
+  TNavFrames.Go(TFrameDnevnikMusterije.Create(nil));
+end;
+
+// -------------------------------------------------------
+//  Klik na zuti banner "U toku" → otvori popup
+// -------------------------------------------------------
+procedure TFrameOsoblje.rectUTokuClick(Sender: TObject);
+var
+  Q: TFDQuery;
+begin
+  Q := TFDQuery.Create(nil);
+  try
+    Q.Connection := DB;
+    Q.SQL.Text :=
+      'SELECT Sifra_aktivnosti, Vrsta_aktivnosti, VremeOd, VremeDo ' +
+      'FROM DNEVNA_AKTIVNOST ' +
+      'WHERE Sifra_zaposlenog = :zap ' +
+      'AND StatusAktivnosti = ''U toku'' ' +
+      'AND date(VremeOd) = date(''now'') ' +
+      'ORDER BY VremeOd DESC LIMIT 1';
+    Q.ParamByName('zap').AsInteger := LoggedInUserID;
+    Q.Open;
+
+    if Q.IsEmpty then
+    begin
+      rectUToku.Visible := False;
+      Exit;
+    end;
+
+    FCurrentActivityID     := Q.FieldByName('Sifra_aktivnosti').AsInteger;
+    lblPopupAktNaslov.Text := Q.FieldByName('Vrsta_aktivnosti').AsString;
+    // Dva reda: pocetno i predvidjeno vreme
+    lblPopupAktVreme.Text  :=
+      'Pocelo: ' + FormatDateTime('hh:nn', Q.FieldByName('VremeOd').AsDateTime) +
+      #13#10 +
+      'Predvidjeno zavrsetka: ' +
+      FormatDateTime('hh:nn', Q.FieldByName('VremeDo').AsDateTime);
+    lblPopupAktStatus.Text := 'Status: U toku';
+    // Polje za stvarno vreme - prepopunjeno predvidjenim
+    edtVremeZavrsetka.Text := FormatDateTime('hh:nn',
+      Q.FieldByName('VremeDo').AsDateTime);
+
+    rectPopupUToku.Visible := True;
+    rectPopupUToku.BringToFront;
+  finally
+    Q.Free;
+  end;
+end;
+
+// -------------------------------------------------------
+//  Klik "Zavrsi aktivnost" u popupu
+// -------------------------------------------------------
+procedure TFrameOsoblje.rectZavrsiBtnClick(Sender: TObject);
+var
+  Q: TFDQuery;
+  dtOd, dtDo: TDateTime;
+  nMinuta: Int64;
+  sTrajanje: string;
+  parts: TArray<string>;
+  nH, nM: Integer;
+begin
+  parts := Trim(edtVremeZavrsetka.Text).Split([':']);
+  if (Length(parts) < 2) or
+     not TryStrToInt(Trim(parts[0]), nH) or
+     not TryStrToInt(Trim(parts[1]), nM) or
+     (nH < 0) or (nH > 23) or (nM < 0) or (nM > 59) then
+  begin
+    ShowMessage('Pogresno vreme! Format: hh:nn (npr. 11:30)');
+    Exit;
+  end;
+
+  dtDo := Trunc(Now) + EncodeTime(nH, nM, 0, 0);
+
+  Q := TFDQuery.Create(nil);
+  try
+    Q.Connection := DB;
+
+    // Uzmi VremeOd radi trajanja
+    Q.SQL.Text :=
+      'SELECT VremeOd FROM DNEVNA_AKTIVNOST WHERE Sifra_aktivnosti = :id';
+    Q.ParamByName('id').AsInteger := FCurrentActivityID;
+    Q.Open;
+
+    if not Q.IsEmpty then
+    begin
+      dtOd := Q.FieldByName('VremeOd').AsDateTime;
+      if dtDo < dtOd then
+        dtDo := dtDo + 1;
+      nMinuta := MinutesBetween(dtDo, dtOd);
+      if nMinuta < 60 then
+        sTrajanje := IntToStr(nMinuta) + ' min'
+      else
+        sTrajanje := IntToStr(nMinuta div 60) + 'h ' +
+                     IntToStr(nMinuta mod 60) + 'min';
+    end
+    else
+      sTrajanje := '0 min';
+
+    Q.Close;
+    Q.SQL.Text :=
+      'UPDATE DNEVNA_AKTIVNOST SET ' +
+      '  VremeDo = :do_, ' +
+      '  DuzinaTrajanja = :traj, ' +
+      '  StatusAktivnosti = ''Zavrseno'' ' +
+      'WHERE Sifra_aktivnosti = :id';
+    Q.ParamByName('do_').AsDateTime  := dtDo;
+    Q.ParamByName('traj').AsString   := sTrajanje;
+    Q.ParamByName('id').AsInteger    := FCurrentActivityID;
+    Q.ExecSQL;
+
+    rectPopupUToku.Visible := False;
+    FCurrentActivityID := 0;
+    AzurirajBrojeve;
+    ShowMessage('Aktivnost zavrsena! Trajanje: ' + sTrajanje);
+  except
+    on E: Exception do
+      ShowMessage('Greska: ' + E.Message);
+  end;
+  Q.Free;
+end;
+
+// -------------------------------------------------------
+//  Zatvori popup (klik na pozadinu ili "Zatvori")
+// -------------------------------------------------------
+procedure TFrameOsoblje.rectPopupUTokuZatvoriClick(Sender: TObject);
+begin
+  rectPopupUToku.Visible := False;
+end;
+
 procedure TFrameOsoblje.rectOdjavaClick(Sender: TObject);
 begin
   LoggedInUserID     := 0;
@@ -208,11 +503,11 @@ begin
   SelectedPetID      := 0;
   TNavFrames.GoLogin;
 end;
+
 procedure TFrameOsoblje.Show;
 begin
   inherited;
   AzurirajBrojeve;
-
 end;
 
 end.

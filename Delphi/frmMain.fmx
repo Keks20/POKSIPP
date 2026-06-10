@@ -15,6 +15,15 @@ object Form5: TForm5
     Size.Height = 844.000000000000000000
     Size.PlatformDefault = False
     TabOrder = 0
+    object bgRect: TRectangle
+      Align = Contents
+      HitTest = False
+      Fill.Color = xFFECEEF1
+      Stroke.Kind = None
+      Size.Width = 392.000000000000000000
+      Size.Height = 844.000000000000000000
+      Size.PlatformDefault = False
+    end
   end
   object FDQuery1: TFDQuery
     Connection = FDConnection1

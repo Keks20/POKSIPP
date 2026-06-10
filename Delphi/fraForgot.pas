@@ -79,28 +79,30 @@ begin
       try
         Connection := DB;
 
-
+        // Provjeri u MUSTERIJA tabeli (po korisničkom imenu, emailu ili telefonu)
         SQL.Text :=
-          'SELECT id FROM users ' +
-          'WHERE lower(username) = lower(:x) OR lower(email) = lower(:x) OR phone = :x';
-
+          'SELECT Sifra_musterije FROM MUSTERIJA ' +
+          'WHERE lower(KorisnickoIme) = lower(:x) ' +
+          '   OR lower(COALESCE(Email, '''')) = lower(:x) ' +
+          '   OR Telefon_Hitno = :x';
         ParamByName('x').AsString := identifier;
         Open;
 
         if IsEmpty then
         begin
-          ShowMessage('Ne postoji korisnik sa tim podacima');
+          Close;
+          ShowMessage('Ne postoji korisnik sa tim podacima.' + #13#10 +
+                      'Unesite korisničko ime, email ili telefon.');
           Exit;
         end;
-
         Close;
 
-
         SQL.Text :=
-          'UPDATE users SET password = :p ' +
-          'WHERE lower(username) = lower(:x) OR lower(email) = lower(:x) OR phone = :x';
-
-        ParamByName('p').AsString := edtPassword.Text;
+          'UPDATE MUSTERIJA SET Lozinka = :p ' +
+          'WHERE lower(KorisnickoIme) = lower(:x) ' +
+          '   OR lower(COALESCE(Email, '''')) = lower(:x) ' +
+          '   OR Telefon_Hitno = :x';
+        ParamByName('p').AsString := Trim(edtPassword.Text);
         ParamByName('x').AsString := identifier;
         ExecSQL;
 
@@ -109,7 +111,7 @@ begin
       end;
     end;
 
-    ShowMessage('Lozinka je uspešno promenjena');
+    ShowMessage('Lozinka je uspešno promenjena!');
     TNavFrames.Back;
 
   except

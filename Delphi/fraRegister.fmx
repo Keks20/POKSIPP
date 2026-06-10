@@ -24,7 +24,7 @@ object Frame4: TFrame4
         Position.X = 45.000000000000000000
         Position.Y = 232.000000000000000000
         Size.Width = 300.000000000000000000
-        Size.Height = 300.000000000000000000
+        Size.Height = 382.000000000000000000
         Size.PlatformDefault = False
         XRadius = 30.000000000000000000
         YRadius = 30.000000000000000000
@@ -33,7 +33,7 @@ object Frame4: TFrame4
           Align = Top
           TabOrder = 3
           Position.X = 30.000000000000000000
-          Position.Y = 26.000000000000000000
+          Position.Y = 138.000000000000000000
           Hint = 'korisnicko ime'
           Margins.Left = 14.000000000000000000
           Margins.Top = 10.000000000000000000
@@ -50,7 +50,7 @@ object Frame4: TFrame4
           TabOrder = 2
           Password = True
           Position.X = 30.000000000000000000
-          Position.Y = 194.000000000000000000
+          Position.Y = 306.000000000000000000
           Hint = 'lozinka'
           Margins.Left = 14.000000000000000000
           Margins.Top = 10.000000000000000000
@@ -66,7 +66,7 @@ object Frame4: TFrame4
           Align = Top
           TabOrder = 1
           Position.X = 30.000000000000000000
-          Position.Y = 138.000000000000000000
+          Position.Y = 250.000000000000000000
           Hint = 'broj telefona'
           Margins.Left = 14.000000000000000000
           Margins.Top = 10.000000000000000000
@@ -82,7 +82,7 @@ object Frame4: TFrame4
           Align = Top
           TabOrder = 0
           Position.X = 30.000000000000000000
-          Position.Y = 82.000000000000000000
+          Position.Y = 194.000000000000000000
           Hint = 'email'
           Margins.Left = 14.000000000000000000
           Margins.Top = 10.000000000000000000
@@ -93,6 +93,36 @@ object Frame4: TFrame4
           Size.PlatformDefault = False
           TextPrompt = 'e-mail'
         end
+        object edtIme: TEdit
+          Touch.InteractiveGestures = [LongTap, DoubleTap]
+          Align = Top
+          TabOrder = 4
+          Position.X = 30.000000000000000000
+          Position.Y = 26.000000000000000000
+          Margins.Left = 14.000000000000000000
+          Margins.Top = 10.000000000000000000
+          Margins.Right = 14.000000000000000000
+          Margins.Bottom = 10.000000000000000000
+          Size.Width = 240.000000000000000000
+          Size.Height = 36.000000000000000000
+          Size.PlatformDefault = False
+          TextPrompt = 'ime'
+        end
+        object edtPrezime: TEdit
+          Touch.InteractiveGestures = [LongTap, DoubleTap]
+          Align = Top
+          TabOrder = 5
+          Position.X = 30.000000000000000000
+          Position.Y = 82.000000000000000000
+          Margins.Left = 14.000000000000000000
+          Margins.Top = 10.000000000000000000
+          Margins.Right = 14.000000000000000000
+          Margins.Bottom = 10.000000000000000000
+          Size.Width = 240.000000000000000000
+          Size.Height = 36.000000000000000000
+          Size.PlatformDefault = False
+          TextPrompt = 'prezime'
+        end
         object btnRegister: TRectangle
           Align = Bottom
           Cursor = crHandPoint
@@ -101,7 +131,7 @@ object Frame4: TFrame4
           Margins.Right = 14.000000000000000000
           Margins.Bottom = 2.000000000000000000
           Position.X = 30.000000000000000000
-          Position.Y = 240.000000000000000000
+          Position.Y = 322.000000000000000000
           Size.Width = 240.000000000000000000
           Size.Height = 42.000000000000000000
           Size.PlatformDefault = False

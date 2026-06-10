@@ -34,7 +34,7 @@ implementation
 
 {$R *.fmx}
 
-uses fraOsoblje, fraDnevnikMusterije;
+uses fraOsoblje, fraDnevnikMusterije, fraAdmin;
 
 procedure TFrame2.lblForgotClick(Sender: TObject);
 begin
@@ -74,7 +74,7 @@ begin
     // KORAK 1: ZAPOSLENI → fraOsoblje
     // ============================================
     Q.SQL.Text :=
-      'SELECT Sifra_zaposlenog, Ime, Prezime, KorisnickoIme ' +
+      'SELECT Sifra_zaposlenog, Ime, Prezime, KorisnickoIme, Uloga ' +
       'FROM ZAPOSLENI ' +
       'WHERE lower(KorisnickoIme) = lower(:u) AND Lozinka = :p';
     Q.ParamByName('u').AsString := sUser;
@@ -87,9 +87,20 @@ begin
       LoggedInUsername   := Q.FieldByName('KorisnickoIme').AsString;
       LoggedInImePrezime := Q.FieldByName('Ime').AsString + ' ' +
                             Q.FieldByName('Prezime').AsString;
-      LoggedInRole := 'ZAPOSLENI';
-      Q.Close;
-      TNavFrames.Go(TFrameOsoblje.Create(nil));
+
+      // Admin -> pregled zaposlenih; ostali zaposleni -> dashboard osoblja
+      if SameText(Q.FieldByName('Uloga').AsString, 'Admin') then
+      begin
+        LoggedInRole := 'ADMIN';
+        Q.Close;
+        TNavFrames.Go(TFrameAdmin.Create(nil));
+      end
+      else
+      begin
+        LoggedInRole := 'ZAPOSLENI';
+        Q.Close;
+        TNavFrames.Go(TFrameOsoblje.Create(nil));
+      end;
       Exit;
     end;
     Q.Close;

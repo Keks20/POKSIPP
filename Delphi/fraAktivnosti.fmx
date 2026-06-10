@@ -71,7 +71,7 @@ object FrameAktivnosti: TFrameAktivnosti
     Size.Height = 522.000000000000000000
     Size.PlatformDefault = False
     TabOrder = 1
-    Viewport.Width = 408.000000000000000000
+    Viewport.Width = 392.000000000000000000
     Viewport.Height = 522.000000000000000000
     object rectForma: TRectangle
       Align = Top
@@ -81,8 +81,8 @@ object FrameAktivnosti: TFrameAktivnosti
       Padding.Bottom = 12.000000000000000000
       Position.X = 10.000000000000000000
       Position.Y = 10.000000000000000000
-      Size.Width = 388.000000000000000000
-      Size.Height = 487.000000000000000000
+      Size.Width = 372.000000000000000000
+      Size.Height = 541.000000000000000000
       Size.PlatformDefault = False
       Stroke.Color = x00EEEEEE
       Stroke.Thickness = 0.500000000000000000
@@ -93,7 +93,7 @@ object FrameAktivnosti: TFrameAktivnosti
         StyledSettings = [Family, Style]
         Position.X = 12.000000000000000000
         Position.Y = 12.000000000000000000
-        Size.Width = 364.000000000000000000
+        Size.Width = 348.000000000000000000
         Size.Height = 18.000000000000000000
         Size.PlatformDefault = False
         TextSettings.Font.Size = 11.000000000000000000
@@ -107,7 +107,7 @@ object FrameAktivnosti: TFrameAktivnosti
         TextSettings.Font.Size = 13.000000000000000000
         Position.X = 12.000000000000000000
         Position.Y = 30.000000000000000000
-        Size.Width = 364.000000000000000000
+        Size.Width = 348.000000000000000000
         Size.Height = 36.000000000000000000
         Size.PlatformDefault = False
         TextPrompt = 'npr. Jutarnja setnja'
@@ -119,7 +119,7 @@ object FrameAktivnosti: TFrameAktivnosti
         Margins.Top = 8.000000000000000000
         Position.X = 12.000000000000000000
         Position.Y = 74.000000000000000000
-        Size.Width = 364.000000000000000000
+        Size.Width = 348.000000000000000000
         Size.Height = 18.000000000000000000
         Size.PlatformDefault = False
         TextSettings.Font.Size = 11.000000000000000000
@@ -133,7 +133,7 @@ object FrameAktivnosti: TFrameAktivnosti
         TextSettings.Font.Size = 14.000000000000000000
         Position.X = 12.000000000000000000
         Position.Y = 92.000000000000000000
-        Size.Width = 364.000000000000000000
+        Size.Width = 348.000000000000000000
         Size.Height = 36.000000000000000000
         Size.PlatformDefault = False
         TextPrompt = '09:00'
@@ -146,7 +146,7 @@ object FrameAktivnosti: TFrameAktivnosti
         Margins.Top = 8.000000000000000000
         Position.X = 12.000000000000000000
         Position.Y = 136.000000000000000000
-        Size.Width = 364.000000000000000000
+        Size.Width = 348.000000000000000000
         Size.Height = 18.000000000000000000
         Size.PlatformDefault = False
         TextSettings.Font.Size = 11.000000000000000000
@@ -160,7 +160,7 @@ object FrameAktivnosti: TFrameAktivnosti
         TextSettings.Font.Size = 14.000000000000000000
         Position.X = 12.000000000000000000
         Position.Y = 154.000000000000000000
-        Size.Width = 364.000000000000000000
+        Size.Width = 348.000000000000000000
         Size.Height = 36.000000000000000000
         Size.PlatformDefault = False
         TextPrompt = '10:30'
@@ -173,7 +173,7 @@ object FrameAktivnosti: TFrameAktivnosti
         Margins.Top = 8.000000000000000000
         Position.X = 12.000000000000000000
         Position.Y = 198.000000000000000000
-        Size.Width = 364.000000000000000000
+        Size.Width = 348.000000000000000000
         Size.Height = 18.000000000000000000
         Size.PlatformDefault = False
         TextSettings.Font.Size = 11.000000000000000000
@@ -186,7 +186,7 @@ object FrameAktivnosti: TFrameAktivnosti
         Margins.Top = 5.000000000000000000
         Position.X = 12.000000000000000000
         Position.Y = 221.000000000000000000
-        Size.Width = 364.000000000000000000
+        Size.Width = 348.000000000000000000
         Size.Height = 24.000000000000000000
         Size.PlatformDefault = False
         TextSettings.Font.Size = 11.000000000000000000
@@ -201,7 +201,7 @@ object FrameAktivnosti: TFrameAktivnosti
         Margins.Top = 8.000000000000000000
         Position.X = 12.000000000000000000
         Position.Y = 253.000000000000000000
-        Size.Width = 364.000000000000000000
+        Size.Width = 348.000000000000000000
         Size.Height = 18.000000000000000000
         Size.PlatformDefault = False
         TextSettings.Font.Size = 11.000000000000000000
@@ -215,11 +215,11 @@ object FrameAktivnosti: TFrameAktivnosti
         Align = Top
         Position.X = 12.000000000000000000
         Position.Y = 271.000000000000000000
-        Size.Width = 364.000000000000000000
+        Size.Width = 348.000000000000000000
         Size.Height = 65.000000000000000000
         Size.PlatformDefault = False
         TabOrder = 9
-        Viewport.Width = 364.000000000000000000
+        Viewport.Width = 348.000000000000000000
         Viewport.Height = 65.000000000000000000
       end
       object lblProcena: TLabel
@@ -228,7 +228,7 @@ object FrameAktivnosti: TFrameAktivnosti
         Margins.Top = 8.000000000000000000
         Position.X = 12.000000000000000000
         Position.Y = 344.000000000000000000
-        Size.Width = 364.000000000000000000
+        Size.Width = 348.000000000000000000
         Size.Height = 18.000000000000000000
         Size.PlatformDefault = False
         TextSettings.Font.Size = 11.000000000000000000
@@ -242,35 +242,35 @@ object FrameAktivnosti: TFrameAktivnosti
         Position.X = 12.000000000000000000
         Position.Y = 370.000000000000000000
         Margins.Top = 8.000000000000000000
-        Size.Width = 364.000000000000000000
+        Size.Width = 348.000000000000000000
         Size.Height = 36.000000000000000000
         Size.PlatformDefault = False
         TextPrompt = 'npr. Odlican, druzeljubiv'
         StyledSettings = []
       end
-      object rectPotvrdi: TRectangle
+      object rectZapocni: TRectangle
         Align = Bottom
         Fill.Color = claYellow
-        Margins.Top = 10.000000000000000000
+        Margins.Bottom = 8.000000000000000000
         Position.X = 12.000000000000000000
-        Position.Y = 429.000000000000000000
-        Size.Width = 364.000000000000000000
+        Position.Y = 475.000000000000000000
+        Size.Width = 348.000000000000000000
         Size.Height = 46.000000000000000000
         Size.PlatformDefault = False
         Stroke.Kind = None
         XRadius = 20.000000000000000000
         YRadius = 20.000000000000000000
-        OnClick = rectPotvrdiClick
-        object lblPotvrdi: TLabel
+        OnClick = rectZapocniClick
+        object lblZapocni: TLabel
           Align = Client
           StyledSettings = [Family, FontColor]
-          Size.Width = 364.000000000000000000
+          Size.Width = 348.000000000000000000
           Size.Height = 46.000000000000000000
           Size.PlatformDefault = False
           TextSettings.Font.Size = 14.000000000000000000
           TextSettings.Font.StyleExt = {00070000000000000004000000}
           TextSettings.HorzAlign = Center
-          Text = 'Potvrdi'
+          Text = 'Zapocni aktivnost'
           TabOrder = 0
         end
       end

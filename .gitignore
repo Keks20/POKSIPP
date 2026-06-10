@@ -1,0 +1,25 @@
+# --- Delphi build izlaz i IDE kes (ne ide na git) ---
+Delphi/Win32/
+Delphi/Win64/
+Delphi/Android/
+Delphi/Android64/
+Delphi/iOSDevice64/
+Delphi/__history/
+Delphi/__recovery/
+
+# Prevedeni/generisani fajlovi
+*.dcu
+*.exe
+*.~*
+*.local
+*.identcache
+*.tvsconfig
+*.dproj.local
+*.dres
+*.deployproj
+
+# Stare kopije projekta
+Delphi/Delphi/
+
+# Lokalna SQLite baza se kreira automatski pri pokretanju
+Delphi/Win32/Debug/Baza/
