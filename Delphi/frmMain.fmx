@@ -17,12 +17,12 @@ object Form5: TForm5
     TabOrder = 0
     object bgRect: TRectangle
       Align = Contents
-      HitTest = False
       Fill.Color = xFFECEEF1
-      Stroke.Kind = None
+      HitTest = False
       Size.Width = 392.000000000000000000
       Size.Height = 844.000000000000000000
       Size.PlatformDefault = False
+      Stroke.Kind = None
     end
   end
   object FDQuery1: TFDQuery

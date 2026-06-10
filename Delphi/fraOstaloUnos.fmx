@@ -70,7 +70,7 @@ object FrameOstaloUnos: TFrameOstaloUnos
     Size.Height = 446.000000000000000000
     Size.PlatformDefault = False
     TabOrder = 1
-    Viewport.Width = 352.000000000000000000
+    Viewport.Width = 336.000000000000000000
     Viewport.Height = 446.000000000000000000
     object rectForma: TRectangle
       Align = Top
@@ -80,8 +80,8 @@ object FrameOstaloUnos: TFrameOstaloUnos
       Padding.Bottom = 12.000000000000000000
       Position.X = 10.000000000000000000
       Position.Y = 10.000000000000000000
-      Size.Width = 332.000000000000000000
-      Size.Height = 423.000000000000000000
+      Size.Width = 316.000000000000000000
+      Size.Height = 495.000000000000000000
       Size.PlatformDefault = False
       Stroke.Thickness = 0.500000000000000000
       XRadius = 12.000000000000000000
@@ -91,7 +91,7 @@ object FrameOstaloUnos: TFrameOstaloUnos
         StyledSettings = [Family, Style, FontColor]
         Position.X = 12.000000000000000000
         Position.Y = 12.000000000000000000
-        Size.Width = 308.000000000000000000
+        Size.Width = 292.000000000000000000
         Size.Height = 18.000000000000000000
         Size.PlatformDefault = False
         TextSettings.Font.Size = 11.000000000000000000
@@ -106,7 +106,7 @@ object FrameOstaloUnos: TFrameOstaloUnos
         Position.X = 12.000000000000000000
         Position.Y = 38.000000000000000000
         Margins.Top = 8.000000000000000000
-        Size.Width = 308.000000000000000000
+        Size.Width = 292.000000000000000000
         Size.Height = 36.000000000000000000
         Size.PlatformDefault = False
         TextPrompt = 'npr. Higijena'
@@ -118,7 +118,7 @@ object FrameOstaloUnos: TFrameOstaloUnos
         Margins.Top = 8.000000000000000000
         Position.X = 12.000000000000000000
         Position.Y = 82.000000000000000000
-        Size.Width = 308.000000000000000000
+        Size.Width = 292.000000000000000000
         Size.Height = 18.000000000000000000
         Size.PlatformDefault = False
         TextSettings.Font.Size = 11.000000000000000000
@@ -133,7 +133,7 @@ object FrameOstaloUnos: TFrameOstaloUnos
         Position.X = 12.000000000000000000
         Position.Y = 108.000000000000000000
         Margins.Top = 8.000000000000000000
-        Size.Width = 308.000000000000000000
+        Size.Width = 292.000000000000000000
         Size.Height = 36.000000000000000000
         Size.PlatformDefault = False
         TextPrompt = 'npr. 14:00'
@@ -145,7 +145,7 @@ object FrameOstaloUnos: TFrameOstaloUnos
         Margins.Top = 8.000000000000000000
         Position.X = 12.000000000000000000
         Position.Y = 152.000000000000000000
-        Size.Width = 308.000000000000000000
+        Size.Width = 292.000000000000000000
         Size.Height = 18.000000000000000000
         Size.PlatformDefault = False
         TextSettings.Font.Size = 11.000000000000000000
@@ -160,10 +160,37 @@ object FrameOstaloUnos: TFrameOstaloUnos
         Position.X = 12.000000000000000000
         Position.Y = 178.000000000000000000
         Margins.Top = 8.000000000000000000
-        Size.Width = 308.000000000000000000
+        Size.Width = 292.000000000000000000
         Size.Height = 36.000000000000000000
         Size.PlatformDefault = False
         TextPrompt = 'npr. Dlaka ociscena, nokti iseceni'
+        StyledSettings = [Family, Style, FontColor]
+      end
+      object lblKolicina: TLabel
+        Align = Top
+        StyledSettings = [Family, Style, FontColor]
+        Margins.Top = 8.000000000000000000
+        Position.X = 12.000000000000000000
+        Position.Y = 222.000000000000000000
+        Size.Width = 292.000000000000000000
+        Size.Height = 18.000000000000000000
+        Size.PlatformDefault = False
+        TextSettings.Font.Size = 11.000000000000000000
+        Text = 'Kolicina (skida se iz magacina):'
+        TabOrder = 8
+      end
+      object edtKolicina: TEdit
+        Touch.InteractiveGestures = [LongTap, DoubleTap]
+        Align = Top
+        TabOrder = 9
+        TextSettings.Font.Size = 14.000000000000000000
+        Position.X = 12.000000000000000000
+        Position.Y = 248.000000000000000000
+        Margins.Top = 8.000000000000000000
+        Size.Width = 292.000000000000000000
+        Size.Height = 36.000000000000000000
+        Size.PlatformDefault = False
+        TextPrompt = 'npr. 50 (sampon ml) ili 5 (maramice kom)'
         StyledSettings = [Family, Style, FontColor]
       end
       object lblKomentar: TLabel
@@ -171,8 +198,8 @@ object FrameOstaloUnos: TFrameOstaloUnos
         StyledSettings = [Family, Style, FontColor]
         Margins.Top = 8.000000000000000000
         Position.X = 12.000000000000000000
-        Position.Y = 222.000000000000000000
-        Size.Width = 308.000000000000000000
+        Position.Y = 292.000000000000000000
+        Size.Width = 292.000000000000000000
         Size.Height = 18.000000000000000000
         Size.PlatformDefault = False
         TextSettings.Font.Size = 11.000000000000000000
@@ -187,21 +214,21 @@ object FrameOstaloUnos: TFrameOstaloUnos
         Align = Top
         Margins.Top = 8.000000000000000000
         Position.X = 12.000000000000000000
-        Position.Y = 248.000000000000000000
-        Size.Width = 308.000000000000000000
+        Position.Y = 318.000000000000000000
+        Size.Width = 292.000000000000000000
         Size.Height = 65.000000000000000000
         Size.PlatformDefault = False
         TabOrder = 7
-        Viewport.Width = 308.000000000000000000
-        Viewport.Height = 65.000000000000000000
+        Viewport.Width = 288.000000000000000000
+        Viewport.Height = 61.000000000000000000
       end
       object rectPotvrdi: TRectangle
         Align = Bottom
         Fill.Color = claYellow
         Margins.Top = 10.000000000000000000
         Position.X = 12.000000000000000000
-        Position.Y = 365.000000000000000000
-        Size.Width = 308.000000000000000000
+        Position.Y = 437.000000000000000000
+        Size.Width = 292.000000000000000000
         Size.Height = 46.000000000000000000
         Size.PlatformDefault = False
         Stroke.Kind = None

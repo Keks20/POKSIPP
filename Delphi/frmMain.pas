@@ -10,7 +10,8 @@ uses
   FireDAC.Stan.Def, FireDAC.Stan.Pool, FireDAC.Phys, FireDAC.Phys.SQLite,
   FireDAC.Phys.SQLiteDef, FireDAC.Stan.ExprFuncs,
   FireDAC.Phys.SQLiteWrapper.Stat, FireDAC.FMXUI.Wait, Data.DB,
-  FireDAC.Comp.Client, FireDAC.Comp.DataSet, uUserStore, fraHome, System.IOUtils;
+  FireDAC.Comp.Client, FireDAC.Comp.DataSet, uUserStore, fraHome, System.IOUtils,
+  FMX.Objects;
 
 type
   TForm5 = class(TForm)
@@ -410,11 +411,16 @@ begin
     FDQuery1.ParamByName('status').AsString  := 'Aktivan';
     FDQuery1.ParamByName('sid').AsInteger    := 1;
     FDQuery1.ParamByName('lok').AsString     := 'Boks A1';
-    Stream := TResourceStream.Create(HInstance, 'PngImage_1', RT_RCDATA);
+    // Slika je samo rezerva (prikaz ide iz foldera Slike); ako resurs fali, preskoci
     try
-      FDQuery1.ParamByName('img').LoadFromStream(Stream, ftBlob);
-    finally
-      Stream.Free;
+      Stream := TResourceStream.Create(HInstance, 'PngImage_2', RT_RCDATA);
+      try
+        FDQuery1.ParamByName('img').LoadFromStream(Stream, ftBlob);
+      finally
+        Stream.Free;
+      end;
+    except
+      FDQuery1.ParamByName('img').Clear;
     end;
     FDQuery1.ExecSQL;
 
@@ -425,11 +431,15 @@ begin
     FDQuery1.ParamByName('status').AsString  := 'Aktivan';
     FDQuery1.ParamByName('sid').AsInteger    := 1;
     FDQuery1.ParamByName('lok').AsString     := 'Boks A2';
-    Stream := TResourceStream.Create(HInstance, 'PngImage_3', RT_RCDATA);
     try
-      FDQuery1.ParamByName('img').LoadFromStream(Stream, ftBlob);
-    finally
-      Stream.Free;
+      Stream := TResourceStream.Create(HInstance, 'PngImage_3', RT_RCDATA);
+      try
+        FDQuery1.ParamByName('img').LoadFromStream(Stream, ftBlob);
+      finally
+        Stream.Free;
+      end;
+    except
+      FDQuery1.ParamByName('img').Clear;
     end;
     FDQuery1.ExecSQL;
   end

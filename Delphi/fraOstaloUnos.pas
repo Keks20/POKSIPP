@@ -29,6 +29,9 @@ type
     lblStatus: TLabel;
     edtStatus: TEdit;         // npr. "Dlaka ociscena, nokti skropani"
 
+    lblKolicina: TLabel;
+    edtKolicina: TEdit;       // npr. "50" (sampon ml) ili "5" (maramice kom)
+
     lblKomentar: TLabel;
     memoKomentar: TMemo;
 
@@ -79,6 +82,21 @@ begin
   Result := True;
 end;
 
+// Izvlaci pocetni ceo broj iz teksta kolicine (npr. "50 ml" -> 50)
+function ParsujKolicinu(const AKol: string): Integer;
+var
+  i: Integer;
+  sNum: string;
+begin
+  sNum := '';
+  for i := 1 to Length(AKol) do
+    if CharInSet(AKol[i], ['0'..'9']) then
+      sNum := sNum + AKol[i]
+    else if sNum <> '' then
+      Break;
+  Result := StrToIntDef(sNum, 0);
+end;
+
 procedure TFrameOstaloUnos.SacuvajOstalo;
 var
   Q: TFDQuery;
@@ -117,18 +135,16 @@ begin
   end;
 
   // --- Odredi uslugu (OBUHVATA) i resurs koji se trosi iz magacina (TROSI) ---
+  // Kupanje/pranje trosi sampon, ostalo (higijena) trosi maramice.
   sVrstaLower := LowerCase(Trim(edtVrsta.Text));
   if (Pos('kupanj', sVrstaLower) > 0) or (Pos('sampon', sVrstaLower) > 0) or
      (Pos('pranj', sVrstaLower) > 0) then
-  begin
-    sResTip  := 'Sampon (ml)';
-    nUtrosak := 50;
-  end
+    sResTip := 'Sampon (ml)'
   else
-  begin
-    sResTip  := 'Higijenske maramice (kom)';
-    nUtrosak := 5;
-  end;
+    sResTip := 'Higijenske maramice (kom)';
+
+  // Kolicina koja se skida iz magacina = uneta vrednost (npr. "50 ml" -> 50)
+  nUtrosak := ParsujKolicinu(edtKolicina.Text);
 
   // --- SQL INSERT ---
   Q := TFDQuery.Create(nil);
@@ -154,13 +170,13 @@ begin
       'INSERT INTO DNEVNA_AKTIVNOST ' +
       '  (Kategorija, Vrsta_aktivnosti, VremeOd, VremeDo, ' +
       '   DuzinaTrajanja, StatusAktivnosti, ' +
-      '   StatusOstalo, Komentar, ' +
+      '   StatusOstalo, Komentar, Kolicina, ' +
       '   Sifra_usluge, Sifra_resursa, Kolicina_Utroska, ' +
       '   Sifra_zaposlenog, Sifra_ljubimca) ' +
       'VALUES ' +
       '  (:kat, :vrsta, :od, :od, ' +
       '   :traj, :status, ' +
-      '   :stost, :kom, ' +
+      '   :stost, :kom, :kol, ' +
       '   :usl, :res, :utr, ' +
       '   :zap, :pet)';
 
@@ -171,6 +187,7 @@ begin
     Q.ParamByName('status').AsString := 'Zavrseno';
     Q.ParamByName('stost').AsString  := Trim(edtStatus.Text);
     Q.ParamByName('kom').AsString    := Trim(memoKomentar.Text);
+    Q.ParamByName('kol').AsString    := Trim(edtKolicina.Text);
     Q.ParamByName('usl').AsInteger   := idUsluga;
     Q.ParamByName('res').AsInteger   := idResurs;
     Q.ParamByName('utr').AsInteger   := nUtrosak;
