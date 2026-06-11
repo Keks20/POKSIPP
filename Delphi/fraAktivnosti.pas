@@ -198,8 +198,8 @@ begin
     Q.ParamByName('vdo').AsDateTime   := dtDo;
     Q.ParamByName('traj').AsString    := 'U toku';
     Q.ParamByName('status').AsString  := 'U toku';
-    Q.ParamByName('procena').AsString := '';
-    Q.ParamByName('kom').AsString     := '';
+    Q.ParamByName('procena').AsString := Trim(edtProcena.Text);
+    Q.ParamByName('kom').AsString     := Trim(memoKomentar.Text);
     Q.ParamByName('usl').AsInteger    := NadjiUslugu(Trim(edtVrsta.Text));
     Q.ParamByName('zap').AsInteger    := LoggedInUserID;
     Q.ParamByName('pet').AsInteger    := SelectedPetID;
@@ -266,8 +266,7 @@ begin
       '  ProcenaPonasanja = :procena, Komentar = :kom ' +
       'WHERE Sifra_zaposlenog = :zap AND Sifra_ljubimca = :pet ' +
       'AND Kategorija = ''Aktivnosti'' ' +
-      'AND StatusAktivnosti = ''U toku'' ' +
-      'AND date(VremeOd) = date(''now'')';
+      'AND StatusAktivnosti = ''U toku''';
     Q.ParamByName('do_').AsDateTime    := dtDo;
     Q.ParamByName('traj').AsString     := sTrajanje;
     Q.ParamByName('procena').AsString  := Trim(edtProcena.Text);

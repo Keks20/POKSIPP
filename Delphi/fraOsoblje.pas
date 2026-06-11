@@ -10,7 +10,7 @@ uses
   FireDAC.Comp.Client, uUserStore, uNavFrames;
 
 type
-  TFrameOsoblje = class(TFrame)
+  TFrameOsoblje = class(TFrame, IFrameRefresh)
     // --- ZAGLAVLJE ---
     layHeader: TLayout;
     lblNaslov: TLabel;
@@ -77,6 +77,7 @@ type
     procedure UcitajLjubimce;
     procedure AzurirajBrojeve;
   public
+    procedure RefreshView;  // IFrameRefresh - poziva navigacija pri povratku
   end;
 
 implementation
@@ -235,48 +236,51 @@ end;
 procedure TFrameOsoblje.AzurirajBrojeve;
 var
   Q: TFDQuery;
-  nAkt, nHrana, nOst, nUToku: Integer;
+  nAkt, nHrana, nOst: Integer;
   sAktivnost: string;
 begin
-  if SelectedPetID <= 0 then Exit;
-
   Q := TFDQuery.Create(nil);
   try
     Q.Connection := DB;
 
-    // Brojevi unesenih po kategoriji danas
+    // --- Brojevi unesenih po kategoriji danas (samo ako je ljubimac izabran) ---
+    if SelectedPetID > 0 then
+    begin
+      Q.SQL.Text :=
+        'SELECT COUNT(*) FROM DNEVNA_AKTIVNOST ' +
+        'WHERE Sifra_ljubimca = :pid AND Kategorija = :kat ' +
+        'AND VremeOd >= :d0 AND VremeOd < :d1';
+      Q.ParamByName('pid').AsInteger := SelectedPetID;
+      Q.ParamByName('d0').AsDateTime := Trunc(Now);
+      Q.ParamByName('d1').AsDateTime := Trunc(Now) + 1;
+
+      Q.ParamByName('kat').AsString := 'Aktivnosti';
+      Q.Open; nAkt   := Q.Fields[0].AsInteger; Q.Close;
+
+      Q.ParamByName('kat').AsString := 'Hrana';
+      Q.Open; nHrana := Q.Fields[0].AsInteger; Q.Close;
+
+      Q.ParamByName('kat').AsString := 'Ostalo';
+      Q.Open; nOst   := Q.Fields[0].AsInteger; Q.Close;
+
+      lblAktivnostiSub.Text := 'Uneseno danas: ' + IntToStr(nAkt);
+      lblHranaSub.Text      := 'Uneseno danas: ' + IntToStr(nHrana);
+      lblOstaloSub.Text     := 'Uneseno danas: ' + IntToStr(nOst);
+    end;
+
+    // --- Status zaposlenog: zauzet ako ima aktivnost 'U toku' ---
+    // Zavisi od zaposlenog, NE od izabranog ljubimca, pa se uvek racuna.
+    // Bez COUNT(*) - dohvati poslednju 'U toku' aktivnost i proveri IsEmpty.
     Q.SQL.Text :=
-      'SELECT COUNT(*) FROM DNEVNA_AKTIVNOST ' +
-      'WHERE Sifra_ljubimca = :pid AND Kategorija = :kat ' +
-      'AND date(VremeOd) = date(''now'')';
-    Q.ParamByName('pid').AsInteger := SelectedPetID;
-
-    Q.ParamByName('kat').AsString := 'Aktivnosti';
-    Q.Open; nAkt   := Q.Fields[0].AsInteger; Q.Close;
-
-    Q.ParamByName('kat').AsString := 'Hrana';
-    Q.Open; nHrana := Q.Fields[0].AsInteger; Q.Close;
-
-    Q.ParamByName('kat').AsString := 'Ostalo';
-    Q.Open; nOst   := Q.Fields[0].AsInteger; Q.Close;
-
-    lblAktivnostiSub.Text := 'Uneseno danas: ' + IntToStr(nAkt);
-    lblHranaSub.Text      := 'Uneseno danas: ' + IntToStr(nHrana);
-    lblOstaloSub.Text     := 'Uneseno danas: ' + IntToStr(nOst);
-
-    // Proveri da li radnik ima aktivnost u toku
-    Q.SQL.Text :=
-      'SELECT COUNT(*), Vrsta_aktivnosti, VremeOd ' +
+      'SELECT Vrsta_aktivnosti, VremeOd ' +
       'FROM DNEVNA_AKTIVNOST ' +
       'WHERE Sifra_zaposlenog = :zap ' +
       'AND StatusAktivnosti = ''U toku'' ' +
-      'AND date(VremeOd) = date(''now'') ' +
       'ORDER BY VremeOd DESC LIMIT 1';
     Q.ParamByName('zap').AsInteger := LoggedInUserID;
     Q.Open;
-    nUToku := Q.Fields[0].AsInteger;
 
-    if nUToku > 0 then
+    if not Q.IsEmpty then
     begin
       sAktivnost := Q.FieldByName('Vrsta_aktivnosti').AsString;
       lblUToku.Text := 'U toku: ' + sAktivnost + '  (od ' +
@@ -297,6 +301,13 @@ begin
   finally
     Q.Free;
   end;
+end;
+
+// IFrameRefresh - navigacija ovo poziva svaki put kad ekran osoblja
+// ponovo postane vidljiv (npr. povratak sa unosa aktivnosti).
+procedure TFrameOsoblje.RefreshView;
+begin
+  AzurirajBrojeve;
 end;
 
 procedure TFrameOsoblje.lbLjubimciClick(Sender: TObject);
@@ -383,7 +394,6 @@ begin
       'FROM DNEVNA_AKTIVNOST ' +
       'WHERE Sifra_zaposlenog = :zap ' +
       'AND StatusAktivnosti = ''U toku'' ' +
-      'AND date(VremeOd) = date(''now'') ' +
       'ORDER BY VremeOd DESC LIMIT 1';
     Q.ParamByName('zap').AsInteger := LoggedInUserID;
     Q.Open;

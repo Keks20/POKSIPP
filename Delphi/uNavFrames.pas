@@ -7,6 +7,13 @@ uses
   FMX.Controls, FMX.Forms, FMX.Layouts,FMX.Types,Winapi.Windows;
 
 type
+  // Frejmovi koji treba da se osveze kad postanu vidljivi kroz navigaciju
+  // (npr. ekran osoblja koji racuna brojeve i status "U toku") implementiraju ovo.
+  IFrameRefresh = interface
+    ['{4E7A1C90-3B2D-4F18-9A6E-7C5D0F1B2A33}']
+    procedure RefreshView;
+  end;
+
   TNavFrames = class
   private
     class var FStack: TStack<TFrame>;
@@ -14,6 +21,7 @@ type
     class var FCurrent: TFrame;
     class var FCache: TDictionary<TClass, TFrame>;
     class procedure ClearHost;
+    class procedure RefreshCurrent;
   public
     class constructor Create;
     class destructor Destroy;
@@ -83,6 +91,17 @@ begin
   FCurrent.Align := TAlignLayout.Client;
   FCurrent.Visible := True;
   FCurrent.BringToFront;
+  RefreshCurrent;
+end;
+
+// Pozovi RefreshView na trenutnom frejmu ako ga podrzava (npr. ekran osoblja).
+// Tako se brojevi i status "U toku" osveze pri svakom povratku na ekran.
+class procedure TNavFrames.RefreshCurrent;
+var
+  R: IFrameRefresh;
+begin
+  if (FCurrent <> nil) and Supports(FCurrent, IFrameRefresh, R) then
+    R.RefreshView;
 end;
 
 class procedure TNavFrames.ClearHost;
@@ -134,6 +153,7 @@ begin
   FCurrent.Align := TAlignLayout.Client;
   FCurrent.Visible := True;
   FCurrent.BringToFront;
+  RefreshCurrent;
 end;
 
 end.

@@ -113,8 +113,7 @@ begin
     Q.Connection := DB;
     Q.SQL.Text :=
       'SELECT COUNT(*) FROM DNEVNA_AKTIVNOST ' +
-      'WHERE Sifra_zaposlenog = :z AND StatusAktivnosti = ''U toku'' ' +
-      'AND date(VremeOd) = date(''now'')';
+      'WHERE Sifra_zaposlenog = :z AND StatusAktivnosti = ''U toku''';
     Q.ParamByName('z').AsInteger := ASifra;
     Q.Open;
     Result := Q.Fields[0].AsInteger > 0;
