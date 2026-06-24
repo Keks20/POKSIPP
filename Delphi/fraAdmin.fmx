@@ -184,7 +184,7 @@ object FrameAdmin: TFrameAdmin
         Size.Height = 22.000000000000000000
         Size.PlatformDefault = False
         TextSettings.FontColor = claGreen
-        Text = #226#8212#143' Dostupan'
+        Text = #9679' Dostupan'
         TabOrder = 3
       end
     end
@@ -321,6 +321,31 @@ object FrameAdmin: TFrameAdmin
       DefaultItemStyles.GroupFooterStyle = ''
       Viewport.Width = 332.000000000000000000
       Viewport.Height = 176.000000000000000000
+    end
+    object rectDopuni: TRectangle
+      Align = Top
+      Fill.Color = claYellow
+      Margins.Bottom = 14.000000000000000000
+      Position.X = 10.000000000000000000
+      Position.Y = 1126.000000000000000000
+      Size.Width = 336.000000000000000000
+      Size.Height = 44.000000000000000000
+      Size.PlatformDefault = False
+      Stroke.Kind = None
+      XRadius = 22.000000000000000000
+      YRadius = 22.000000000000000000
+      OnClick = rectDopuniClick
+      object lblDopuni: TLabel
+        Align = Client
+        StyledSettings = [Family, FontColor]
+        Size.Width = 336.000000000000000000
+        Size.Height = 44.000000000000000000
+        Size.PlatformDefault = False
+        TextSettings.Font.StyleExt = {00070000000000000004000000}
+        TextSettings.HorzAlign = Center
+        Text = 'Dopuni izabranu zalihu'
+        TabOrder = 0
+      end
     end
   end
   object rectPopup: TRectangle

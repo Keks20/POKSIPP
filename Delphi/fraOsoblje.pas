@@ -287,13 +287,13 @@ begin
         FormatDateTime('hh:nn', Q.FieldByName('VremeOd').AsDateTime) + ')';
       rectUToku.Visible := True;
 
-      lblDostupnost.Text := '● Zauzet';
+      lblDostupnost.Text := #$25CF' Zauzet';
       lblDostupnost.TextSettings.FontColor := TAlphaColors.Red;
     end
     else
     begin
       rectUToku.Visible := False;
-      lblDostupnost.Text := '● Dostupan';
+      lblDostupnost.Text := #$25CF' Dostupan';
       lblDostupnost.TextSettings.FontColor := TAlphaColors.Green;
     end;
     Q.Close;

@@ -95,22 +95,18 @@ object FrameOstaloUnos: TFrameOstaloUnos
         Size.Height = 18.000000000000000000
         Size.PlatformDefault = False
         TextSettings.Font.Size = 11.000000000000000000
-        Text = 'Vrsta:'
+        Text = 'Vrsta (iz magacina):'
         TabOrder = 0
       end
-      object edtVrsta: TEdit
-        Touch.InteractiveGestures = [LongTap, DoubleTap]
+      object cbVrsta: TComboBox
         Align = Top
-        TabOrder = 1
-        TextSettings.Font.Size = 14.000000000000000000
+        Margins.Top = 8.000000000000000000
         Position.X = 12.000000000000000000
         Position.Y = 38.000000000000000000
-        Margins.Top = 8.000000000000000000
         Size.Width = 292.000000000000000000
         Size.Height = 36.000000000000000000
         Size.PlatformDefault = False
-        TextPrompt = 'npr. Higijena'
-        StyledSettings = [Family, Style, FontColor]
+        TabOrder = 1
       end
       object lblVreme: TLabel
         Align = Top

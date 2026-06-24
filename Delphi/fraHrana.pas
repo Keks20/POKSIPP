@@ -7,7 +7,7 @@ uses
   System.Variants,
   FMX.Types, FMX.Graphics, FMX.Controls, FMX.Forms, FMX.Dialogs,
   FMX.StdCtrls, FMX.Controls.Presentation, FMX.Layouts, FMX.Objects,
-  FMX.Edit, FMX.Memo, FMX.Memo.Types, FMX.ScrollBox,
+  FMX.Edit, FMX.Memo, FMX.Memo.Types, FMX.ScrollBox, FMX.ListBox,
   FireDAC.Comp.Client, uUserStore, uNavFrames;
 
 type
@@ -22,7 +22,7 @@ type
     rectForma: TRectangle;
 
     lblVrsta: TLabel;
-    edtVrsta: TEdit;          // npr. "Super premium granule (Junior)"
+    cbVrsta: TComboBox;       // izbor vrste hrane iz magacina (RESURS)
 
     lblVremeObroka: TLabel;
     edtVremeObroka: TEdit;    // npr. "08:30"
@@ -41,8 +41,11 @@ type
     procedure rectNazadClick(Sender: TObject);
 
   private
+    FResIDs: array[0..49] of Integer;  // Sifra_resursa za svaku stavku menija
+    FResCount: Integer;
     function ParsujVreme(const AVreme: string;
       out ADT: TDateTime): Boolean;
+    procedure UcitajResurse;
     procedure SacuvajHranu;
   end;
 
@@ -55,6 +58,41 @@ begin
   inherited;
   lblNaslov.Text      := 'Hrana';
   edtVremeObroka.Text := FormatDateTime('hh:nn', Now);
+  UcitajResurse;
+end;
+
+// Napuni padajuci meni vrstama hrane iz magacina (RESURS)
+procedure TFrameHrana.UcitajResurse;
+var
+  Q: TFDQuery;
+begin
+  cbVrsta.Items.BeginUpdate;
+  try
+    cbVrsta.Items.Clear;
+    FResCount := 0;
+    Q := TFDQuery.Create(nil);
+    try
+      Q.Connection := DB;
+      Q.SQL.Text :=
+        'SELECT Sifra_resursa, Tip_Resursa FROM RESURS ' +
+        'WHERE lower(Tip_Resursa) LIKE ''%hrana%'' ' +
+        'ORDER BY Tip_Resursa';
+      Q.Open;
+      while not Q.Eof and (FResCount <= High(FResIDs)) do
+      begin
+        FResIDs[FResCount] := Q.FieldByName('Sifra_resursa').AsInteger;
+        cbVrsta.Items.Add(Q.FieldByName('Tip_Resursa').AsString);
+        Inc(FResCount);
+        Q.Next;
+      end;
+    finally
+      Q.Free;
+    end;
+  finally
+    cbVrsta.Items.EndUpdate;
+  end;
+  if cbVrsta.Items.Count > 0 then
+    cbVrsta.ItemIndex := 0;
 end;
 
 // -------------------------------------------------------
@@ -99,13 +137,12 @@ var
   Q: TFDQuery;
   dtVreme: TDateTime;
   idUsluga, idResurs, nUtrosak: Integer;
-  sResTip, sVrstaLower: string;
+  sVrsta: string;
 begin
   // --- Validacija ---
-  if Trim(edtVrsta.Text) = '' then
+  if (cbVrsta.ItemIndex < 0) or (cbVrsta.ItemIndex >= FResCount) then
   begin
-    ShowMessage('Unesite vrstu hrane!');
-    edtVrsta.SetFocus;
+    ShowMessage('Izaberite vrstu hrane iz padajuceg menija!');
     Exit;
   end;
 
@@ -131,13 +168,10 @@ begin
     Exit;
   end;
 
-  // --- Odredi uslugu (Hranjenje) i resurs (suva/vlazna hrana) ---
+  // --- Vrsta hrane i resurs dolaze direktno iz izbora u meniju (RESURS) ---
   nUtrosak := ParsujKolicinu(edtKolicina.Text);
-  sVrstaLower := LowerCase(Trim(edtVrsta.Text));
-  if (Pos('vlaz', sVrstaLower) > 0) or (Pos('konzerv', sVrstaLower) > 0) then
-    sResTip := 'Vlazna hrana (g)'
-  else
-    sResTip := 'Suva hrana (g)';
+  sVrsta   := cbVrsta.Items[cbVrsta.ItemIndex];
+  idResurs := FResIDs[cbVrsta.ItemIndex];
 
   // --- SQL INSERT ---
   Q := TFDQuery.Create(nil);
@@ -148,13 +182,6 @@ begin
     Q.SQL.Text := 'SELECT Sifra_usluge FROM USLUGA WHERE Naziv = ''Hranjenje'' LIMIT 1';
     Q.Open;
     if not Q.IsEmpty then idUsluga := Q.Fields[0].AsInteger;
-    Q.Close;
-
-    idResurs := 0;
-    Q.SQL.Text := 'SELECT Sifra_resursa FROM RESURS WHERE Tip_Resursa = :t LIMIT 1';
-    Q.ParamByName('t').AsString := sResTip;
-    Q.Open;
-    if not Q.IsEmpty then idResurs := Q.Fields[0].AsInteger;
     Q.Close;
 
     Q.SQL.Text :=
@@ -172,7 +199,7 @@ begin
       '   :zap, :pet)';
 
     Q.ParamByName('kat').AsString     := 'Hrana';
-    Q.ParamByName('vrsta').AsString   := Trim(edtVrsta.Text);
+    Q.ParamByName('vrsta').AsString   := sVrsta;
     Q.ParamByName('od').AsDateTime    := dtVreme;
     Q.ParamByName('traj').AsString    := '0 min';
     Q.ParamByName('status').AsString  := 'Zavrseno';

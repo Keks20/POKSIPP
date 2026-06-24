@@ -97,22 +97,18 @@ object FrameHrana: TFrameHrana
         Size.Height = 18.000000000000000000
         Size.PlatformDefault = False
         TextSettings.Font.Size = 11.000000000000000000
-        Text = 'Vrsta hrane:'
+        Text = 'Vrsta hrane (iz magacina):'
         TabOrder = 0
       end
-      object edtVrsta: TEdit
-        Touch.InteractiveGestures = [LongTap, DoubleTap]
+      object cbVrsta: TComboBox
         Align = Top
-        TabOrder = 1
-        TextSettings.Font.Size = 13.000000000000000000
+        Margins.Top = 8.000000000000000000
         Position.X = 12.000000000000000000
         Position.Y = 38.000000000000000000
-        Margins.Top = 8.000000000000000000
         Size.Width = 276.000000000000000000
         Size.Height = 36.000000000000000000
         Size.PlatformDefault = False
-        TextPrompt = 'npr. Super premium granule'
-        StyledSettings = [Family, Style, FontColor]
+        TabOrder = 1
       end
       object lblVremeObroka: TLabel
         Align = Top

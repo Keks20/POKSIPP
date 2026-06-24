@@ -1,11 +1,11 @@
 object Frame1: TFrame1
   Size.Width = 388.000000000000000000
-  Size.Height = 600.000000000000000000
+  Size.Height = 652.000000000000000000
   Size.PlatformDefault = False
   object Layout1: TLayout
     Align = Client
     Size.Width = 388.000000000000000000
-    Size.Height = 600.000000000000000000
+    Size.Height = 652.000000000000000000
     Size.PlatformDefault = False
     TabOrder = 0
     object Label1: TLabel
@@ -1038,7 +1038,7 @@ object Frame1: TFrame1
       Padding.Left = 24.000000000000000000
       Padding.Right = 24.000000000000000000
       Padding.Bottom = 24.000000000000000000
-      Position.Y = 500.000000000000000000
+      Position.Y = 552.000000000000000000
       Size.Width = 388.000000000000000000
       Size.Height = 100.000000000000000000
       Size.PlatformDefault = False

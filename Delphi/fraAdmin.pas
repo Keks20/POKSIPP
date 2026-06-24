@@ -49,6 +49,10 @@ type
     rectIzmeniCenu: TRectangle;
     lblIzmeniCenu: TLabel;
 
+    // ---- DOPUNA MAGACINA ----
+    rectDopuni: TRectangle;
+    lblDopuni: TLabel;
+
     // ---- POPUP DETALJA UNOSA ----
     rectPopup: TRectangle;
     rectPopupCard: TRectangle;
@@ -65,14 +69,18 @@ type
     procedure rectPopupClick(Sender: TObject);
     procedure rectPopupZatvoriClick(Sender: TObject);
     procedure rectIzmeniCenuClick(Sender: TObject);
+    procedure rectDopuniClick(Sender: TObject);
   private
     FZapIDs: array[0..99] of Integer;
     FZapCount: Integer;
     FUslugaIDs: array[0..49] of Integer;
     FUslugaCount: Integer;
+    FMagIDs: array[0..49] of Integer;   // Sifra_resursa po stavci magacina
+    FMagCount: Integer;
     FUnosDetalji: array[0..199] of string;
     function JeZauzet(ASifra: Integer): Boolean;
     procedure IzmeniCenuUsluge(idUsluga: Integer);
+    procedure DopuniResurs(idResurs: Integer);
     procedure UcitajZaposlene;
     procedure PrikaziRadnika(ASifra: Integer);
     procedure UcitajCenovnik;
@@ -173,15 +181,19 @@ begin
   lbMagacin.BeginUpdate;
   try
     lbMagacin.Clear;
+    FMagCount := 0;
     Q := TFDQuery.Create(nil);
     try
       Q.Connection := DB;
       Q.SQL.Text :=
-        'SELECT Tip_Resursa, Trenutno_u_Magacinu, Kolicina_Nivo ' +
+        'SELECT Sifra_resursa, Tip_Resursa, Trenutno_u_Magacinu, Kolicina_Nivo ' +
         'FROM RESURS ORDER BY Tip_Resursa';
       Q.Open;
       while not Q.Eof do
       begin
+        if FMagCount > High(FMagIDs) then Break;
+        FMagIDs[FMagCount] := Q.FieldByName('Sifra_resursa').AsInteger;
+
         dTren := Q.FieldByName('Trenutno_u_Magacinu').AsFloat;
         dNivo := Q.FieldByName('Kolicina_Nivo').AsFloat;
 
@@ -192,6 +204,7 @@ begin
         if dTren <= dNivo then
           Item.Text := Item.Text + '   - NIZAK NIVO!';
         lbMagacin.AddObject(Item);
+        Inc(FMagCount);
         Q.Next;
       end;
     finally
@@ -289,12 +302,12 @@ begin
     // Dostupnost se racuna iz aktivnosti "U toku" (ne iz staticke kolone)
     if JeZauzet(ASifra) then
     begin
-      lblProfilDostupnost.Text := '● Zauzet';
+      lblProfilDostupnost.Text := #$25CF' Zauzet';
       lblProfilDostupnost.TextSettings.FontColor := TAlphaColors.Red;
     end
     else
     begin
-      lblProfilDostupnost.Text := '● Dostupan';
+      lblProfilDostupnost.Text := #$25CF' Dostupan';
       lblProfilDostupnost.TextSettings.FontColor := TAlphaColors.Green;
     end;
 
@@ -344,18 +357,26 @@ begin
           sDetalj :=
             'Kategorija: ' + sKat + #13#10 +
             'Vrsta: ' + Q.FieldByName('Vrsta_aktivnosti').AsString + #13#10 +
-            'Ljubimac: ' + sPet + #13#10 +
-            'Vreme: ' + FormatDateTime('dd.mm.yyyy. hh:nn',
-              Q.FieldByName('VremeOd').AsDateTime);
+            'Ljubimac: ' + sPet;
 
-          if (sKat = 'Aktivnosti') and (Q.FieldByName('VremeDo').AsDateTime > 0) then
-            sDetalj := sDetalj + ' - ' +
-              FormatDateTime('hh:nn', Q.FieldByName('VremeDo').AsDateTime);
+          // Vreme (od-do) i Trajanje se prikazuju samo za Aktivnosti.
+          // Hrana ima "Vreme obroka", a Ostalo svoje vreme - pa za njih ne
+          // dupliramo VremeOd ni bespotrebno "Trajanje: 0 min".
+          if sKat = 'Aktivnosti' then
+          begin
+            sDetalj := sDetalj + #13#10 +
+              'Vreme: ' + FormatDateTime('dd.mm.yyyy. hh:nn',
+                Q.FieldByName('VremeOd').AsDateTime);
+            if Q.FieldByName('VremeDo').AsDateTime > 0 then
+              sDetalj := sDetalj + ' - ' +
+                FormatDateTime('hh:nn', Q.FieldByName('VremeDo').AsDateTime);
+          end;
 
           sDetalj := sDetalj + #13#10 +
             'Status: ' + Q.FieldByName('StatusAktivnosti').AsString;
 
-          if Trim(Q.FieldByName('DuzinaTrajanja').AsString) <> '' then
+          if (sKat = 'Aktivnosti') and
+             (Trim(Q.FieldByName('DuzinaTrajanja').AsString) <> '') then
             sDetalj := sDetalj + #13#10 +
               'Trajanje: ' + Q.FieldByName('DuzinaTrajanja').AsString;
           if Trim(Q.FieldByName('ProcenaPonasanja').AsString) <> '' then
@@ -469,6 +490,87 @@ begin
   idx := lbCenovnik.ItemIndex;
   if (idx < 0) or (idx >= FUslugaCount) then Exit;
   IzmeniCenuUsluge(FUslugaIDs[idx]);
+end;
+
+// -------------------------------------------------------
+//  Dopuna magacina (RESURS) - admin dodaje kolicinu na stanje
+// -------------------------------------------------------
+procedure TFrameAdmin.DopuniResurs(idResurs: Integer);
+var
+  sNaziv: string;
+  dStanje: Double;
+  Q: TFDQuery;
+begin
+  sNaziv  := '';
+  dStanje := 0;
+  Q := TFDQuery.Create(nil);
+  try
+    Q.Connection := DB;
+    Q.SQL.Text :=
+      'SELECT Tip_Resursa, Trenutno_u_Magacinu FROM RESURS ' +
+      'WHERE Sifra_resursa = :id';
+    Q.ParamByName('id').AsInteger := idResurs;
+    Q.Open;
+    if Q.IsEmpty then Exit;
+    sNaziv  := Q.FieldByName('Tip_Resursa').AsString;
+    dStanje := Q.FieldByName('Trenutno_u_Magacinu').AsFloat;
+  finally
+    Q.Free;
+  end;
+
+  TDialogService.InputQuery(
+    'Dopuna: ' + sNaziv + '  (na stanju: ' + FormatFloat('0.##', dStanje) + ')',
+    ['Kolicina za dodavanje'],
+    [''],
+    procedure(const AResult: TModalResult; const AValues: array of string)
+    var
+      sKol: string;
+      dKol: Double;
+      Q2: TFDQuery;
+    begin
+      if AResult <> mrOk then Exit;
+      if Length(AValues) = 0 then Exit;
+
+      sKol := StringReplace(Trim(AValues[0]), ',', '.', [rfReplaceAll]);
+      if not TryStrToFloat(sKol, dKol, TFormatSettings.Invariant) then
+      begin
+        ShowMessage('Neispravna kolicina! Unesite broj (npr. 1000).');
+        Exit;
+      end;
+      if dKol <= 0 then
+      begin
+        ShowMessage('Kolicina mora biti veca od nule.');
+        Exit;
+      end;
+
+      Q2 := TFDQuery.Create(nil);
+      try
+        Q2.Connection := DB;
+        Q2.SQL.Text :=
+          'UPDATE RESURS SET Trenutno_u_Magacinu = Trenutno_u_Magacinu + :k ' +
+          'WHERE Sifra_resursa = :id';
+        Q2.ParamByName('k').AsFloat    := dKol;
+        Q2.ParamByName('id').AsInteger := idResurs;
+        Q2.ExecSQL;
+      finally
+        Q2.Free;
+      end;
+
+      UcitajMagacin;
+    end);
+end;
+
+procedure TFrameAdmin.rectDopuniClick(Sender: TObject);
+var
+  idx: Integer;
+begin
+  idx := lbMagacin.ItemIndex;
+  if (idx < 0) or (idx >= FMagCount) then
+  begin
+    ShowMessage('Izaberite zalihu iz liste pa kliknite "Dopuni".');
+    Exit;
+  end;
+  DopuniResurs(FMagIDs[idx]);
 end;
 
 procedure TFrameAdmin.rectIzmeniCenuClick(Sender: TObject);

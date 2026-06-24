@@ -80,7 +80,7 @@ object FrameOsoblje: TFrameOsoblje
       TextSettings.Font.Size = 11.000000000000000000
       TextSettings.FontColor = claGreen
       TextSettings.HorzAlign = Center
-      Text = #226#8212#143' Dostupan'
+      Text = #9679' Dostupan'
       TabOrder = 2
     end
   end

@@ -7,7 +7,7 @@ uses
   System.Variants,
   FMX.Types, FMX.Graphics, FMX.Controls, FMX.Forms, FMX.Dialogs,
   FMX.StdCtrls, FMX.Controls.Presentation, FMX.Layouts, FMX.Objects,
-  FMX.Edit, FMX.Memo, FMX.Memo.Types, FMX.ScrollBox,
+  FMX.Edit, FMX.Memo, FMX.Memo.Types, FMX.ScrollBox, FMX.ListBox,
   FireDAC.Comp.Client, uUserStore, uNavFrames;
 
 type
@@ -21,7 +21,7 @@ type
     rectForma: TRectangle;
 
     lblVrsta: TLabel;
-    edtVrsta: TEdit;          // npr. "Higijena"
+    cbVrsta: TComboBox;       // izbor vrste iz magacina (RESURS)
 
     lblVreme: TLabel;
     edtVreme: TEdit;          // npr. "14:00"
@@ -43,8 +43,11 @@ type
     procedure rectNazadClick(Sender: TObject);
 
   private
+    FResIDs: array[0..49] of Integer;  // Sifra_resursa za svaku stavku menija
+    FResCount: Integer;
     function ParsujVreme(const AVreme: string;
       out ADT: TDateTime): Boolean;
+    procedure UcitajResurse;
     procedure SacuvajOstalo;
   end;
 
@@ -57,6 +60,41 @@ begin
   inherited;
   lblNaslov.Text := 'Ostalo';
   edtVreme.Text  := FormatDateTime('hh:nn', Now);
+  UcitajResurse;
+end;
+
+// Napuni padajuci meni vrstama iz magacina (RESURS) - sve sem hrane
+procedure TFrameOstaloUnos.UcitajResurse;
+var
+  Q: TFDQuery;
+begin
+  cbVrsta.Items.BeginUpdate;
+  try
+    cbVrsta.Items.Clear;
+    FResCount := 0;
+    Q := TFDQuery.Create(nil);
+    try
+      Q.Connection := DB;
+      Q.SQL.Text :=
+        'SELECT Sifra_resursa, Tip_Resursa FROM RESURS ' +
+        'WHERE lower(Tip_Resursa) NOT LIKE ''%hrana%'' ' +
+        'ORDER BY Tip_Resursa';
+      Q.Open;
+      while not Q.Eof and (FResCount <= High(FResIDs)) do
+      begin
+        FResIDs[FResCount] := Q.FieldByName('Sifra_resursa').AsInteger;
+        cbVrsta.Items.Add(Q.FieldByName('Tip_Resursa').AsString);
+        Inc(FResCount);
+        Q.Next;
+      end;
+    finally
+      Q.Free;
+    end;
+  finally
+    cbVrsta.Items.EndUpdate;
+  end;
+  if cbVrsta.Items.Count > 0 then
+    cbVrsta.ItemIndex := 0;
 end;
 
 // -------------------------------------------------------
@@ -102,13 +140,12 @@ var
   Q: TFDQuery;
   dtVreme: TDateTime;
   idUsluga, idResurs, nUtrosak: Integer;
-  sResTip, sVrstaLower: string;
+  sVrsta: string;
 begin
   // --- Validacija ---
-  if Trim(edtVrsta.Text) = '' then
+  if (cbVrsta.ItemIndex < 0) or (cbVrsta.ItemIndex >= FResCount) then
   begin
-    ShowMessage('Unesite vrstu aktivnosti!');
-    edtVrsta.SetFocus;
+    ShowMessage('Izaberite vrstu iz padajuceg menija!');
     Exit;
   end;
 
@@ -134,14 +171,9 @@ begin
     Exit;
   end;
 
-  // --- Odredi uslugu (OBUHVATA) i resurs koji se trosi iz magacina (TROSI) ---
-  // Kupanje/pranje trosi sampon, ostalo (higijena) trosi maramice.
-  sVrstaLower := LowerCase(Trim(edtVrsta.Text));
-  if (Pos('kupanj', sVrstaLower) > 0) or (Pos('sampon', sVrstaLower) > 0) or
-     (Pos('pranj', sVrstaLower) > 0) then
-    sResTip := 'Sampon (ml)'
-  else
-    sResTip := 'Higijenske maramice (kom)';
+  // --- Vrsta i resurs koji se trosi (TROSI) dolaze iz izbora u meniju (RESURS) ---
+  sVrsta   := cbVrsta.Items[cbVrsta.ItemIndex];
+  idResurs := FResIDs[cbVrsta.ItemIndex];
 
   // Kolicina koja se skida iz magacina = uneta vrednost (npr. "50 ml" -> 50)
   nUtrosak := ParsujKolicinu(edtKolicina.Text);
@@ -151,19 +183,13 @@ begin
   try
     Q.Connection := DB;
 
+    // Usluga (OBUHVATA) - best effort prema nazivu vrste
     idUsluga := 0;
     Q.SQL.Text := 'SELECT Sifra_usluge FROM USLUGA ' +
       'WHERE instr(lower(:v), lower(Naziv)) > 0 LIMIT 1';
-    Q.ParamByName('v').AsString := Trim(edtVrsta.Text);
+    Q.ParamByName('v').AsString := sVrsta;
     Q.Open;
     if not Q.IsEmpty then idUsluga := Q.Fields[0].AsInteger;
-    Q.Close;
-
-    idResurs := 0;
-    Q.SQL.Text := 'SELECT Sifra_resursa FROM RESURS WHERE Tip_Resursa = :t LIMIT 1';
-    Q.ParamByName('t').AsString := sResTip;
-    Q.Open;
-    if not Q.IsEmpty then idResurs := Q.Fields[0].AsInteger;
     Q.Close;
 
     Q.SQL.Text :=
@@ -181,7 +207,7 @@ begin
       '   :zap, :pet)';
 
     Q.ParamByName('kat').AsString    := 'Ostalo';
-    Q.ParamByName('vrsta').AsString  := Trim(edtVrsta.Text);
+    Q.ParamByName('vrsta').AsString  := sVrsta;
     Q.ParamByName('od').AsDateTime   := dtVreme;
     Q.ParamByName('traj').AsString   := '0 min';
     Q.ParamByName('status').AsString := 'Zavrseno';
